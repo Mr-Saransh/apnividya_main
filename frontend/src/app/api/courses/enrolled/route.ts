@@ -28,7 +28,7 @@ export async function GET(req: Request) {
             }
         });
 
-        const courses = enrollments.map(enrollment => ({
+        const courses = enrollments.map((enrollment: any) => ({
             ...enrollment.course,
             progress: enrollment.progress // Include progress from enrollment
         }));
