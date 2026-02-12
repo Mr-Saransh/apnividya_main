@@ -1,0 +1,20 @@
+[
+  {
+    "id": "082d89ae-eb38-45fc-b859-64ed5603ab67",
+    "title": "Projectile Motion",
+    "youtubeVideoId": "dQw4w9WgXcQ",
+    "status": "WAITING_FOR_VIDEO"
+  },
+  {
+    "id": "027b5dc5-39f1-4708-abe2-946e4a0c3601",
+    "title": "Introduction to Motion",
+    "youtubeVideoId": "https://www.youtube.com/watch?v=mlIUKyZIUUU&t=17s",
+    "status": "PUBLISHED"
+  },
+  {
+    "id": "fbc4f06a-a82c-458b-9523-a3de1ef35e47",
+    "title": "Newton's First Law",
+    "youtubeVideoId": "mlIUKyZIUUU&t",
+    "status": "PUBLISHED"
+  }
+]

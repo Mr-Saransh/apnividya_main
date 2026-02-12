@@ -1,0 +1,33 @@
+# Admin Panel Flow Guide
+
+## Accessing the Admin Panel
+1. **Login:**
+   - Use the special Admin account: `admin@apnividya.com` (password: `admin123`).
+   - You will meet the **Admin Dashboard** automatically.
+   *Tip: If you end up on the student dashboard, check if you are logged in with the correct email!*
+
+2. **Creating a Course:**
+   - Click "Create Course" in the sidebar.
+   - Fill in the Title (e.g., "Advanced Algebra") and Description.
+   - Set the Level and Language.
+   - Click "Create Course". You will be redirected to add lessons immediately.
+   *Tip: You don't need a thumbnail right away; a placeholder is used automatically.*
+
+3. **Adding Lessons:**
+   - On the Course Lessons page, use the "Add Lesson" form.
+   - Enter a Title and Description for the lesson.
+   - Click "Add Lesson". It will appear in the list as "Waiting for Video".
+
+4. **Assigning Teachers (The Token System):**
+   - Find the lesson you just created in the list.
+   - Click the "Generate Teacher Link" button.
+   - A unique link will appear (e.g., `.../teacher/submit?token=xyz`).
+   - Copy this link and send it to your teacher.
+   *Tip: Each link is unique to that specific lesson!*
+
+5. **Reviewing Submissions:**
+   - When a teacher submits a video, go to "Submissions" in the sidebar.
+   - You will see a list of pending videos.
+   - Review the link and notes.
+   - Click "Approve & Publish" to make the lesson live for students.
+   *Tip: Once published, the lesson status changes to "Published" automatically.*

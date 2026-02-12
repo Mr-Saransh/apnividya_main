@@ -1,0 +1,47 @@
+<svg width="280" height="280" viewBox="0 0 280 280" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Circular Border -->
+  <circle cx="140" cy="140" r="130" stroke="currentColor" stroke-width="8" fill="none"/>
+  
+  <!-- Graduation Cap -->
+  <polygon points="140,60 175,72 140,84 105,72" fill="currentColor"/>
+  <rect x="137" y="84" width="6" height="18" fill="currentColor"/>
+  <circle cx="143" cy="104" r="4" fill="currentColor" opacity="0.7"/>
+  
+  <!-- Pen/Fountain Nib (Center) -->
+  <path d="M140 110 L145 118 L135 118 Z" fill="currentColor"/>
+  <ellipse cx="140" cy="123" rx="6" ry="8" fill="currentColor"/>
+  <path d="M134 123 L140 135 L146 123" fill="currentColor" opacity="0.8"/>
+  
+  <!-- Open Book -->
+  <path d="M80 135 Q75 140 80 145 L80 195 Q80 200 85 200 L135 200 Q140 200 140 195 L140 145 Q140 140 135 135 Z" 
+        fill="white" stroke="currentColor" stroke-width="4"/>
+  <path d="M200 135 Q205 140 200 145 L200 195 Q200 200 195 200 L145 200 Q140 200 140 195 L140 145 Q140 140 145 135 Z" 
+        fill="white" stroke="currentColor" stroke-width="4"/>
+  
+  <!-- Book Pages Lines -->
+  <line x1="90" y1="155" x2="130" y2="155" stroke="currentColor" stroke-width="2" opacity="0.4"/>
+  <line x1="90" y1="165" x2="130" y2="165" stroke="currentColor" stroke-width="2" opacity="0.4"/>
+  <line x1="90" y1="175" x2="130" y2="175" stroke="currentColor" stroke-width="2" opacity="0.4"/>
+  <line x1="90" y1="185" x2="130" y2="185" stroke="currentColor" stroke-width="2" opacity="0.4"/>
+  
+  <line x1="150" y1="155" x2="190" y2="155" stroke="currentColor" stroke-width="2" opacity="0.4"/>
+  <line x1="150" y1="165" x2="190" y2="165" stroke="currentColor" stroke-width="2" opacity="0.4"/>
+  <line x1="150" y1="175" x2="190" y2="175" stroke="currentColor" stroke-width="2" opacity="0.4"/>
+  <line x1="150" y1="185" x2="190" y2="185" stroke="currentColor" stroke-width="2" opacity="0.4"/>
+  
+  <!-- Book Center Binding -->
+  <line x1="140" y1="135" x2="140" y2="200" stroke="currentColor" stroke-width="3" opacity="0.5"/>
+  
+  <!-- Supporting Hands -->
+  <!-- Left Hand -->
+  <path d="M60 200 Q55 205 58 212 L62 218 Q65 222 70 220 L78 216 Q82 214 82 210 L82 205 Q80 200 75 200 Z" 
+        fill="currentColor"/>
+  <path d="M70 210 Q68 215 72 220 L76 224 Q79 227 84 225 L90 222 Q93 220 93 216 L92 212 Q90 208 86 208 Z" 
+        fill="currentColor"/>
+  
+  <!-- Right Hand -->
+  <path d="M220 200 Q225 205 222 212 L218 218 Q215 222 210 220 L202 216 Q198 214 198 210 L198 205 Q200 200 205 200 Z" 
+        fill="currentColor"/>
+  <path d="M210 210 Q212 215 208 220 L204 224 Q201 227 196 225 L190 222 Q187 220 187 216 L188 212 Q190 208 194 208 Z" 
+        fill="currentColor"/>
+</svg>

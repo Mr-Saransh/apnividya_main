@@ -1,0 +1,176 @@
+Error: 
+Invalid `this.prisma.mockTest.create()` invocation in
+D:\S\projects\APNI VIDYA\backend\src\mock-test\mock-test.service.ts:93:57
+
+  90 }
+  91 
+  92 // 3. Save test to DB
+→ 93 const mockTest = await this.prisma.mockTest.create({
+       data: {
+         userId: undefined,
+         courseId: "706b2b19-8761-41c2-9886-3b75224f4a47",
+         title: "Mock Test: Physics: Mechanics Mastery",
+         totalPoints: 50,
+         questions: {
+           create: [
+             {
+               question: "What is the primary goal of calculating trajectory?",
+               options: [
+                 "To find maximum range",
+                 "To determine the direction of motion",
+                 "To calculate the velocity and acceleration",
+                 "To understand the concept of energy conservation"
+               ],
+               correctAnswer: 0,
+               explanation: "To understand the concept of energy conservation"
+             },
+             {
+               question: "Which of the following is a fundamental principle in the law of inertia?",
+               options: [
+                 "Newton's Third Law of Motion",
+                 "The Law of Universal Gravitation",
+                 "Energy Conservation",
+                 "Force Equal to Mass Multiplied Velocity"
+               ],
+               correctAnswer: 0,
+               explanation: "Law of Inertia"
+             },
+             {
+               question: "What is the term for the range at which an object's motion becomes predictable?",
+               options: [
+                 "Terminal Velocity",
+                 "Range",
+                 "Maximum Range",
+                 "Average Speed"
+               ],
+               correctAnswer: 0,
+               explanation: "Range"
+             },
+             {
+               question: "A projectile's trajectory can be described by a parabolic path due to the following reason",
+               options: [
+                 "The force of gravity acting on the object is constant",
+                 "The angle of projection affects the shape of the trajectory",
+                 "Both of the above reasons",
+                 "None of the above reasons"
+               ],
+               correctAnswer: 0,
+               explanation: "Both of the above reasons"
+             },
+             {
+               question: "What is the term for the amount of energy required to change an object's state (e.g., from kinetic to potential)?",
+               options: [
+                 "Potential Energy",
+                 "Kinetic Energy",
+                 "Thermodynamic Energy",
+                 "Gravitational Potential Energy"
+               ],
+               correctAnswer: 0,
+               explanation: "Gravitational Potential Energy"
+             }
+           ]
+         },
+     +   user: {
+     +     create: UserCreateWithoutMockTestsInput | UserUncheckedCreateWithoutMockTestsInput,
+     +     connectOrCreate: UserCreateOrConnectWithoutMockTestsInput,
+     +     connect: UserWhereUniqueInput
+     +   }
+       },
+       include: {
+         questions: true
+       }
+     })
+
+Argument `user` is missing.
+Stack: PrismaClientValidationError: 
+Invalid `this.prisma.mockTest.create()` invocation in
+D:\S\projects\APNI VIDYA\backend\src\mock-test\mock-test.service.ts:93:57
+
+  90 }
+  91 
+  92 // 3. Save test to DB
+→ 93 const mockTest = await this.prisma.mockTest.create({
+       data: {
+         userId: undefined,
+         courseId: "706b2b19-8761-41c2-9886-3b75224f4a47",
+         title: "Mock Test: Physics: Mechanics Mastery",
+         totalPoints: 50,
+         questions: {
+           create: [
+             {
+               question: "What is the primary goal of calculating trajectory?",
+               options: [
+                 "To find maximum range",
+                 "To determine the direction of motion",
+                 "To calculate the velocity and acceleration",
+                 "To understand the concept of energy conservation"
+               ],
+               correctAnswer: 0,
+               explanation: "To understand the concept of energy conservation"
+             },
+             {
+               question: "Which of the following is a fundamental principle in the law of inertia?",
+               options: [
+                 "Newton's Third Law of Motion",
+                 "The Law of Universal Gravitation",
+                 "Energy Conservation",
+                 "Force Equal to Mass Multiplied Velocity"
+               ],
+               correctAnswer: 0,
+               explanation: "Law of Inertia"
+             },
+             {
+               question: "What is the term for the range at which an object's motion becomes predictable?",
+               options: [
+                 "Terminal Velocity",
+                 "Range",
+                 "Maximum Range",
+                 "Average Speed"
+               ],
+               correctAnswer: 0,
+               explanation: "Range"
+             },
+             {
+               question: "A projectile's trajectory can be described by a parabolic path due to the following reason",
+               options: [
+                 "The force of gravity acting on the object is constant",
+                 "The angle of projection affects the shape of the trajectory",
+                 "Both of the above reasons",
+                 "None of the above reasons"
+               ],
+               correctAnswer: 0,
+               explanation: "Both of the above reasons"
+             },
+             {
+               question: "What is the term for the amount of energy required to change an object's state (e.g., from kinetic to potential)?",
+               options: [
+                 "Potential Energy",
+                 "Kinetic Energy",
+                 "Thermodynamic Energy",
+                 "Gravitational Potential Energy"
+               ],
+               correctAnswer: 0,
+               explanation: "Gravitational Potential Energy"
+             }
+           ]
+         },
+     +   user: {
+     +     create: UserCreateWithoutMockTestsInput | UserUncheckedCreateWithoutMockTestsInput,
+     +     connectOrCreate: UserCreateOrConnectWithoutMockTestsInput,
+     +     connect: UserWhereUniqueInput
+     +   }
+       },
+       include: {
+         questions: true
+       }
+     })
+
+Argument `user` is missing.
+    at wn (D:\S\projects\APNI VIDYA\node_modules\@prisma\client\runtime\library.js:29:1363)
+    at $n.handleRequestError (D:\S\projects\APNI VIDYA\node_modules\@prisma\client\runtime\library.js:121:6958)
+    at $n.handleAndLogRequestError (D:\S\projects\APNI VIDYA\node_modules\@prisma\client\runtime\library.js:121:6623)
+    at $n.request (D:\S\projects\APNI VIDYA\node_modules\@prisma\client\runtime\library.js:121:6307)
+    at async l (D:\S\projects\APNI VIDYA\node_modules\@prisma\client\runtime\library.js:130:9633)
+    at async MockTestService.generateTest (D:\S\projects\APNI VIDYA\backend\src\mock-test\mock-test.service.ts:93:30)
+    at async D:\S\projects\APNI VIDYA\node_modules\@nestjs\core\router\router-execution-context.js:46:28
+    at async D:\S\projects\APNI VIDYA\node_modules\@nestjs\core\router\router-proxy.js:9:17

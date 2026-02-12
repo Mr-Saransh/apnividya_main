@@ -1,0 +1,21 @@
+# Teacher Submission Flow Guide
+
+## Submitting Your Class
+*Note: Teachers do not need to log in! They just need the unique link from the Admin.*
+
+1. **Opening the Link:**
+   - Click the link sent to you by the Admin.
+   - It will look like: `http://localhost:3000/teacher/submit?token=...`
+   - You will see the "Teacher Submission" page with the Lesson Title.
+
+2. **Uploading Your Content:**
+   - Check the Lesson Title to make sure it's the right class.
+   - **Class Recording Link:** Paste the link to your video (Google Drive, Zoom, YouTube, etc.).
+   - **Notes:** Add any special instructions or timestamps for the editor.
+   *Tip: Make sure your Google Drive link is set to "Anyone with the link can view" so the admin can open it!*
+
+3. **Submitting:**
+   - Click the "Submit Class" button.
+   - Wait for the success message: "Submission Received".
+   - You are done! The admin has your video now.
+   *Tip: If you made a mistake, ask the Admin for a new link to submit again.*

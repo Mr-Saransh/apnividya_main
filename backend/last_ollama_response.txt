@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema#",
+  "title": "Physics: Mechanics Mastery - Calculating trajectory and range",
+  "description": "Calculating trajectory and range in mechanics",
+  "sections": [
+    {
+      "question": "What is the correct formula for calculating the range of a projectile?",
+      "options": ["R = v0*t*cos(θ)", "R = v0*t*sin(θ)", "R = (v0^2)/(g)", "R = v0^2/(2*g)"],
+      "correctAnswer": 3,
+      "explanation": "The range of a projectile is given by the formula R = (v0^2)/(2*g)"
+    },
+    {
+      "question": "Which law explains the relationship between inertia and acceleration?",
+      "options": ["Newton's Second Law", "Torque", "Gravity", "Friction"],
+      "correctAnswer": 0,
+      "explanation": "Inertia is a measure of an object's resistance to change in motion"
+    },
+    {
+      "question": "What is the purpose of calculating the trajectory of an object?",
+      "options": ["To find the shortest path", "To find the maximum height", "To calculate the range and energy", "To determine the direction of motion"],
+      "correctAnswer": 0,
+      "explanation": "Trajectory calculation helps to understand the motion of objects under various forces"
+    },
+    {
+      "question": "A block is thrown upwards from the ground with an initial velocity of 20 m/s. What is the maximum height reached by the block?",
+      "options": ["10 m", "20 m", "30 m", "40 m"],
+      "correctAnswer": 2,
+      "explanation": "The maximum height reached by the block is given by h = v0^2/2g"
+    },
+    {
+      "question": "What is the unit of mass in the International System of Units (SI)?",
+      "options": ["kg", "g", "m", "L"],
+      "correctAnswer": 1,
+      "explanation": "The unit of mass in SI is the kilogram"
+    }
+  ] }

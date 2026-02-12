@@ -1,0 +1,69 @@
+
+> frontend@0.1.0 build
+> next build
+
+⚠ Warning: Next.js inferred your workspace root, but it may not be correct.
+ We detected multiple lockfiles and selected the directory of D:\S\projects\APNI VIDYA\package-lock.json as the root directory.
+ To silence this warning, set `turbopack.root` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
+   See https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopack#root-directory for more information.
+ Detected additional lockfiles: 
+   * D:\S\projects\APNI VIDYA\frontend\package-lock.json
+
+▲ Next.js 16.1.6 (Turbopack)
+
+  Creating an optimized production build ...
+Error: Cannot apply unknown utility class `border-border`
+    [2m[at onInvalidCandidate (D:\S\projects\APNI VIDYA\frontend\node_modules\tailwindcss\dist\lib.js:21:1511)][0m
+    [2m[at Te (D:\S\projects\APNI VIDYA\frontend\node_modules\tailwindcss\dist\lib.js:16:36652)][0m
+    [2m[at D:\S\projects\APNI VIDYA\frontend\node_modules\tailwindcss\dist\lib.js:21:355][0m
+    [2m[at Rr (D:\S\projects\APNI VIDYA\frontend\node_modules\tailwindcss\dist\lib.js:3:1718)][0m
+    [2m[at _ (D:\S\projects\APNI VIDYA\frontend\node_modules\tailwindcss\dist\lib.js:3:1377)][0m
+    [2m[at $e (D:\S\projects\APNI VIDYA\frontend\node_modules\tailwindcss\dist\lib.js:21:172)][0m
+    [2m[at un (D:\S\projects\APNI VIDYA\frontend\node_modules\tailwindcss\dist\lib.js:38:294)][0m
+    [2m[at async cn (D:\S\projects\APNI VIDYA\frontend\node_modules\tailwindcss\dist\lib.js:38:631)][0m
+    [2m[at async Xr (D:\S\projects\APNI VIDYA\frontend\node_modules\@tailwindcss\node\dist\index.js:10:3417)][0m
+    [2m[at async I (D:\S\projects\APNI VIDYA\frontend\node_modules\@tailwindcss\postcss\dist\index.js:10:3977)][0m
+Turbopack build encountered 1 warnings:
+./frontend/tailwind.config.ts:61:15
+Module not found: Can't resolve 'tailwindcss-animate'
+[0m [90m 59 |[39m         }[33m,[39m
+ [90m 60 |[39m     }[33m,[39m
+[31m[1m>[22m[39m[90m 61 |[39m     plugins[33m:[39m [require([32m"tailwindcss-animate"[39m)][33m,[39m
+ [90m    |[39m               [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 62 |[39m }[33m;[39m
+ [90m 63 |[39m [36mexport[39m [36mdefault[39m config[33m;[39m
+ [90m 64 |[39m[0m
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+
+> Build error occurred
+Error: Turbopack build failed with 1 errors:
+./frontend/src/app/globals.css
+Error evaluating Node.js code
+CssSyntaxError: tailwindcss: D:\S\projects\APNI VIDYA\frontend\src\app\globals.css:1:1: Cannot apply unknown utility class `border-border`
+    at Input.error (frontend/node_modules/postcss/lib/input.js:135:16) [D:\S\projects\APNI VIDYA\frontend\.next\build\chunks\9e883_174fdf60._.js:4651:22]
+    at Root.error (frontend/node_modules/postcss/lib/node.js:146:32) [D:\S\projects\APNI VIDYA\frontend\.next\build\chunks\9e883_174fdf60._.js:928:38]
+    [at Object.Once (D:\S\projects\APNI VIDYA\frontend\node_modules\@tailwindcss\postcss\dist\index.js:10:6911)]
+    at async LazyResult.runAsync (frontend/node_modules/postcss/lib/lazy-result.js:293:11) [D:\S\projects\APNI VIDYA\frontend\.next\build\chunks\9e883_174fdf60._.js:6206:21]
+    at async transform (turbopack:///[turbopack-node]/transforms/postcss.ts:70:34) [D:\S\projects\APNI VIDYA\frontend\.next\build\chunks\[root-of-the-server]__188e9cb8._.js:146:36]
+    at async run (turbopack:///[turbopack-node]/ipc/evaluate.ts:92:23) [D:\S\projects\APNI VIDYA\frontend\.next\build\chunks\[root-of-the-server]__3b54a99d._.js:443:31]
+
+Import trace:
+  Client Component Browser:
+    ./frontend/src/app/globals.css [Client Component Browser]
+    ./frontend/src/app/layout.tsx [Server Component]
+
+
+    at async transform (turbopack:///[turbopack-node]/transforms/postcss.ts:70:34) [D:\S\projects\APNI VIDYA\frontend\.next\build\chunks\[root-of-the-server]__188e9cb8._.js:146:36])
+    at async run (turbopack:///[turbopack-node]/ipc/evaluate.ts:92:23) [D:\S\projects\APNI VIDYA\frontend\.next\build\chunks\[root-of-the-server]__3b54a99d._.js:443:31])
+npm error Lifecycle script `build` failed with error:
+npm error code 1
+npm error path D:\S\projects\APNI VIDYA\frontend
+npm error workspace frontend@0.1.0
+npm error location D:\S\projects\APNI VIDYA\frontend
+npm error command failed
+npm error command C:\WINDOWS\system32\cmd.exe /d /s /c next build

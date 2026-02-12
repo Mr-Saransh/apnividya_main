@@ -1,0 +1,32 @@
+<svg width="1000" height="320" viewBox="0 0 1000 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Circular Badge -->
+  <circle cx="160" cy="160" r="150" stroke="#2E5CB8" stroke-width="8" fill="white"/>
+  
+  <!-- Graduation Cap -->
+  <path d="M160 70 L200 85 L160 100 L120 85 Z" fill="#1E4193"/>
+  <rect x="157" y="100" width="6" height="15" fill="#1E4193"/>
+  <circle cx="163" cy="117" r="3" fill="#60A5FA"/>
+  
+  <!-- Book with Pen -->
+  <path d="M100 120 C100 115 105 110 110 110 L210 110 C215 110 220 115 220 120 L220 180 C220 185 215 190 210 190 L110 190 C105 190 100 185 100 180 Z" fill="white" stroke="#2E5CB8" stroke-width="3"/>
+  <path d="M160 110 L160 190" stroke="#60A5FA" stroke-width="2"/>
+  <path d="M120 130 L150 130" stroke="#2E5CB8" stroke-width="2"/>
+  <path d="M170 130 L200 130" stroke="#2E5CB8" stroke-width="2"/>
+  <path d="M120 145 L150 145" stroke="#2E5CB8" stroke-width="2"/>
+  <path d="M170 145 L200 145" stroke="#2E5CB8" stroke-width="2"/>
+  <path d="M120 160 L150 160" stroke="#2E5CB8" stroke-width="2"/>
+  <path d="M170 160 L200 160" stroke="#2E5CB8" stroke-width="2"/>
+  
+  <!-- Pen/Nib Symbol -->
+  <path d="M160 125 L165 135 L155 135 Z" fill="#1E4193"/>
+  <circle cx="160" cy="140" r="3" fill="#60A5FA"/>
+  
+  <!-- Supporting Hands -->
+  <path d="M80 200 Q75 210 85 220 L95 215 Q90 205 95 200 Z" fill="#2E5CB8"/>
+  <path d="M240 200 Q245 210 235 220 L225 215 Q230 205 225 200 Z" fill="#2E5CB8"/>
+  <path d="M100 210 Q95 220 105 230 L115 225 Q110 215 115 210 Z" fill="#2E5CB8"/>
+  <path d="M220 210 Q225 220 215 230 L205 225 Q210 215 205 210 Z" fill="#2E5CB8"/>
+  
+  <!-- Text "Apni Vidya" -->
+  <text x="340" y="200" font-family="Arial, sans-serif" font-size="120" font-weight="700" fill="#2E5CB8">Apni Vidya</text>
+</svg>

@@ -1,0 +1,36 @@
+# Student Panel Flow Guide
+
+## Getting Started
+1. **Sign Up / Login:**
+   - Go to the login page (`/login`).
+   - If you don't have an account, click "Sign up".
+   - Use your email and password to access the Dashboard.
+   *Tip: Use a simple password you can remember easily for testing!*
+
+2. **The Dashboard:**
+   - This is your main hub. You will see your stats (Karma Points, Day Streak) here.
+   - Click "Resume Learning" to jump back into your last course.
+   - Check the "Daily Challenge" card to earn extra points.
+
+3. **Finding Courses:**
+   - Click "Browse Courses" in the sidebar or "View All Courses".
+   - You can search for specific topics like "Physics" or "Math".
+   - Click "Enroll Now" on any course card to add it to your library.
+   *Tip: Use the search bar for quick access!*
+
+4. **Watching Lessons:**
+   - Open a course from "My Courses".
+   - Click on a lesson in the list.
+   - Watch the video and read the notes.
+   - Once done, click "Mark Complete" to track progress.
+
+5. **Taking Tests:**
+   - Go to "Mock Tests" in the sidebar.
+   - Select a test and answer the questions.
+   - Submit to see your score instantly.
+   *Tip: Don't rush! Read each question carefully.*
+
+6. **Asking the AI Tutor:**
+   - While in a lesson, look for the "AI Chat" or "Ask AI" button.
+   - Type your question about the topic.
+   - The AI will answer based on the course material.
