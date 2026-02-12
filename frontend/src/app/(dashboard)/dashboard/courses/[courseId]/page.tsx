@@ -12,6 +12,8 @@ import { api } from "@/lib/api";
 
 import { useSearchParams } from "next/navigation";
 
+export const dynamic = 'force-dynamic';
+
 export default function CoursePlayerPage({ params }: { params: Promise<{ courseId: string }> }) {
     const { courseId } = use(params);
     const searchParams = useSearchParams();

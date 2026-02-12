@@ -14,6 +14,8 @@ import { Loader2 } from "lucide-react";
 
 import { useSearchParams, useRouter } from "next/navigation";
 
+export const dynamic = 'force-dynamic';
+
 export default function CoursesPage() {
     const searchParams = useSearchParams();
     const router = useRouter();

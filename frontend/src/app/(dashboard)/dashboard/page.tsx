@@ -48,6 +48,8 @@ interface DailyChallenge {
     progress: number;
 }
 
+export const dynamic = 'force-dynamic';
+
 export default function DashboardPage() {
     const { user } = useAuth();
     const [stats, setStats] = useState<DashboardStats | null>(null);
