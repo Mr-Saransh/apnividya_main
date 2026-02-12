@@ -1,7 +1,5 @@
 "use client";
 
-import Script from "next/script";
-
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -155,6 +153,17 @@ export default function CoursesPage() {
         return () => document.removeEventListener('visibilitychange', handleVisibilityChange);
     }, []);
 
+    useEffect(() => {
+        // Load Razorpay script
+        const script = document.createElement('script');
+        script.src = 'https://checkout.razorpay.com/v1/checkout.js';
+        script.async = true;
+        document.body.appendChild(script);
+        return () => {
+            document.body.removeChild(script);
+        };
+    }, []);
+
     return (
         <div className="space-y-6">
             <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
@@ -266,7 +275,6 @@ export default function CoursesPage() {
                     ))}
                 </div>
             )}
-            <Script src="https://checkout.razorpay.com/v1/checkout.js" />
         </div>
     );
 }
