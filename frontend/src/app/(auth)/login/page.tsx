@@ -38,8 +38,8 @@ export default function LoginPage() {
         setError(null);
         try {
             const response = await api.post("/auth/login", data);
-            const { accessToken, user } = response.data;
-            login(accessToken, user);
+            const { token, user } = response.data;
+            login(token, user);
         } catch (err: any) {
             setError(err.response?.data?.message || "Invalid credentials. Try again.");
         } finally {
