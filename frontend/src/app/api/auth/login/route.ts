@@ -17,11 +17,11 @@ export async function POST(req: Request) {
             where: { email }
         });
 
-        if (!user || !user.password) {
+        if (!user || !user.passwordHash) {
             return new NextResponse("Invalid credentials", { status: 401 });
         }
 
-        const isMatch = await bcrypt.compare(password, user.password);
+        const isMatch = await bcrypt.compare(password, user.passwordHash);
 
         if (!isMatch) {
             return new NextResponse("Invalid credentials", { status: 401 });

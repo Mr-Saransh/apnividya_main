@@ -26,7 +26,7 @@ export async function POST(req: Request) {
         const user = await db.user.create({
             data: {
                 email,
-                password: hashedPassword,
+                passwordHash: hashedPassword,
                 fullName,
                 role: "STUDENT" // Default role
             }
