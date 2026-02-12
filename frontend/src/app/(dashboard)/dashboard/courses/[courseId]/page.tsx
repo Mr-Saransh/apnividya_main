@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, use } from "react";
+import { useState, useEffect, use, Suspense } from "react";
 import { CustomVideoPlayer } from "@/components/player/custom-video-player";
 import { MockTestTab } from "@/components/player/mock-test-tab";
 import { Button } from "@/components/ui/button";
@@ -14,8 +14,7 @@ import { useSearchParams } from "next/navigation";
 
 export const dynamic = 'force-dynamic';
 
-export default function CoursePlayerPage({ params }: { params: Promise<{ courseId: string }> }) {
-    const { courseId } = use(params);
+function CoursePlayerContent({ courseId }: { courseId: string }) {
     const searchParams = useSearchParams();
     const initialTab = searchParams.get("tab") || "overview";
 
@@ -184,3 +183,11 @@ export default function CoursePlayerPage({ params }: { params: Promise<{ courseI
     );
 }
 
+export default function CoursePlayerPage({ params }: { params: Promise<{ courseId: string }> }) {
+    const { courseId } = use(params);
+    return (
+        <Suspense fallback={<div className="flex justify-center p-12"><Loader2 className="animate-spin text-primary" /></div>}>
+            <CoursePlayerContent courseId={courseId} />
+        </Suspense>
+    );
+}

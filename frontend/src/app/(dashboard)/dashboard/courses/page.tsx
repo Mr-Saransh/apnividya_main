@@ -1,5 +1,6 @@
 "use client";
 
+import { Suspense } from "react";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -14,7 +15,7 @@ import { useSearchParams, useRouter } from "next/navigation";
 
 export const dynamic = 'force-dynamic';
 
-export default function CoursesPage() {
+function CoursesContent() {
     const searchParams = useSearchParams();
     const router = useRouter();
     const searchQuery = searchParams.get("search") || "";
@@ -276,5 +277,13 @@ export default function CoursesPage() {
                 </div>
             )}
         </div>
+    );
+}
+
+export default function CoursesPage() {
+    return (
+        <Suspense fallback={<div className="flex justify-center p-12"><Loader2 className="animate-spin text-primary" /></div>}>
+            <CoursesContent />
+        </Suspense>
     );
 }
