@@ -31,7 +31,7 @@ export async function GET(req: Request) {
             dayStreak: streak?.currentStreak || 0,
             lessonsCompleted,
             lessonsThisWeek: 0,
-            continueLearning: continueLearningEnrollments.map(e => ({
+            continueLearning: continueLearningEnrollments.map((e: any) => ({
                 courseId: e.courseId,
                 title: e.course.title,
                 thumbnail: e.course.thumbnail,

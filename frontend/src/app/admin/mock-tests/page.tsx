@@ -108,7 +108,7 @@ export default function MockTestAdminPage() {
                                     required
                                 >
                                     <option value="">Select a Course</option>
-                                    {courses.map(c => (
+                                    {courses.map((c: any) => (
                                         <option key={c.id} value={c.id}>{c.title}</option>
                                     ))}
                                 </select>
@@ -124,7 +124,7 @@ export default function MockTestAdminPage() {
                                     required
                                 >
                                     <option value="">Select a Lesson</option>
-                                    {lessons.map(l => (
+                                    {lessons.map((l: any) => (
                                         <option key={l.id} value={l.id}>{l.title}</option>
                                     ))}
                                 </select>
