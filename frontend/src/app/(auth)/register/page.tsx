@@ -17,7 +17,6 @@ const registerSchema = z.object({
     fullName: z.string().min(2, "Name must be at least 2 characters"),
     email: z.string().email("Invalid email address"),
     password: z.string().min(6, "Password must be at least 6 characters"),
-    role: z.enum(["STUDENT", "EDUCATOR"]).default("STUDENT"),
 });
 
 type RegisterFormValues = z.infer<typeof registerSchema>;
@@ -33,9 +32,6 @@ export default function RegisterPage() {
         formState: { errors },
     } = useForm({
         resolver: zodResolver(registerSchema),
-        defaultValues: {
-            role: "STUDENT",
-        },
     });
 
     const onSubmit = async (data: RegisterFormValues) => {

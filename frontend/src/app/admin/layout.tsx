@@ -28,11 +28,6 @@ const sidebarItems = [
         href: "/admin/mock-tests",
         icon: Trophy,
     },
-    {
-        title: "Submissions",
-        href: "/admin/submissions",
-        icon: Users,
-    },
 ];
 
 export default function AdminLayout({

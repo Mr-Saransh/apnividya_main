@@ -11,9 +11,6 @@ export async function GET(req: Request, { params }: { params: Promise<{ courseId
             },
             include: {
                 lessons: {
-                    where: {
-                        status: "PUBLISHED"
-                    },
                     orderBy: {
                         order: "asc"
                     },

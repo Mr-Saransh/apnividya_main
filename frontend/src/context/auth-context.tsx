@@ -8,7 +8,7 @@ interface User {
     id: string;
     email: string;
     fullName: string | null;
-    role: "STUDENT" | "EDUCATOR" | "ADMIN";
+    role: "STUDENT" | "ADMIN";
     karmaPoints: number;
     avatar?: string | null;
 }

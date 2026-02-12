@@ -1,28 +1,55 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Link from "next/link";
 import { useParams } from "next/navigation";
 import { api } from "@/lib/api";
 import { Button } from "@/components/ui/button";
-import { PlusCircle, Loader2, Video, Link as LinkIcon, AlertCircle, Copy, Check, Trash2 } from "lucide-react";
+import { PlusCircle, Loader2, Video, Link as LinkIcon, AlertCircle, Trash2, Calendar, Clock, ExternalLink, Youtube } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import {
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
+    DialogFooter
+} from "@/components/ui/dialog";
+import { Pencil } from "lucide-react";
 
+// ========== STATUS BADGE ==========
+function StatusBadge({ status }: { status: string }) {
+    const styles: Record<string, string> = {
+        SCHEDULED: "bg-blue-100 text-blue-700 border-blue-200",
+        LIVE: "bg-red-100 text-red-700 border-red-200",
+        RECORDED: "bg-yellow-100 text-yellow-700 border-yellow-200",
+        PUBLISHED: "bg-green-100 text-green-700 border-green-200",
+    };
+    return (
+        <span className={`inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold ${styles[status] || "bg-gray-100 text-gray-700"}`}>
+            {status}
+        </span>
+    );
+}
+
+// ========== MAIN PAGE ==========
 export default function AdminLessonsPage() {
     const params = useParams();
     const courseId = params.courseId;
 
     const [course, setCourse] = useState<any>(null);
     const [loading, setLoading] = useState(true);
-    const [generatingToken, setGeneratingToken] = useState<string | null>(null);
-    const [newTokenLink, setNewTokenLink] = useState<string | null>(null);
 
     // New Lesson Form
     const [newLessonTitle, setNewLessonTitle] = useState("");
     const [newLessonDesc, setNewLessonDesc] = useState("");
+    const [newLessonLiveLink, setNewLessonLiveLink] = useState("");
+    const [newLessonScheduledAt, setNewLessonScheduledAt] = useState("");
+    const [newLessonVideoId, setNewLessonVideoId] = useState("");
+    const [newLessonStatus, setNewLessonStatus] = useState("SCHEDULED");
     const [addingLesson, setAddingLesson] = useState(false);
 
     useEffect(() => {
@@ -48,31 +75,25 @@ export default function AdminLessonsPage() {
             await api.post(`/admin/courses/${courseId}/lessons`, {
                 title: newLessonTitle,
                 description: newLessonDesc,
+                liveLink: newLessonLiveLink || null,
+                scheduledAt: newLessonScheduledAt || null,
+                youtubeVideoId: newLessonVideoId || null,
+                status: newLessonStatus,
                 order: (course.lessons?.length || 0) + 1
             });
+            // Reset form
             setNewLessonTitle("");
             setNewLessonDesc("");
-            fetchCourse(); // Refresh list
-        } catch (error) {
-            console.error(error);
-        } finally {
-            setAddingLesson(false);
-        }
-    };
-
-    const handleGenerateToken = async (lessonId: string) => {
-        setGeneratingToken(lessonId);
-
-        try {
-            const res = await api.post(`/admin/lessons/${lessonId}/token`, {});
-
-            const link = `${window.location.origin}/teacher/submit?token=${res.data.token}`;
-            setNewTokenLink(link);
+            setNewLessonLiveLink("");
+            setNewLessonScheduledAt("");
+            setNewLessonVideoId("");
+            setNewLessonStatus("SCHEDULED");
             fetchCourse();
         } catch (error) {
             console.error(error);
+            alert("Failed to add lesson");
         } finally {
-            setGeneratingToken(null);
+            setAddingLesson(false);
         }
     };
 
@@ -86,11 +107,6 @@ export default function AdminLessonsPage() {
             console.error(error);
             alert("Failed to delete lesson");
         }
-    };
-
-    const copyToClipboard = (text: string) => {
-        navigator.clipboard.writeText(text);
-        alert("Link copied!");
     };
 
     if (loading) return <div className="flex justify-center p-8"><Loader2 className="animate-spin" /></div>;
@@ -111,9 +127,16 @@ export default function AdminLessonsPage() {
             <div className="grid gap-6 md:grid-cols-3">
                 {/* Lesson List */}
                 <div className="md:col-span-2 space-y-4">
-                    <h2 className="text-xl font-semibold">Lessons</h2>
+                    <h2 className="text-xl font-semibold">Lessons ({course?.lessons?.length || 0})</h2>
+                    {course?.lessons?.length === 0 && (
+                        <p className="text-muted-foreground text-sm">No lessons yet. Add your first lesson.</p>
+                    )}
                     {course?.lessons?.map((lesson: any) => (
-                        <Card key={lesson.id} className="border-l-4 border-l-primary">
+                        <Card key={lesson.id} className={`border-l-4 ${lesson.status === 'PUBLISHED' ? 'border-l-green-500' :
+                                lesson.status === 'RECORDED' ? 'border-l-yellow-500' :
+                                    lesson.status === 'LIVE' ? 'border-l-red-500' :
+                                        'border-l-blue-500'
+                            }`}>
                             <CardHeader className="pb-2">
                                 <div className="flex justify-between items-start">
                                     <div>
@@ -122,18 +145,9 @@ export default function AdminLessonsPage() {
                                             {lesson.title}
                                         </CardTitle>
                                         <CardDescription className="mt-1">{lesson.description}</CardDescription>
-                                        {lesson.liveMeetingAt && (
-                                            <div className="text-xs text-blue-600 mt-1 font-medium">
-                                                Live: {new Date(lesson.liveMeetingAt).toLocaleString()}
-                                            </div>
-                                        )}
                                     </div>
                                     <div className="flex items-center gap-2">
-                                        {lesson.status === 'PUBLISHED' ? (
-                                            <Badge variant="success" className="bg-green-600 text-white">Published</Badge>
-                                        ) : (
-                                            <Badge variant="secondary">Waiting Video</Badge>
-                                        )}
+                                        <StatusBadge status={lesson.status} />
                                         <Button
                                             variant="ghost"
                                             size="icon"
@@ -147,36 +161,30 @@ export default function AdminLessonsPage() {
                                 </div>
                             </CardHeader>
                             <CardContent>
-                                <div className="flex items-center justify-between mt-4">
-                                    <div className="text-sm text-muted-foreground space-y-1">
-                                        {lesson.youtubeVideoId ? (
-                                            <div className="text-green-600 flex items-center"><Video className="w-4 h-4 mr-1" /> Video Linked</div>
-                                        ) : (
-                                            <div className="text-orange-500 flex items-center"><AlertCircle className="w-4 h-4 mr-1" /> No Video</div>
-                                        )}
-                                        {lesson.liveMeetingUrl && (
-                                            <div className="text-blue-600 flex items-center"><LinkIcon className="w-4 h-4 mr-1" /> Live Link Set</div>
-                                        )}
-                                    </div>
-
-                                    <Button
-                                        size="sm"
-                                        variant="outline"
-                                        onClick={() => handleGenerateToken(lesson.id)}
-                                        disabled={generatingToken === lesson.id}
-                                    >
-                                        {generatingToken === lesson.id ? <Loader2 className="animate-spin w-4 h-4" /> : <LinkIcon className="w-4 h-4 mr-2" />}
-                                        Generate Teacher Link
-                                    </Button>
+                                <div className="flex flex-wrap gap-3 text-sm text-muted-foreground">
+                                    {lesson.youtubeVideoId ? (
+                                        <div className="text-green-600 flex items-center gap-1">
+                                            <Youtube className="w-4 h-4" /> Video: {lesson.youtubeVideoId}
+                                        </div>
+                                    ) : (
+                                        <div className="text-orange-500 flex items-center gap-1">
+                                            <AlertCircle className="w-4 h-4" /> No Video
+                                        </div>
+                                    )}
+                                    {lesson.liveLink && (
+                                        <div className="text-blue-600 flex items-center gap-1">
+                                            <ExternalLink className="w-4 h-4" />
+                                            <a href={lesson.liveLink} target="_blank" rel="noopener noreferrer" className="hover:underline">
+                                                Live Link
+                                            </a>
+                                        </div>
+                                    )}
+                                    {lesson.scheduledAt && (
+                                        <div className="text-purple-600 flex items-center gap-1">
+                                            <Calendar className="w-4 h-4" /> {new Date(lesson.scheduledAt).toLocaleString()}
+                                        </div>
+                                    )}
                                 </div>
-                                {newTokenLink && generatingToken === null && (
-                                    <div className="mt-4 p-3 bg-blue-50 border border-blue-200 rounded-md flex items-center justify-between text-sm text-blue-800">
-                                        <span className="truncate flex-1 mr-2">{newTokenLink}</span>
-                                        <Button size="icon" variant="ghost" className="h-6 w-6" onClick={() => copyToClipboard(newTokenLink)}>
-                                            <Copy className="w-4 h-4" />
-                                        </Button>
-                                    </div>
-                                )}
                             </CardContent>
                         </Card>
                     ))}
@@ -186,12 +194,14 @@ export default function AdminLessonsPage() {
                 <div>
                     <Card>
                         <CardHeader>
-                            <CardTitle>Add Lesson</CardTitle>
+                            <CardTitle className="flex items-center gap-2">
+                                <PlusCircle className="h-5 w-5" /> Add Lesson
+                            </CardTitle>
                         </CardHeader>
                         <CardContent>
                             <form onSubmit={handleAddLesson} className="space-y-4">
                                 <div className="space-y-2">
-                                    <Label>Title</Label>
+                                    <Label>Title *</Label>
                                     <Input
                                         value={newLessonTitle}
                                         onChange={(e: React.ChangeEvent<HTMLInputElement>) => setNewLessonTitle(e.target.value)}
@@ -204,8 +214,47 @@ export default function AdminLessonsPage() {
                                     <Textarea
                                         value={newLessonDesc}
                                         onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setNewLessonDesc(e.target.value)}
-                                        placeholder="Overview..."
+                                        placeholder="Brief overview..."
                                     />
+                                </div>
+                                <div className="space-y-2">
+                                    <Label>Status</Label>
+                                    <select
+                                        className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
+                                        value={newLessonStatus}
+                                        onChange={(e) => setNewLessonStatus(e.target.value)}
+                                    >
+                                        <option value="SCHEDULED">Scheduled</option>
+                                        <option value="LIVE">Live</option>
+                                        <option value="RECORDED">Recorded</option>
+                                        <option value="PUBLISHED">Published</option>
+                                    </select>
+                                </div>
+                                <div className="space-y-2">
+                                    <Label>Live Class Link</Label>
+                                    <Input
+                                        value={newLessonLiveLink}
+                                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setNewLessonLiveLink(e.target.value)}
+                                        placeholder="https://meet.google.com/..."
+                                    />
+                                    <p className="text-xs text-muted-foreground">Google Meet, Zoom, etc.</p>
+                                </div>
+                                <div className="space-y-2">
+                                    <Label>Scheduled Date & Time</Label>
+                                    <Input
+                                        type="datetime-local"
+                                        value={newLessonScheduledAt}
+                                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setNewLessonScheduledAt(e.target.value)}
+                                    />
+                                </div>
+                                <div className="space-y-2">
+                                    <Label>YouTube Video ID</Label>
+                                    <Input
+                                        value={newLessonVideoId}
+                                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setNewLessonVideoId(e.target.value)}
+                                        placeholder="e.g. dQw4w9WgXcQ"
+                                    />
+                                    <p className="text-xs text-muted-foreground">Paste after uploading recording to YouTube</p>
                                 </div>
                                 <Button type="submit" className="w-full" disabled={addingLesson}>
                                     {addingLesson ? <Loader2 className="animate-spin mr-2" /> : <PlusCircle className="mr-2 h-4 w-4" />}
@@ -216,26 +265,11 @@ export default function AdminLessonsPage() {
                     </Card>
                 </div>
             </div>
-        </div >
+        </div>
     );
 }
 
-// Minimal Badge replacement
-function Badge({ children, className, variant }: any) {
-    return <span className={`inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 ${className} ${variant === 'secondary' ? 'border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80' : 'border-transparent bg-primary text-primary-foreground hover:bg-primary/80'}`}>{children}</span>
-}
-
-import {
-    Dialog,
-    DialogContent,
-    DialogDescription,
-    DialogHeader,
-    DialogTitle,
-    DialogTrigger,
-    DialogFooter
-} from "@/components/ui/dialog"
-import { Pencil } from "lucide-react";
-
+// ========== EDIT LESSON DIALOG ==========
 function EditLessonDialog({ lesson, onUpdate }: { lesson: any, onUpdate: () => void }) {
     const [open, setOpen] = useState(false);
     const [loading, setLoading] = useState(false);
@@ -243,8 +277,9 @@ function EditLessonDialog({ lesson, onUpdate }: { lesson: any, onUpdate: () => v
         title: lesson.title,
         description: lesson.description || "",
         youtubeVideoId: lesson.youtubeVideoId || "",
-        liveMeetingUrl: lesson.liveMeetingUrl || "",
-        liveMeetingAt: lesson.liveMeetingAt ? new Date(lesson.liveMeetingAt).toISOString().slice(0, 16) : ""
+        liveLink: lesson.liveLink || "",
+        scheduledAt: lesson.scheduledAt ? new Date(lesson.scheduledAt).toISOString().slice(0, 16) : "",
+        status: lesson.status || "SCHEDULED"
     });
 
     const handleUpdate = async () => {
@@ -252,7 +287,9 @@ function EditLessonDialog({ lesson, onUpdate }: { lesson: any, onUpdate: () => v
         try {
             await api.patch(`/admin/lessons/${lesson.id}`, {
                 ...formData,
-                liveMeetingAt: formData.liveMeetingAt || null // Handle empty string
+                scheduledAt: formData.scheduledAt || null,
+                youtubeVideoId: formData.youtubeVideoId || null,
+                liveLink: formData.liveLink || null
             });
             onUpdate();
             setOpen(false);
@@ -271,61 +308,86 @@ function EditLessonDialog({ lesson, onUpdate }: { lesson: any, onUpdate: () => v
                     <Pencil className="h-4 w-4" />
                 </Button>
             </DialogTrigger>
-            <DialogContent className="sm:max-w-[425px]">
+            <DialogContent className="sm:max-w-[480px]">
                 <DialogHeader>
                     <DialogTitle>Edit Lesson</DialogTitle>
                     <DialogDescription>
-                        Update lesson details like video ID and Live Session link.
+                        Update lesson details, live link, or add YouTube recording.
                     </DialogDescription>
                 </DialogHeader>
-                <div className="grid gap-4 py-4">
+                <div className="grid gap-4 py-4 max-h-[60vh] overflow-y-auto">
                     <div className="grid gap-2">
-                        <Label htmlFor="title">Title</Label>
+                        <Label htmlFor="edit-title">Title</Label>
                         <Input
-                            id="title"
+                            id="edit-title"
                             value={formData.title}
                             onChange={(e) => setFormData({ ...formData, title: e.target.value })}
                         />
                     </div>
                     <div className="grid gap-2">
-                        <Label htmlFor="videoId">YouTube Video ID</Label>
+                        <Label htmlFor="edit-desc">Description</Label>
+                        <Textarea
+                            id="edit-desc"
+                            value={formData.description}
+                            onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+                        />
+                    </div>
+                    <div className="grid gap-2">
+                        <Label htmlFor="edit-status">Status</Label>
+                        <select
+                            id="edit-status"
+                            className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
+                            value={formData.status}
+                            onChange={(e) => setFormData({ ...formData, status: e.target.value })}
+                        >
+                            <option value="SCHEDULED">Scheduled</option>
+                            <option value="LIVE">Live</option>
+                            <option value="RECORDED">Recorded</option>
+                            <option value="PUBLISHED">Published</option>
+                        </select>
+                    </div>
+                    <div className="grid gap-2">
+                        <Label htmlFor="edit-liveLink">Live Class Link</Label>
                         <Input
-                            id="videoId"
+                            id="edit-liveLink"
+                            placeholder="https://meet.google.com/..."
+                            value={formData.liveLink}
+                            onChange={(e) => setFormData({ ...formData, liveLink: e.target.value })}
+                        />
+                        <p className="text-xs text-muted-foreground">Clear after live session ends</p>
+                    </div>
+                    <div className="grid gap-2">
+                        <Label htmlFor="edit-scheduledAt">Scheduled Date & Time</Label>
+                        <Input
+                            id="edit-scheduledAt"
+                            type="datetime-local"
+                            value={formData.scheduledAt}
+                            onChange={(e) => setFormData({ ...formData, scheduledAt: e.target.value })}
+                        />
+                    </div>
+                    <div className="grid gap-2">
+                        <Label htmlFor="edit-videoId">YouTube Video ID</Label>
+                        <Input
+                            id="edit-videoId"
                             placeholder="e.g. dQw4w9WgXcQ"
                             value={formData.youtubeVideoId}
                             onChange={(e) => setFormData({ ...formData, youtubeVideoId: e.target.value })}
                         />
-                    </div>
-                    <div className="grid gap-2">
-                        <Label htmlFor="liveUrl">Live Meeting URL</Label>
-                        <Input
-                            id="liveUrl"
-                            placeholder="https://meet.google.com/..."
-                            value={formData.liveMeetingUrl}
-                            onChange={(e) => setFormData({ ...formData, liveMeetingUrl: e.target.value })}
-                        />
-                    </div>
-                    <div className="grid gap-2">
-                        <Label htmlFor="liveTime">Live Meeting Time</Label>
-                        <Input
-                            id="liveTime"
-                            type="datetime-local"
-                            value={formData.liveMeetingAt}
-                            onChange={(e) => setFormData({ ...formData, liveMeetingAt: e.target.value })}
-                        />
+                        <p className="text-xs text-muted-foreground">Add after uploading recording to YouTube (unlisted)</p>
                     </div>
                 </div>
                 <DialogFooter>
                     <Button type="submit" onClick={handleUpdate} disabled={loading}>
                         {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-                        Save changes
+                        Save Changes
                     </Button>
                 </DialogFooter>
             </DialogContent>
         </Dialog>
-    )
+    );
 }
 
+// ========== EDIT COURSE DIALOG ==========
 function EditCourseDialog({ course, onUpdate }: { course: any, onUpdate: () => void }) {
     const [open, setOpen] = useState(false);
     const [loading, setLoading] = useState(false);
