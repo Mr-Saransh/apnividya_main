@@ -15,7 +15,7 @@ export async function GET(req: Request) {
             where: { userId },
             select: { courseId: true },
         });
-        const courseIds = enrollments.map((e) => e.courseId);
+        const courseIds = enrollments.map((e: any) => e.courseId);
 
         // Fetch Mock Tests for lessons in enrolled courses
         const mockTests = await db.mockTest.findMany({
