@@ -7,9 +7,10 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+// ========== ENUMS ==========
+
 enum Role {
   STUDENT
-  EDUCATOR
   ADMIN
 }
 
@@ -26,15 +27,20 @@ enum DocType {
 }
 
 enum LessonStatus {
-  WAITING_FOR_VIDEO
-  PUBLISHED
+  SCHEDULED      // Live class scheduled, not yet happened
+  LIVE           // Currently happening (optional status)
+  RECORDED       // Recording uploaded but not published
+  PUBLISHED      // Available to students
 }
 
-enum SubmissionStatus {
-  PENDING_REVIEW
-  APPROVED
-  REJECTED
+enum NotificationType {
+  LIVE_SESSION
+  COURSE_UPDATE
+  COMMUNITY_REPLY
+  ACHIEVEMENT
 }
+
+// ========== MODELS ==========
 
 model User {
   id            String    @id @default(uuid())
@@ -50,119 +56,121 @@ model User {
   updatedAt     DateTime  @updatedAt
   
   // Relations
-  enrollments   Enrollment[]
-  posts         CommunityPost[]
-  comments      Comment[]
-  postVotes     PostVote[]
-  quizAttempts  QuizAttempt[]
-  karmaLedger   KarmaLedger[]
-  streak        Streak?
+  enrollments      Enrollment[]
+  posts            CommunityPost[]
+  comments         Comment[]
+  postVotes        PostVote[]
+  quizAttempts     QuizAttempt[]
+  karmaLedger      KarmaLedger[]
+  streak           Streak?
   mockTestAttempts MockTestAttempt[]
-  ownedCourses  Course[]      @relation("InstructorCourses")
-  notifications Notification[]
-  payments      Payment[]
+  ownedCourses     Course[]      @relation("InstructorCourses")
+  notifications    Notification[]
+  payments         Payment[]
+  lessonCompletions LessonCompletion[]
 }
 
 model Streak {
-  id          String   @id @default(uuid())
-  userId      String   @unique
-  currentStreak Int    @default(0)
+  id               String   @id @default(uuid())
+  userId           String   @unique
+  currentStreak    Int      @default(0)
   lastActivityDate DateTime @default(now())
   
-  user        User     @relation(fields: [userId], references: [id])
+  user             User     @relation(fields: [userId], references: [id])
 }
 
 model Course {
-  id          String   @id @default(uuid())
-  title       String
-  description String
-  thumbnail   String?
+  id           String   @id @default(uuid())
+  title        String
+  description  String
+  thumbnail    String?
   instructorId String
-  published   Boolean  @default(false)
-  level       String?   // Beginner, Intermediate, Advanced
-  language    String?
-  category    String?
-  price       Float    @default(0)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  published    Boolean  @default(false)
+  level        String?   // Beginner, Intermediate, Advanced
+  language     String?
+  category     String?
+  price        Float    @default(0)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
   
-  instructor  User     @relation("InstructorCourses", fields: [instructorId], references: [id])
-  lessons     Lesson[]
-  enrollments Enrollment[]
+  instructor   User     @relation("InstructorCourses", fields: [instructorId], references: [id])
+  lessons      Lesson[]
+  enrollments  Enrollment[]
   liveSessions LiveSession[]
-  payments    Payment[]
+  payments     Payment[]
 }
 
 model Enrollment {
-  id        String   @id @default(uuid())
-  userId    String
-  courseId  String
+  id         String   @id @default(uuid())
+  userId     String
+  courseId   String
   enrolledAt DateTime @default(now())
-  progress  Int      @default(0) // Percentage or lessons completed count
+  progress   Int      @default(0) // Percentage or lessons completed count
   
-  user      User     @relation(fields: [userId], references: [id])
-  course    Course   @relation(fields: [courseId], references: [id])
+  user       User     @relation(fields: [userId], references: [id])
+  course     Course   @relation(fields: [courseId], references: [id])
 
   @@unique([userId, courseId])
 }
 
 model Lesson {
-  id              String   @id @default(uuid())
-  courseId        String
-  title           String
-  description     String?
-  type            ContentType @default(VIDEO)
-  content         String?  // Markdown/Text content or Quiz JSON
-  youtubeVideoId  String?  // The ONLY video reference (Optional now)
-  liveMeetingUrl  String?  // URL for Live Session (e.g. Zoom/Meet)
-  liveMeetingAt   DateTime? // Scheduled time for Live Session
-  duration        Int?     // Duration in seconds
-  order           Int
-  status          LessonStatus @default(WAITING_FOR_VIDEO)
+  id             String       @id @default(uuid())
+  courseId       String
+  title          String
+  description    String?
+  type           ContentType  @default(VIDEO)
+  content        String?      // Markdown/Text content or Quiz JSON
+  youtubeVideoId String?      // YouTube video ID for recorded lesson
+  liveLink       String?      // Google Meet / Zoom link for live class
+  scheduledAt    DateTime?    // When live class is scheduled
+  duration       Int?         // Duration in seconds
+  order          Int
+  status         LessonStatus @default(SCHEDULED)
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
   
-  course          Course   @relation(fields: [courseId], references: [id])
-  completion      LessonCompletion[]
-  submissions     TeacherSubmission[]
-  tokens          TeacherToken[]
-  mockTest        MockTest?
+  course         Course              @relation(fields: [courseId], references: [id])
+  completions    LessonCompletion[]
+  mockTest       MockTest?
 }
 
 model LessonCompletion {
-  id        String   @id @default(uuid())
-  userId    String
-  lessonId  String
+  id          String   @id @default(uuid())
+  userId      String
+  lessonId    String
   completedAt DateTime @default(now())
 
-  lesson    Lesson   @relation(fields: [lessonId], references: [id])
+  user        User     @relation(fields: [userId], references: [id])
+  lesson      Lesson   @relation(fields: [lessonId], references: [id])
   
   @@unique([userId, lessonId])
 }
 
 model MockTest {
-  id              String   @id @default(uuid())
-  lessonId        String   @unique
-  title           String
-  googleFormLink  String
-  totalMarks      Int
-  passingMarks    Int
-  published       Boolean  @default(false)
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
+  id             String   @id @default(uuid())
+  lessonId       String   @unique
+  title          String
+  googleFormLink String
+  totalMarks     Int
+  passingMarks   Int
+  published      Boolean  @default(false)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
 
-  lesson          Lesson   @relation(fields: [lessonId], references: [id])
-  attempts        MockTestAttempt[]
+  lesson         Lesson   @relation(fields: [lessonId], references: [id])
+  attempts       MockTestAttempt[]
 }
 
 model MockTestAttempt {
-  id          String   @id @default(uuid())
-  userId      String
-  mockTestId  String
-  score       Int
-  percentage  Float
-  createdAt   DateTime @default(now())
+  id         String   @id @default(uuid())
+  userId     String
+  mockTestId String
+  score      Int
+  percentage Float
+  createdAt  DateTime @default(now())
 
-  user        User     @relation(fields: [userId], references: [id])
-  mockTest    MockTest @relation(fields: [mockTestId], references: [id])
+  user       User     @relation(fields: [userId], references: [id])
+  mockTest   MockTest @relation(fields: [mockTestId], references: [id])
 }
 
 model KarmaLedger {
@@ -202,55 +210,26 @@ model Comment {
 }
 
 model PostVote {
-  id        String   @id @default(uuid())
-  postId    String
+  id        String  @id @default(uuid())
   userId    String
-  value     Int // 1 for upvote, -1 for downvote
+  postId    String
+  value     Int     // +1 or -1
   
-  post      CommunityPost @relation(fields: [postId], references: [id])
-  user      User     @relation(fields: [userId], references: [id])
-
+  user      User           @relation(fields: [userId], references: [id])
+  post      CommunityPost  @relation(fields: [postId], references: [id])
+  
   @@unique([userId, postId])
 }
 
 model QuizAttempt {
   id        String   @id @default(uuid())
   userId    String
-  lessonId  String?  // If it's a lesson quiz
+  quizId    String
   score     Int
   maxScore  Int
   createdAt DateTime @default(now())
   
   user      User     @relation(fields: [userId], references: [id])
-}
-
-model TeacherSubmission {
-  id            String           @id @default(uuid())
-  lessonId      String
-  submittedLink String
-  status        SubmissionStatus @default(PENDING_REVIEW)
-  notes         String?
-  createdAt     DateTime         @default(now())
-  
-  lesson        Lesson           @relation(fields: [lessonId], references: [id])
-}
-
-model TeacherToken {
-  id        String   @id @default(uuid())
-  token     String   @unique
-  lessonId  String
-  expiresAt DateTime
-  used      Boolean  @default(false)
-  createdAt DateTime @default(now())
-  
-  lesson    Lesson   @relation(fields: [lessonId], references: [id])
-}
-
-enum NotificationType {
-  LIVE_SESSION
-  COURSE_UPDATE
-  COMMUNITY_REPLY
-  ACHIEVEMENT
 }
 
 model Notification {
@@ -271,8 +250,10 @@ model LiveSession {
   courseId    String
   title       String
   description String?
-  scheduledAt DateTime
-  meetingLink String?
+  startTime   DateTime
+  endTime     DateTime?
+  meetingUrl  String   // External meeting URL
+  recordingUrl String? // Optional recording URL after session
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
   
@@ -280,17 +261,16 @@ model LiveSession {
 }
 
 model Payment {
-  id                String   @id @default(uuid())
-  userId            String
-  courseId          String
-  amount            Float
-  currency          String   @default("INR")
-  razorpayOrderId   String?
-  razorpayPaymentId String?
-  status            String   @default("pending") // pending, success, failed
-  createdAt         DateTime @default(now())
-  updatedAt         DateTime @updatedAt
+  id                  String   @id @default(uuid())
+  userId              String
+  courseId            String
+  amount              Float
+  razorpayOrderId     String   @unique
+  razorpayPaymentId   String?
+  razorpaySignature   String?
+  status              String   // pending, success, failed
+  createdAt           DateTime @default(now())
   
-  user              User     @relation(fields: [userId], references: [id])
-  course            Course   @relation(fields: [courseId], references: [id])
+  user                User     @relation(fields: [userId], references: [id])
+  course              Course   @relation(fields: [courseId], references: [id])
 }
