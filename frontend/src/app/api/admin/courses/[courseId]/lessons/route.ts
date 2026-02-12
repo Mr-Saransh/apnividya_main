@@ -3,12 +3,13 @@ import { db } from "@/lib/db";
 
 export async function GET(
     req: Request,
-    { params }: { params: { courseId: string } }
+    { params }: { params: Promise<{ courseId: string }> }
 ) {
     try {
+        const { courseId } = await params;
         const lessons = await db.lesson.findMany({
             where: {
-                courseId: params.courseId
+                courseId: courseId
             },
             orderBy: {
                 order: "asc"

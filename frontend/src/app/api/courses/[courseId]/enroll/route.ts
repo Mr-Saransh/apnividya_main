@@ -2,8 +2,9 @@ import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { getCurrentUser } from "@/lib/session";
 
-export async function POST(req: Request, { params }: { params: { courseId: string } }) {
+export async function POST(req: Request, { params }: { params: Promise<{ courseId: string }> }) {
     try {
+        const { courseId } = await params;
         const user = await getCurrentUser(req);
 
         if (!user) {
@@ -12,7 +13,7 @@ export async function POST(req: Request, { params }: { params: { courseId: strin
 
         const course = await db.course.findUnique({
             where: {
-                id: params.courseId,
+                id: courseId,
                 published: true,
             }
         });
@@ -25,7 +26,7 @@ export async function POST(req: Request, { params }: { params: { courseId: strin
             where: {
                 userId_courseId: {
                     userId: user.id,
-                    courseId: params.courseId,
+                    courseId: courseId,
                 },
             }
         });
@@ -37,7 +38,7 @@ export async function POST(req: Request, { params }: { params: { courseId: strin
         const enrollment = await db.enrollment.create({
             data: {
                 userId: user.id,
-                courseId: params.courseId,
+                courseId: courseId,
             }
         });
 

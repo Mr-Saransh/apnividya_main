@@ -2,8 +2,9 @@ import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { getCurrentUser } from "@/lib/session";
 
-export async function POST(req: Request, { params }: { params: { postId: string } }) {
+export async function POST(req: Request, { params }: { params: Promise<{ postId: string }> }) {
     try {
+        const { postId } = await params;
         const user = await getCurrentUser(req);
         if (!user) {
             return new NextResponse("Unauthorized", { status: 401 });
@@ -17,7 +18,7 @@ export async function POST(req: Request, { params }: { params: { postId: string 
 
         const post = await db.communityPost.findUnique({
             where: {
-                id: params.postId,
+                id: postId,
             },
         });
 
@@ -28,7 +29,7 @@ export async function POST(req: Request, { params }: { params: { postId: string 
         const comment = await db.comment.create({
             data: {
                 content: content,
-                postId: params.postId,
+                postId: postId,
                 userId: user.id,
             },
         });

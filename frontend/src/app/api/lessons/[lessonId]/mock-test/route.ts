@@ -3,12 +3,13 @@ import { db } from "@/lib/db";
 
 export async function GET(
     req: Request,
-    { params }: { params: { lessonId: string } }
+    { params }: { params: Promise<{ lessonId: string }> }
 ) {
     try {
+        const { lessonId } = await params;
         const mockTest = await db.mockTest.findUnique({
             where: {
-                lessonId: params.lessonId,
+                lessonId: lessonId,
                 published: true,
             },
         });
@@ -26,9 +27,10 @@ export async function GET(
 
 export async function POST(
     req: Request,
-    { params }: { params: { lessonId: string } }
+    { params }: { params: Promise<{ lessonId: string }> }
 ) {
     try {
+        const { lessonId } = await params;
         const { userId, score } = await req.json();
 
         if (!userId || score === undefined) {
@@ -38,7 +40,7 @@ export async function POST(
         // Fetch Mock Test details to validate score
         const mockTest = await db.mockTest.findUnique({
             where: {
-                lessonId: params.lessonId,
+                lessonId: lessonId,
                 published: true,
             },
         });
