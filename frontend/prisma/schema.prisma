@@ -1,5 +1,6 @@
 generator client {
   provider = "prisma-client-js"
+  output   = "../src/generated/client"
 }
 
 datasource db {
@@ -63,7 +64,7 @@ model User {
   quizAttempts     QuizAttempt[]
   karmaLedger      KarmaLedger[]
   streak           Streak?
-  mockTestAttempts MockTestAttempt[]
+  mockTestAttempts LessonQuizAttempt[]
   ownedCourses     Course[]      @relation("InstructorCourses")
   notifications    Notification[]
   payments         Payment[]
@@ -121,8 +122,8 @@ model Lesson {
   type           ContentType  @default(VIDEO)
   content        String?      // Markdown/Text content or Quiz JSON
   youtubeVideoId String?      // YouTube video ID for recorded lesson
-  liveLink       String?      // Google Meet / Zoom link for live class
-  scheduledAt    DateTime?    // When live class is scheduled
+  liveMeetingUrl String?      // Google Meet / Zoom link for live class
+  liveMeetingAt  DateTime?    // When live class is scheduled
   duration       Int?         // Duration in seconds
   order          Int
   status         LessonStatus @default(SCHEDULED)
@@ -131,7 +132,7 @@ model Lesson {
   
   course         Course              @relation(fields: [courseId], references: [id])
   completions    LessonCompletion[]
-  mockTest       MockTest?
+  quiz           LessonQuiz?
 }
 
 model LessonCompletion {
@@ -146,7 +147,7 @@ model LessonCompletion {
   @@unique([userId, lessonId])
 }
 
-model MockTest {
+model LessonQuiz {
   id             String   @id @default(uuid())
   lessonId       String   @unique
   title          String
@@ -158,19 +159,19 @@ model MockTest {
   updatedAt      DateTime @updatedAt
 
   lesson         Lesson   @relation(fields: [lessonId], references: [id])
-  attempts       MockTestAttempt[]
+  attempts       LessonQuizAttempt[]
 }
 
-model MockTestAttempt {
+model LessonQuizAttempt {
   id         String   @id @default(uuid())
   userId     String
-  mockTestId String
+  quizId     String
   score      Int
   percentage Float
   createdAt  DateTime @default(now())
 
-  user       User     @relation(fields: [userId], references: [id])
-  mockTest   MockTest @relation(fields: [mockTestId], references: [id])
+  user       User       @relation(fields: [userId], references: [id])
+  quiz       LessonQuiz @relation(fields: [quizId], references: [id])
 }
 
 model KarmaLedger {

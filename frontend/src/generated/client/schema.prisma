@@ -1,0 +1,277 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/client"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ========== ENUMS ==========
+
+enum Role {
+  STUDENT
+  ADMIN
+}
+
+enum ContentType {
+  VIDEO
+  TEXT
+  QUIZ
+}
+
+enum DocType {
+  PDF
+  TRANSCRIPT
+  NOTE
+}
+
+enum LessonStatus {
+  SCHEDULED // Live class scheduled, not yet happened
+  LIVE // Currently happening (optional status)
+  RECORDED // Recording uploaded but not published
+  PUBLISHED // Available to students
+}
+
+enum NotificationType {
+  LIVE_SESSION
+  COURSE_UPDATE
+  COMMUNITY_REPLY
+  ACHIEVEMENT
+}
+
+// ========== MODELS ==========
+
+model User {
+  id           String   @id @default(uuid())
+  email        String   @unique
+  phone        String?  @unique
+  passwordHash String
+  role         Role     @default(STUDENT)
+  fullName     String?
+  bio          String?
+  avatar       String?
+  karmaPoints  Int      @default(0)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  // Relations
+  enrollments       Enrollment[]
+  posts             CommunityPost[]
+  comments          Comment[]
+  postVotes         PostVote[]
+  quizAttempts      QuizAttempt[]
+  karmaLedger       KarmaLedger[]
+  streak            Streak?
+  mockTestAttempts  LessonQuizAttempt[]
+  ownedCourses      Course[]            @relation("InstructorCourses")
+  notifications     Notification[]
+  payments          Payment[]
+  lessonCompletions LessonCompletion[]
+}
+
+model Streak {
+  id               String   @id @default(uuid())
+  userId           String   @unique
+  currentStreak    Int      @default(0)
+  lastActivityDate DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id])
+}
+
+model Course {
+  id           String   @id @default(uuid())
+  title        String
+  description  String
+  thumbnail    String?
+  instructorId String
+  published    Boolean  @default(false)
+  level        String? // Beginner, Intermediate, Advanced
+  language     String?
+  category     String?
+  price        Float    @default(0)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  instructor   User          @relation("InstructorCourses", fields: [instructorId], references: [id])
+  lessons      Lesson[]
+  enrollments  Enrollment[]
+  liveSessions LiveSession[]
+  payments     Payment[]
+}
+
+model Enrollment {
+  id         String   @id @default(uuid())
+  userId     String
+  courseId   String
+  enrolledAt DateTime @default(now())
+  progress   Int      @default(0) // Percentage or lessons completed count
+
+  user   User   @relation(fields: [userId], references: [id])
+  course Course @relation(fields: [courseId], references: [id])
+
+  @@unique([userId, courseId])
+}
+
+model Lesson {
+  id             String       @id @default(uuid())
+  courseId       String
+  title          String
+  description    String?
+  type           ContentType  @default(VIDEO)
+  content        String? // Markdown/Text content or Quiz JSON
+  youtubeVideoId String? // YouTube video ID for recorded lesson
+  liveMeetingUrl String? // Google Meet / Zoom link for live class
+  liveMeetingAt  DateTime? // When live class is scheduled
+  duration       Int? // Duration in seconds
+  order          Int
+  status         LessonStatus @default(SCHEDULED)
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+
+  course      Course             @relation(fields: [courseId], references: [id])
+  completions LessonCompletion[]
+  quiz        LessonQuiz?
+}
+
+model LessonCompletion {
+  id          String   @id @default(uuid())
+  userId      String
+  lessonId    String
+  completedAt DateTime @default(now())
+
+  user   User   @relation(fields: [userId], references: [id])
+  lesson Lesson @relation(fields: [lessonId], references: [id])
+
+  @@unique([userId, lessonId])
+}
+
+model LessonQuiz {
+  id             String   @id @default(uuid())
+  lessonId       String   @unique
+  title          String
+  googleFormLink String
+  totalMarks     Int
+  passingMarks   Int
+  published      Boolean  @default(false)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  lesson   Lesson              @relation(fields: [lessonId], references: [id])
+  attempts LessonQuizAttempt[]
+}
+
+model LessonQuizAttempt {
+  id         String   @id @default(uuid())
+  userId     String
+  quizId     String
+  score      Int
+  percentage Float
+  createdAt  DateTime @default(now())
+
+  user User       @relation(fields: [userId], references: [id])
+  quiz LessonQuiz @relation(fields: [quizId], references: [id])
+}
+
+model KarmaLedger {
+  id        String   @id @default(uuid())
+  userId    String
+  amount    Int
+  reason    String
+  createdAt DateTime @default(now()) // Append only
+
+  user User @relation(fields: [userId], references: [id])
+}
+
+model CommunityPost {
+  id        String   @id @default(uuid())
+  userId    String
+  title     String?
+  content   String
+  upvotes   Int      @default(0)
+  downvotes Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user     User       @relation(fields: [userId], references: [id])
+  comments Comment[]
+  votes    PostVote[]
+}
+
+model Comment {
+  id        String   @id @default(uuid())
+  postId    String
+  userId    String
+  content   String
+  createdAt DateTime @default(now())
+
+  post CommunityPost @relation(fields: [postId], references: [id])
+  user User          @relation(fields: [userId], references: [id])
+}
+
+model PostVote {
+  id     String @id @default(uuid())
+  userId String
+  postId String
+  value  Int // +1 or -1
+
+  user User          @relation(fields: [userId], references: [id])
+  post CommunityPost @relation(fields: [postId], references: [id])
+
+  @@unique([userId, postId])
+}
+
+model QuizAttempt {
+  id        String   @id @default(uuid())
+  userId    String
+  quizId    String
+  score     Int
+  maxScore  Int
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id])
+}
+
+model Notification {
+  id        String           @id @default(uuid())
+  userId    String
+  type      NotificationType
+  title     String
+  message   String
+  link      String?
+  read      Boolean          @default(false)
+  createdAt DateTime         @default(now())
+
+  user User @relation(fields: [userId], references: [id])
+}
+
+model LiveSession {
+  id           String    @id @default(uuid())
+  courseId     String
+  title        String
+  description  String?
+  startTime    DateTime
+  endTime      DateTime?
+  meetingUrl   String // External meeting URL
+  recordingUrl String? // Optional recording URL after session
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  course Course @relation(fields: [courseId], references: [id])
+}
+
+model Payment {
+  id                String   @id @default(uuid())
+  userId            String
+  courseId          String
+  amount            Float
+  razorpayOrderId   String   @unique
+  razorpayPaymentId String?
+  razorpaySignature String?
+  status            String // pending, success, failed
+  createdAt         DateTime @default(now())
+
+  user   User   @relation(fields: [userId], references: [id])
+  course Course @relation(fields: [courseId], references: [id])
+}

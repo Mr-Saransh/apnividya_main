@@ -11,8 +11,10 @@ export async function PATCH(
 
         // Prepare update data, handling dates correctly
         const updateData: any = { ...body };
-        if (body.scheduledAt) {
-            updateData.scheduledAt = new Date(body.scheduledAt);
+        if (body.liveMeetingAt) {
+            updateData.liveMeetingAt = new Date(body.liveMeetingAt);
+        } else if (body.liveMeetingAt === null) {
+            updateData.liveMeetingAt = null;
         }
 
         const lesson = await db.lesson.update({

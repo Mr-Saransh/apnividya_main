@@ -19,11 +19,6 @@ const sidebarItems = [
         icon: BookOpen,
     },
     {
-        title: "Lessons",
-        href: "/admin/lessons",
-        icon: FileVideo,
-    },
-    {
         title: "Mock Tests",
         href: "/admin/mock-tests",
         icon: Trophy,

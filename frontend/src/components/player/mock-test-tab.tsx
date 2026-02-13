@@ -20,19 +20,19 @@ export function MockTestTab({ lessonId }: MockTestTabProps) {
     const [karmaAwarded, setKarmaAwarded] = useState(0);
 
     useEffect(() => {
-        const fetchTest = async () => {
+        const fetchQuiz = async () => {
             setLoading(true);
             try {
                 const res = await api.get(`/lessons/${lessonId}/mock-test`);
                 setMockTest(res.data);
             } catch (error) {
-                console.log("No mock test found or error", error);
+                console.log("No assessment found or error", error);
                 setMockTest(null);
             } finally {
                 setLoading(false);
             }
         };
-        if (lessonId) fetchTest();
+        if (lessonId) fetchQuiz();
     }, [lessonId]);
 
     const handleSubmit = async (e: React.FormEvent) => {
@@ -41,21 +41,11 @@ export function MockTestTab({ lessonId }: MockTestTabProps) {
 
         setSubmitting(true);
         try {
-            // Get user ID from local storage or context (Assuming stored in auth token payload which we don't have direct access to without decoding)
-            // But API needs userId.
-            // TEMPORARY: Decode token or ask API to decode.
-            // Better: Decode token here.
-
             const token = localStorage.getItem("accessToken");
             if (!token) {
                 alert("Please login first");
                 return;
             }
-
-            // Simple approach: Send Request, let backend extract user from token if middleware exists. 
-            // But I didn't implement middleware in the new API routes.
-            // So I will send userId extracted from token if possible, or just fail for now?
-            // Wait, I can decode the token here.
 
             const base64Url = token.split('.')[1];
             const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
@@ -63,7 +53,7 @@ export function MockTestTab({ lessonId }: MockTestTabProps) {
                 return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
             }).join(''));
             const payload = JSON.parse(jsonPayload);
-            const userId = payload.sub || payload.id; // Usually sub in standard JWT
+            const userId = payload.sub || payload.id;
 
             const res = await api.post(`/lessons/${lessonId}/mock-test`, {
                 userId,

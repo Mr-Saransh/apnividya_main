@@ -58,20 +58,31 @@ export function TopNav({ onMenuClick, className }: { onMenuClick?: () => void, c
                 </div>
             ) : (
                 <div className="flex w-full items-center gap-4 md:gap-2 lg:gap-4">
-                    {/* Logo - Always Visible */}
-                    <Link href="/dashboard" className="flex items-center gap-2 flex-shrink-0 mr-auto">
-                        <div className="h-8 w-8 flex-shrink-0">
+                    {/* Mobile Menu Trigger */}
+                    {onMenuClick && (
+                        <Button
+                            variant="ghost"
+                            size="icon"
+                            className="md:hidden text-muted-foreground mr-2"
+                            onClick={onMenuClick}
+                        >
+                            <Menu className="h-5 w-5" />
+                        </Button>
+                    )}
+
+                    {/* Mobile Logo */}
+                    <Link href="/dashboard" className="flex md:hidden items-center gap-2 flex-shrink-0 mr-auto">
+                        <div className="h-9 w-9 flex-shrink-0 bg-white rounded-full flex items-center justify-center p-1 shadow-sm">
                             <Image
                                 src="/logo.png"
                                 alt="Apni Vidya Logo"
-                                width={32}
-                                height={32}
+                                width={28}
+                                height={28}
                                 className="object-contain"
                                 priority
                                 unoptimized
                             />
                         </div>
-                        <span className="text-lg font-bold text-primary whitespace-nowrap">Apni Vidya</span>
                     </Link>
 
                     {/* Right Side Actions */}
@@ -123,7 +134,8 @@ export function TopNav({ onMenuClick, className }: { onMenuClick?: () => void, c
                                 >
                                     <Avatar className="h-9 w-9 border-2 border-primary/20">
                                         <AvatarImage
-                                            src={user?.avatar || `https://ui-avatars.com/api/?name=${user?.fullName || "User"}&background=3b82f6&color=fff`}
+                                            key={user?.avatar || "default"}
+                                            src={user?.avatar || undefined}
                                             alt={user?.fullName || "User"}
                                         />
                                         <AvatarFallback className="bg-primary text-primary-foreground">

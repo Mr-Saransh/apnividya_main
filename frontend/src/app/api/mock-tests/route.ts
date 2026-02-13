@@ -17,8 +17,8 @@ export async function GET(req: Request) {
         });
         const courseIds = enrollments.map((e: any) => e.courseId);
 
-        // Fetch Mock Tests for lessons in enrolled courses
-        const mockTests = await db.mockTest.findMany({
+        // Fetch Quizzes for lessons in enrolled courses
+        const quizzes = await db.lessonQuiz.findMany({
             where: {
                 published: true,
                 lesson: {
@@ -45,9 +45,9 @@ export async function GET(req: Request) {
             orderBy: { createdAt: "desc" },
         });
 
-        return NextResponse.json(mockTests);
-    } catch (error) {
+        return NextResponse.json(quizzes);
+    } catch (error: any) {
         console.log("[MOCK_TESTS_GET]", error);
-        return new NextResponse("Internal Error", { status: 500 });
+        return new NextResponse(`Internal Error: ${error.message}`, { status: 500 });
     }
 }

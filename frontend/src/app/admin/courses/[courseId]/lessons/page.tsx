@@ -75,8 +75,8 @@ export default function AdminLessonsPage() {
             await api.post(`/admin/courses/${courseId}/lessons`, {
                 title: newLessonTitle,
                 description: newLessonDesc,
-                liveLink: newLessonLiveLink || null,
-                scheduledAt: newLessonScheduledAt || null,
+                liveMeetingUrl: newLessonLiveLink || null,
+                liveMeetingAt: newLessonScheduledAt || null,
                 youtubeVideoId: newLessonVideoId || null,
                 status: newLessonStatus,
                 order: (course.lessons?.length || 0) + 1
@@ -133,9 +133,9 @@ export default function AdminLessonsPage() {
                     )}
                     {course?.lessons?.map((lesson: any) => (
                         <Card key={lesson.id} className={`border-l-4 ${lesson.status === 'PUBLISHED' ? 'border-l-green-500' :
-                                lesson.status === 'RECORDED' ? 'border-l-yellow-500' :
-                                    lesson.status === 'LIVE' ? 'border-l-red-500' :
-                                        'border-l-blue-500'
+                            lesson.status === 'RECORDED' ? 'border-l-yellow-500' :
+                                lesson.status === 'LIVE' ? 'border-l-red-500' :
+                                    'border-l-blue-500'
                             }`}>
                             <CardHeader className="pb-2">
                                 <div className="flex justify-between items-start">
@@ -161,27 +161,35 @@ export default function AdminLessonsPage() {
                                 </div>
                             </CardHeader>
                             <CardContent>
-                                <div className="flex flex-wrap gap-3 text-sm text-muted-foreground">
+                                <div className="flex flex-wrap gap-4 text-sm text-muted-foreground mt-2">
                                     {lesson.youtubeVideoId ? (
-                                        <div className="text-green-600 flex items-center gap-1">
-                                            <Youtube className="w-4 h-4" /> Video: {lesson.youtubeVideoId}
+                                        <div className="bg-green-50 text-green-700 px-2 py-1 rounded flex items-center gap-1.5 border border-green-100">
+                                            <Video className="w-4 h-4" />
+                                            <span className="font-medium">Video ID: {lesson.youtubeVideoId}</span>
                                         </div>
                                     ) : (
-                                        <div className="text-orange-500 flex items-center gap-1">
-                                            <AlertCircle className="w-4 h-4" /> No Video
+                                        <div className="bg-gray-50 text-gray-500 px-2 py-1 rounded flex items-center gap-1.5 border border-gray-100 italic">
+                                            <Video className="w-4 h-4 opacity-50" />
+                                            <span>No recording</span>
                                         </div>
                                     )}
-                                    {lesson.liveLink && (
-                                        <div className="text-blue-600 flex items-center gap-1">
+                                    {lesson.liveMeetingUrl ? (
+                                        <div className="bg-blue-50 text-blue-700 px-2 py-1 rounded flex items-center gap-1.5 border border-blue-100">
                                             <ExternalLink className="w-4 h-4" />
-                                            <a href={lesson.liveLink} target="_blank" rel="noopener noreferrer" className="hover:underline">
-                                                Live Link
+                                            <a href={lesson.liveMeetingUrl} target="_blank" rel="noopener noreferrer" className="font-medium hover:underline">
+                                                Join Link
                                             </a>
                                         </div>
+                                    ) : (
+                                        <div className="bg-gray-50 text-gray-500 px-2 py-1 rounded flex items-center gap-1.5 border border-gray-100 italic">
+                                            <ExternalLink className="w-4 h-4 opacity-50" />
+                                            <span>No live link</span>
+                                        </div>
                                     )}
-                                    {lesson.scheduledAt && (
-                                        <div className="text-purple-600 flex items-center gap-1">
-                                            <Calendar className="w-4 h-4" /> {new Date(lesson.scheduledAt).toLocaleString()}
+                                    {lesson.liveMeetingAt && (
+                                        <div className="bg-purple-50 text-purple-700 px-2 py-1 rounded flex items-center gap-1.5 border border-purple-100">
+                                            <Calendar className="w-4 h-4" />
+                                            <span>{new Date(lesson.liveMeetingAt).toLocaleString()}</span>
                                         </div>
                                     )}
                                 </div>
@@ -277,8 +285,8 @@ function EditLessonDialog({ lesson, onUpdate }: { lesson: any, onUpdate: () => v
         title: lesson.title,
         description: lesson.description || "",
         youtubeVideoId: lesson.youtubeVideoId || "",
-        liveLink: lesson.liveLink || "",
-        scheduledAt: lesson.scheduledAt ? new Date(lesson.scheduledAt).toISOString().slice(0, 16) : "",
+        liveMeetingUrl: lesson.liveMeetingUrl || "",
+        liveMeetingAt: lesson.liveMeetingAt ? new Date(lesson.liveMeetingAt).toISOString().slice(0, 16) : "",
         status: lesson.status || "SCHEDULED"
     });
 
@@ -287,9 +295,9 @@ function EditLessonDialog({ lesson, onUpdate }: { lesson: any, onUpdate: () => v
         try {
             await api.patch(`/admin/lessons/${lesson.id}`, {
                 ...formData,
-                scheduledAt: formData.scheduledAt || null,
+                liveMeetingAt: formData.liveMeetingAt || null,
                 youtubeVideoId: formData.youtubeVideoId || null,
-                liveLink: formData.liveLink || null
+                liveMeetingUrl: formData.liveMeetingUrl || null
             });
             onUpdate();
             setOpen(false);
@@ -351,8 +359,8 @@ function EditLessonDialog({ lesson, onUpdate }: { lesson: any, onUpdate: () => v
                         <Input
                             id="edit-liveLink"
                             placeholder="https://meet.google.com/..."
-                            value={formData.liveLink}
-                            onChange={(e) => setFormData({ ...formData, liveLink: e.target.value })}
+                            value={formData.liveMeetingUrl}
+                            onChange={(e) => setFormData({ ...formData, liveMeetingUrl: e.target.value })}
                         />
                         <p className="text-xs text-muted-foreground">Clear after live session ends</p>
                     </div>
@@ -361,8 +369,8 @@ function EditLessonDialog({ lesson, onUpdate }: { lesson: any, onUpdate: () => v
                         <Input
                             id="edit-scheduledAt"
                             type="datetime-local"
-                            value={formData.scheduledAt}
-                            onChange={(e) => setFormData({ ...formData, scheduledAt: e.target.value })}
+                            value={formData.liveMeetingAt}
+                            onChange={(e) => setFormData({ ...formData, liveMeetingAt: e.target.value })}
                         />
                     </div>
                     <div className="grid gap-2">

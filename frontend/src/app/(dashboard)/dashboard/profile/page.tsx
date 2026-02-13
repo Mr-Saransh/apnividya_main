@@ -23,6 +23,8 @@ import {
 } from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
 
+import { useAuth } from "@/context/auth-context";
+
 interface UserProfile {
     id: string;
     email: string;
@@ -112,6 +114,7 @@ const BADGE_SYSTEM: BadgeInfo[] = [
 ];
 
 export default function ProfilePage() {
+    const { updateUser } = useAuth();
     const [profile, setProfile] = useState<UserProfile | null>(null);
     const [loading, setLoading] = useState(true);
     const [isEditOpen, setIsEditOpen] = useState(false);
@@ -143,6 +146,7 @@ export default function ProfilePage() {
         try {
             const response = await api.post("/auth/me", editForm);
             setProfile(response.data);
+            updateUser(response.data); // Synchronize with AuthContext
             setIsEditOpen(false);
         } catch (error) {
             console.error("Failed to update profile:", error);
@@ -175,10 +179,13 @@ export default function ProfilePage() {
                     <div className="flex flex-col sm:flex-row items-center gap-6">
                         <Avatar className="h-24 w-24 sm:h-32 sm:w-32 border-4 border-background shadow-xl">
                             <AvatarImage
-                                src={profile.avatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(profile.fullName)}&background=random&color=fff`}
+                                key={profile.avatar || "default"}
+                                src={profile.avatar || undefined}
                                 alt={profile.fullName}
                             />
-                            <AvatarFallback>{profile.fullName.charAt(0)}</AvatarFallback>
+                            <AvatarFallback className="text-3xl bg-primary text-primary-foreground">
+                                {profile.fullName.charAt(0)}
+                            </AvatarFallback>
                         </Avatar>
                         <div className="text-center sm:text-left space-y-2 flex-1">
                             <h1 className="text-2xl sm:text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-purple-600">

@@ -13,17 +13,17 @@ export default function DashboardLayout({
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
     return (
-        <div className="flex min-h-screen flex-col pb-16 md:pb-0">
-            <TopNav className="border-b" />
+        <div className="flex min-h-screen bg-background flex-col md:flex-row pb-16 md:pb-0">
+            {/* Desktop Sidebar */}
+            <aside className="hidden md:block w-64 border-r bg-card fixed h-full z-40">
+                <Sidebar />
+            </aside>
 
-            <div className="flex-1 flex">
-                {/* Desktop Sidebar */}
-                <aside className="hidden w-64 border-r bg-background md:block fixed h-full pt-16">
-                    <Sidebar />
-                </aside>
+            <div className="flex-1 flex flex-col md:ml-64">
+                <TopNav className="border-b sticky top-0 z-30" />
 
                 {/* Main Content */}
-                <main className="flex-1 bg-muted/10 p-4 md:p-6 lg:p-8 md:ml-64">
+                <main className="flex-1 bg-muted/10 p-4 md:p-6 lg:p-8">
                     {children}
                 </main>
             </div>

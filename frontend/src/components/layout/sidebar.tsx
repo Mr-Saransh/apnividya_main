@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
+import Image from "next/image";
 import {
     LayoutDashboard,
     BookOpen,
@@ -52,8 +53,25 @@ export function Sidebar({ className }: SidebarProps) {
 
     return (
         <div className={cn("flex flex-col h-full bg-card border-r border-border", className)}>
-            <div className="h-4" />
-            <div className="flex-1 px-4 space-y-1 py-6">
+            {/* Logo Area */}
+            <div className="h-16 flex items-center px-6 border-b border-border/50">
+                <Link href="/dashboard" className="flex items-center gap-2">
+                    <div className="h-10 w-10 flex-shrink-0 bg-white rounded-full flex items-center justify-center p-1.5 shadow-sm">
+                        <Image
+                            src="/logo.png"
+                            alt="Apni Vidya Logo"
+                            width={32}
+                            height={32}
+                            className="object-contain"
+                            priority
+                            unoptimized
+                        />
+                    </div>
+                    <span className="text-lg font-bold text-primary whitespace-nowrap">Apni Vidya</span>
+                </Link>
+            </div>
+
+            <div className="flex-1 px-4 space-y-1 py-4">
                 {routes.map((route) => (
                     <Link
                         key={route.href}

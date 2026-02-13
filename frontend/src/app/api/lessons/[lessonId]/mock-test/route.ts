@@ -7,21 +7,21 @@ export async function GET(
 ) {
     try {
         const { lessonId } = await params;
-        const mockTest = await db.mockTest.findUnique({
+        const quiz = await db.lessonQuiz.findUnique({
             where: {
                 lessonId: lessonId,
                 published: true,
             },
         });
 
-        if (!mockTest) {
-            return new NextResponse("Mock Test not found", { status: 404 });
+        if (!quiz) {
+            return new NextResponse("Assessment not found", { status: 404 });
         }
 
-        return NextResponse.json(mockTest);
-    } catch (error) {
-        console.log("[LESSON_MOCK_TEST_GET]", error);
-        return new NextResponse("Internal Error", { status: 500 });
+        return NextResponse.json(quiz);
+    } catch (error: any) {
+        console.log("[LESSON_QUIZ_GET]", error);
+        return new NextResponse(`Internal Error: ${error.message}`, { status: 500 });
     }
 }
 
@@ -37,30 +37,30 @@ export async function POST(
             return new NextResponse("Missing data", { status: 400 });
         }
 
-        // Fetch Mock Test details to validate score
-        const mockTest = await db.mockTest.findUnique({
+        // Fetch Quiz details to validate score
+        const quiz = await db.lessonQuiz.findUnique({
             where: {
                 lessonId: lessonId,
                 published: true,
             },
         });
 
-        if (!mockTest) {
-            return new NextResponse("Mock Test not found", { status: 404 });
+        if (!quiz) {
+            return new NextResponse("Assessment not found", { status: 404 });
         }
 
         // Validate score
-        if (score > mockTest.totalMarks || score < 0) {
+        if (score > quiz.totalMarks || score < 0) {
             return new NextResponse("Invalid score", { status: 400 });
         }
 
-        const percentage = (score / mockTest.totalMarks) * 100;
+        const percentage = (score / quiz.totalMarks) * 100;
 
         // Create Attempt
-        const attempt = await db.mockTestAttempt.create({
+        const attempt = await db.lessonQuizAttempt.create({
             data: {
                 userId,
-                mockTestId: mockTest.id,
+                quizId: quiz.id,
                 score,
                 percentage,
             },
@@ -84,14 +84,14 @@ export async function POST(
                 data: {
                     userId,
                     amount: karmaPoints,
-                    reason: `Mock Test: ${mockTest.title} (${score}/${mockTest.totalMarks})`
+                    reason: `Quiz: ${quiz.title} (${score}/${quiz.totalMarks})`
                 }
             });
         }
 
         return NextResponse.json({ attempt, karmaAwarded: karmaPoints });
-    } catch (error) {
-        console.log("[LESSON_MOCK_TEST_POST]", error);
-        return new NextResponse("Internal Error", { status: 500 });
+    } catch (error: any) {
+        console.log("[LESSON_QUIZ_POST]", error);
+        return new NextResponse(`Internal Error: ${error.message}`, { status: 500 });
     }
 }

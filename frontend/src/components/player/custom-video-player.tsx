@@ -69,6 +69,9 @@ export function CustomVideoPlayer({ url, title, onNext, hasNext, autoPlay = fals
         };
     }, [videoId]); // Re-init if video changes
 
+    const [availableQualities, setAvailableQualities] = useState<string[]>([]);
+    const [currentQuality, setCurrentQuality] = useState("auto");
+
     const initializePlayer = () => {
         if (!videoId || playerRef.current) return;
 
@@ -78,19 +81,68 @@ export function CustomVideoPlayer({ url, title, onNext, hasNext, autoPlay = fals
             videoId: videoId,
             playerVars: {
                 autoplay: autoPlay ? 1 : 0,
-                controls: 0, // Strict: Hide controls
-                disablekb: 1, // Strict: Disable keyboard
-                fs: 0, // Strict: Disable fullscreen button
+                controls: 0,
+                disablekb: 1,
+                fs: 0,
                 modestbranding: 1,
-                rel: 0, // No related videos
+                rel: 0,
                 showinfo: 0,
                 playsinline: 1,
             },
             events: {
                 'onReady': onPlayerReady,
-                'onStateChange': onPlayerStateChange
+                'onStateChange': onPlayerStateChange,
+                'onPlaybackQualityChange': (e: any) => {
+                    setCurrentQuality(e.data);
+                }
             }
         });
+    };
+
+    const updateQualities = () => {
+        if (playerRef.current && typeof playerRef.current.getAvailableQualityLevels === 'function') {
+            const levels = playerRef.current.getAvailableQualityLevels();
+            setAvailableQualities(levels);
+            setCurrentQuality(playerRef.current.getPlaybackQuality());
+        }
+    };
+
+    const onPlayerReady = (event: any) => {
+        setLoading(false);
+        updateQualities();
+        if (autoPlay) {
+            event.target.playVideo();
+        }
+    };
+
+    const onPlayerStateChange = (event: any) => {
+        if (event.data === 1) {
+            setIsPlaying(true);
+            startProgressTracking();
+            updateQualities(); // Check qualities again when playing starts
+        }
+        if (event.data === 2) {
+            setIsPlaying(false);
+            stopProgressTracking();
+        }
+        if (event.data === 0) {
+            setIsPlaying(false);
+            stopProgressTracking();
+            if (hasNext && onNext) onNext();
+        }
+    };
+
+    const qualityLabels: Record<string, string> = {
+        'highres': 'Original',
+        'hd2160': '4K',
+        'hd1440': '2K',
+        'hd1080': '1080p',
+        'hd720': '720p',
+        'large': '480p',
+        'medium': '360p',
+        'small': '240p',
+        'tiny': '144p',
+        'auto': 'Auto'
     };
 
     const startProgressTracking = () => {
@@ -107,30 +159,6 @@ export function CustomVideoPlayer({ url, title, onNext, hasNext, autoPlay = fals
 
     const stopProgressTracking = () => {
         if (progressInterval.current) clearInterval(progressInterval.current);
-    };
-
-    const onPlayerReady = (event: any) => {
-        setLoading(false);
-        if (autoPlay) {
-            event.target.playVideo();
-        }
-    };
-
-    const onPlayerStateChange = (event: any) => {
-        // YT.PlayerState.PLAYING = 1, PAUSED = 2, ENDED = 0
-        if (event.data === 1) {
-            setIsPlaying(true);
-            startProgressTracking();
-        }
-        if (event.data === 2) {
-            setIsPlaying(false);
-            stopProgressTracking();
-        }
-        if (event.data === 0) {
-            setIsPlaying(false);
-            stopProgressTracking();
-            if (hasNext && onNext) onNext();
-        }
     };
 
     const togglePlay = () => {
@@ -155,24 +183,20 @@ export function CustomVideoPlayer({ url, title, onNext, hasNext, autoPlay = fals
         }
     };
 
-    // Fix: Re-initialize player when videoId changes
+    // Update the initPlayer in the 2nd useEffect as well
     useEffect(() => {
         setMounted(true);
 
         const initPlayer = () => {
-            // Destroy existing player if it exists
             if (playerRef.current) {
                 try {
                     if (typeof playerRef.current.destroy === 'function') {
                         playerRef.current.destroy();
                     }
-                } catch (e) {
-                    console.warn("Error destroying player", e);
-                }
+                } catch (e) { console.warn("Error destroying player", e); }
                 playerRef.current = null;
             }
 
-            // small delay to ensure DOM is ready
             setTimeout(() => {
                 if (window.YT && window.YT.Player && videoId) {
                     playerRef.current = new window.YT.Player('youtube-player', {
@@ -191,7 +215,10 @@ export function CustomVideoPlayer({ url, title, onNext, hasNext, autoPlay = fals
                         },
                         events: {
                             'onReady': onPlayerReady,
-                            'onStateChange': onPlayerStateChange
+                            'onStateChange': onPlayerStateChange,
+                            'onPlaybackQualityChange': (e: any) => {
+                                setCurrentQuality(e.data);
+                            }
                         }
                     });
                 }
@@ -203,20 +230,18 @@ export function CustomVideoPlayer({ url, title, onNext, hasNext, autoPlay = fals
             tag.src = "https://www.youtube.com/iframe_api";
             const firstScriptTag = document.getElementsByTagName('script')[0];
             firstScriptTag.parentNode?.insertBefore(tag, firstScriptTag);
-
             window.onYouTubeIframeAPIReady = initPlayer;
         } else {
             initPlayer();
         }
 
         return () => {
-            // Cleanup on unmount or id change
             if (playerRef.current) {
                 try {
                     if (typeof playerRef.current.destroy === 'function') {
                         playerRef.current.destroy();
                     }
-                } catch (e) { /* ignore */ }
+                } catch (e) { }
                 playerRef.current = null;
             }
             stopProgressTracking();
@@ -310,7 +335,7 @@ export function CustomVideoPlayer({ url, title, onNext, hasNext, autoPlay = fals
 
                         {/* Speed Control */}
                         <select
-                            className="bg-black/50 text-white text-xs rounded border border-white/20 p-1"
+                            className="bg-black/50 text-white text-xs rounded border border-white/20 p-1 cursor-pointer outline-none"
                             onChange={(e) => {
                                 const speed = parseFloat(e.target.value);
                                 if (playerRef.current) playerRef.current.setPlaybackRate(speed);
@@ -326,7 +351,26 @@ export function CustomVideoPlayer({ url, title, onNext, hasNext, autoPlay = fals
                             <option value="2">2x</option>
                         </select>
 
-                        <span className="text-white/80 text-sm font-medium truncate max-w-[200px]">{title}</span>
+                        {/* Quality Control */}
+                        {availableQualities.length > 0 && (
+                            <select
+                                className="bg-black/50 text-white text-xs rounded border border-white/20 p-1 cursor-pointer outline-none"
+                                value={currentQuality}
+                                onChange={(e) => {
+                                    const quality = e.target.value;
+                                    if (playerRef.current) playerRef.current.setPlaybackQuality(quality);
+                                    setCurrentQuality(quality);
+                                }}
+                                onClick={(e) => e.stopPropagation()}
+                            >
+                                <option value="auto">Auto</option>
+                                {availableQualities.map(q => (
+                                    <option key={q} value={q}>{qualityLabels[q] || q}</option>
+                                ))}
+                            </select>
+                        )}
+
+                        <span className="text-white/80 text-sm font-medium truncate max-w-[150px]">{title}</span>
                     </div>
 
                     <div className="flex items-center gap-4">

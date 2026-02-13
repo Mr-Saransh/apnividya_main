@@ -26,7 +26,9 @@ enum DocType {
 }
 
 enum LessonStatus {
-  WAITING_FOR_VIDEO
+  SCHEDULED
+  LIVE
+  RECORDED
   PUBLISHED
 }
 
@@ -120,7 +122,9 @@ model Lesson {
   liveMeetingAt   DateTime? // Scheduled time for Live Session
   duration        Int?     // Duration in seconds
   order           Int
-  status          LessonStatus @default(WAITING_FOR_VIDEO)
+  status          LessonStatus @default(SCHEDULED)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
   
   course          Course   @relation(fields: [courseId], references: [id])
   completion      LessonCompletion[]

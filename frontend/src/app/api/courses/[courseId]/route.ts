@@ -15,7 +15,7 @@ export async function GET(req: Request, { params }: { params: Promise<{ courseId
                         order: "asc"
                     },
                     include: {
-                        mockTest: true,
+                        quiz: true,
                     }
                 },
                 instructor: {
@@ -34,8 +34,8 @@ export async function GET(req: Request, { params }: { params: Promise<{ courseId
         // But since this is MVP refactor, let's return it.
 
         return NextResponse.json(course);
-    } catch (error) {
-        console.log("[COURSE_GET]", error);
-        return new NextResponse("Internal Error", { status: 500 });
+    } catch (error: any) {
+        console.error("[COURSE_GET] Detailed Error:", error);
+        return new NextResponse(`Internal Error: ${error.message}\nStack: ${error.stack}`, { status: 500 });
     }
 }

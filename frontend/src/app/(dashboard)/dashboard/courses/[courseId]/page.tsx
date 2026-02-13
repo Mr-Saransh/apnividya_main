@@ -22,6 +22,7 @@ function CoursePlayerContent({ courseId }: { courseId: string }) {
     const [course, setCourse] = useState<any>(null);
     const [currentLessonId, setCurrentLessonId] = useState<string | null>(null);
     const [isLoading, setIsLoading] = useState(true);
+    const [activeTab, setActiveTab] = useState(initialTab);
 
     // Countdown component for Scheduled lessons
     const Countdown = ({ targetDate }: { targetDate: string }) => {
@@ -89,7 +90,7 @@ function CoursePlayerContent({ courseId }: { courseId: string }) {
             }
         };
         fetchCourse();
-    }, [courseId]);
+    }, [courseId, searchParams]);
 
     if (isLoading) {
         return (
@@ -108,7 +109,7 @@ function CoursePlayerContent({ courseId }: { courseId: string }) {
         );
     }
 
-    const currentLesson = course.lessons.find((l: any) => l.id === currentLessonId);
+    const currentLesson = course.lessons?.find((l: any) => l.id === currentLessonId);
     const activeVideoId = currentLesson?.youtubeVideoId || "";
 
     const handleNext = () => {
@@ -118,17 +119,12 @@ function CoursePlayerContent({ courseId }: { courseId: string }) {
         }
     };
 
-    const [activeTab, setActiveTab] = useState(initialTab);
-
-    // Sync tab with URL if needed, but for now just use initial state unless deep linking changes within same page
-    // Actually, simple Controlled component is enough.
-
     return (
         <div className="flex flex-col h-[calc(100vh-4rem)] md:flex-row gap-4 p-4 lg:p-0">
             {/* Main Content Area */}
             <div className="flex-1 flex flex-col min-w-0">
                 <div className="flex-1 lg:p-6 overflow-y-auto">
-                    {(currentLesson?.status === 'RECORDED' || currentLesson?.status === 'PUBLISHED') && activeVideoId ? (
+                    {activeVideoId ? (
                         <CustomVideoPlayer
                             url={`https://www.youtube.com/watch?v=${activeVideoId}`}
                             title={currentLesson?.title || "Course Video"}
@@ -146,18 +142,18 @@ function CoursePlayerContent({ courseId }: { courseId: string }) {
                                     <h2 className="text-2xl font-bold mb-2">Live Session Scheduled</h2>
                                     <p className="text-slate-400 mb-6 max-w-md">This session hasn&apos;t started yet. Join us at the scheduled time below.</p>
 
-                                    {currentLesson.scheduledAt && (
+                                    {currentLesson.liveMeetingAt && (
                                         <div className="mb-8 p-6 bg-slate-800/50 rounded-lg border border-slate-700 mx-auto">
                                             <p className="text-sm text-slate-400 mb-2 uppercase tracking-wide">Starts In</p>
-                                            <Countdown targetDate={currentLesson.scheduledAt} />
+                                            <Countdown targetDate={currentLesson.liveMeetingAt} />
                                             <p className="mt-4 text-sm font-medium text-slate-300">
-                                                {new Date(currentLesson.scheduledAt).toLocaleString()}
+                                                {new Date(currentLesson.liveMeetingAt).toLocaleString()}
                                             </p>
                                         </div>
                                     )}
 
-                                    {currentLesson.liveLink && (
-                                        <Button size="lg" className="rounded-full px-8 py-6 text-lg" onClick={() => window.open(currentLesson.liveLink, '_blank')}>
+                                    {currentLesson.liveMeetingUrl && (
+                                        <Button size="lg" className="rounded-full px-8 py-6 text-lg" onClick={() => window.open(currentLesson.liveMeetingUrl!, '_blank')}>
                                             <Video className="h-5 w-5 mr-2" /> Join Live Class
                                         </Button>
                                     )}
@@ -170,8 +166,8 @@ function CoursePlayerContent({ courseId }: { courseId: string }) {
                                     <h2 className="text-3xl font-bold mb-2">Live Session in Progress</h2>
                                     <p className="text-slate-400 mb-8 max-w-md">Join the interactive session now to participate in discussions.</p>
 
-                                    {currentLesson.liveLink && (
-                                        <Button size="lg" variant="destructive" className="rounded-full px-8 py-6 text-lg animate-bounce" onClick={() => window.open(currentLesson.liveLink, '_blank')}>
+                                    {currentLesson.liveMeetingUrl && (
+                                        <Button size="lg" variant="destructive" className="rounded-full px-8 py-6 text-lg animate-bounce" onClick={() => window.open(currentLesson.liveMeetingUrl!, '_blank')}>
                                             <Video className="h-5 w-5 mr-2" /> Join Live Class Now
                                         </Button>
                                     )}
@@ -243,8 +239,8 @@ function CoursePlayerContent({ courseId }: { courseId: string }) {
                                             <CardDescription>Participate in live discussions and get your doubts resolved in real-time.</CardDescription>
                                         </CardHeader>
                                         <CardContent className="flex flex-col items-center justify-center py-6 text-center">
-                                            {currentLesson?.liveLink ? (
-                                                <Button size="lg" className="px-10" onClick={() => window.open(currentLesson.liveLink, '_blank')}>
+                                            {currentLesson?.liveMeetingUrl ? (
+                                                <Button size="lg" className="px-10" onClick={() => window.open(currentLesson.liveMeetingUrl!, '_blank')}>
                                                     <Video className="h-4 w-4 mr-2" /> Open External Link
                                                 </Button>
                                             ) : (

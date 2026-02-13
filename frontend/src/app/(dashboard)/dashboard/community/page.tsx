@@ -211,10 +211,12 @@ export default function CommunityPage() {
                                     <div className="flex items-start gap-3">
                                         <Avatar className="h-10 w-10 border border-border">
                                             <AvatarImage
-                                                src={post.user.avatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(post.user.fullName)}&background=random&color=fff`}
+                                                src={post.user.avatar || undefined}
                                                 alt={post.user.fullName}
                                             />
-                                            <AvatarFallback>{post.user.fullName.charAt(0)}</AvatarFallback>
+                                            <AvatarFallback className="bg-primary text-primary-foreground">
+                                                {post.user.fullName.charAt(0)}
+                                            </AvatarFallback>
                                         </Avatar>
                                         <div className="flex-1 min-w-0">
                                             <div className="flex items-center gap-2 flex-wrap">
@@ -273,10 +275,12 @@ export default function CommunityPage() {
                                                 <div className="flex items-center gap-2">
                                                     <Avatar className="h-6 w-6 border border-border">
                                                         <AvatarImage
-                                                            src={comment.user.avatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(comment.user.fullName)}&background=random&color=fff`}
+                                                            src={comment.user.avatar || undefined}
                                                             alt={comment.user.fullName}
                                                         />
-                                                        <AvatarFallback>{comment.user.fullName.charAt(0)}</AvatarFallback>
+                                                        <AvatarFallback className="text-[10px] bg-primary text-primary-foreground">
+                                                            {comment.user.fullName.charAt(0)}
+                                                        </AvatarFallback>
                                                     </Avatar>
                                                     <span className="text-xs font-semibold">{comment.user.fullName}</span>
                                                     <span className="text-xs text-muted-foreground ml-auto">
