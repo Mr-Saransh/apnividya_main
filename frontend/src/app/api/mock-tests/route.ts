@@ -5,49 +5,52 @@ export async function GET(req: Request) {
     const { searchParams } = new URL(req.url);
     const userId = searchParams.get("userId");
 
-    if (!userId) {
-        return new NextResponse("Unauthorized", { status: 401 });
-    }
-
     try {
-        // Get enrolled course IDs
-        const enrollments = await db.enrollment.findMany({
-            where: { userId },
-            select: { courseId: true },
-        });
-        const courseIds = enrollments.map((e: any) => e.courseId);
-
-        // Fetch Quizzes for lessons in enrolled courses
-        const quizzes = await db.lessonQuiz.findMany({
+        const mockTests = await db.mockTest.findMany({
             where: {
-                published: true,
-                lesson: {
-                    courseId: { in: courseIds },
-                },
+                published: true
             },
             include: {
                 lesson: {
-                    select: {
-                        id: true,
-                        title: true,
-                        courseId: true,
-                        course: {
-                            select: { title: true },
-                        },
-                    },
+                    include: {
+                        course: true
+                    }
                 },
-                attempts: {
-                    where: { userId },
-                    orderBy: { createdAt: "desc" },
-                    take: 1,
-                },
-            },
-            orderBy: { createdAt: "desc" },
+                attempts: userId ? {
+                    where: { userId: userId },
+                    orderBy: { completedAt: 'desc' }
+                } : false
+            }
         });
 
-        return NextResponse.json(quizzes);
-    } catch (error: any) {
-        console.log("[MOCK_TESTS_GET]", error);
-        return new NextResponse(`Internal Error: ${error.message}`, { status: 500 });
+        const formattedTests = mockTests.map(test => {
+            // Get latest attempt if any
+            // Note: attempts is an array. If userId was not provided, it might not be included or be empty?
+            // With 'false', it is not included.
+            const userAttempts = (test as any).attempts || [];
+            const latestAttempt = userAttempts.length > 0 ? userAttempts[0] : null;
+
+            return {
+                id: test.id,
+                totalMarks: test.totalMarks,
+                passingPercentage: test.passingPercentage,
+                difficulty: test.difficulty,
+                title: `${test.lesson.title} Quiz`,
+                lesson: {
+                    id: test.lesson.id,
+                    title: test.lesson.title,
+                    courseId: test.lesson.courseId,
+                    course: {
+                        title: test.lesson.course.title
+                    }
+                },
+                attempts: userAttempts // return all or logic for latest
+            };
+        });
+
+        return NextResponse.json(formattedTests);
+    } catch (error) {
+        console.error("Fetch mock tests error:", error);
+        return NextResponse.json({ error: "Failed to fetch mock tests" }, { status: 500 });
     }
 }

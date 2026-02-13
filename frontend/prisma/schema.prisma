@@ -69,6 +69,7 @@ model User {
   notifications    Notification[]
   payments         Payment[]
   lessonCompletions LessonCompletion[]
+  newMockTestAttempts MockTestAttempt[]
 }
 
 model Streak {
@@ -133,6 +134,7 @@ model Lesson {
   course         Course              @relation(fields: [courseId], references: [id])
   completions    LessonCompletion[]
   quiz           LessonQuiz?
+  mockTest       MockTest?
 }
 
 model LessonCompletion {
@@ -274,4 +276,45 @@ model Payment {
   
   user                User     @relation(fields: [userId], references: [id])
   course              Course   @relation(fields: [courseId], references: [id])
+}
+
+model MockTest {
+  id                String   @id @default(uuid())
+  lessonId          String   @unique
+  totalMarks        Int
+  passingPercentage Int
+  difficulty        String   // Easy, Medium, Hard
+  published         Boolean  @default(false)
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  lesson    Lesson         @relation(fields: [lessonId], references: [id])
+  questions MockQuestion[]
+  attempts  MockTestAttempt[]
+}
+
+model MockQuestion {
+  id           String   @id @default(uuid())
+  mockTestId   String
+  question     String
+  optionA      String
+  optionB      String
+  optionC      String
+  optionD      String
+  correctIndex Int
+
+  mockTest MockTest @relation(fields: [mockTestId], references: [id], onDelete: Cascade)
+}
+
+model MockTestAttempt {
+  id          String   @id @default(uuid())
+  userId      String
+  mockTestId  String
+  score       Int
+  percentage  Float
+  status      String   // PASSED | FAILED
+  completedAt DateTime @default(now())
+
+  user     User     @relation(fields: [userId], references: [id])
+  mockTest MockTest @relation(fields: [mockTestId], references: [id])
 }

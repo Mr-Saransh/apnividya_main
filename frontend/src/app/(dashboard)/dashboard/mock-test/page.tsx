@@ -95,7 +95,7 @@ export default function MockTestListPage() {
                                     <Button
                                         className="w-full"
                                         variant={isCompleted ? "outline" : "default"}
-                                        onClick={() => router.push(`/dashboard/courses/${test.lesson.courseId}?lessonId=${test.lesson.id}&tab=mock-test`)}
+                                        onClick={() => router.push(`/dashboard/mock-test/take/${test.lesson.id}`)}
                                     >
                                         {isCompleted ? "Retake Test" : "Start Test"}
                                         <ArrowRight className="ml-2 h-4 w-4" />

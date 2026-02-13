@@ -1,97 +1,146 @@
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 
-export async function GET(
-    req: Request,
-    { params }: { params: Promise<{ lessonId: string }> }
-) {
+export async function GET(req: Request, { params }: { params: Promise<{ lessonId: string }> }) {
     try {
         const { lessonId } = await params;
-        const quiz = await db.lessonQuiz.findUnique({
-            where: {
-                lessonId: lessonId,
-                published: true,
-            },
+        const { searchParams } = new URL(req.url);
+        const userId = searchParams.get("userId");
+
+        const mockTest = await db.mockTest.findUnique({
+            where: { lessonId: lessonId },
+            include: {
+                questions: {
+                    select: {
+                        id: true,
+                        question: true,
+                        optionA: true,
+                        optionB: true,
+                        optionC: true,
+                        optionD: true,
+                        // Do NOT select correctIndex
+                    }
+                }
+            }
         });
 
-        if (!quiz) {
-            return new NextResponse("Assessment not found", { status: 404 });
+        if (!mockTest) {
+            return NextResponse.json({ error: "Mock test not found" }, { status: 404 });
         }
 
-        return NextResponse.json(quiz);
-    } catch (error: any) {
-        console.log("[LESSON_QUIZ_GET]", error);
-        return new NextResponse(`Internal Error: ${error.message}`, { status: 500 });
+        let attempt = null;
+        if (userId) {
+            attempt = await db.mockTestAttempt.findFirst({
+                where: {
+                    mockTestId: mockTest.id,
+                    userId: userId
+                },
+                orderBy: { completedAt: 'desc' }
+            });
+        }
+
+        return NextResponse.json({ ...mockTest, attempt });
+    } catch (error) {
+        console.error("Error fetching mock test:", error);
+        return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
     }
 }
 
-export async function POST(
-    req: Request,
-    { params }: { params: Promise<{ lessonId: string }> }
-) {
+export async function POST(req: Request, { params }: { params: Promise<{ lessonId: string }> }) {
     try {
         const { lessonId } = await params;
-        const { userId, score } = await req.json();
+        const body = await req.json();
+        const { userId, answers } = body; // answers: { [questionId]: selectedIndex }
 
-        if (!userId || score === undefined) {
-            return new NextResponse("Missing data", { status: 400 });
+        if (!userId || !answers) {
+            return NextResponse.json({ error: "Missing data" }, { status: 400 });
         }
 
-        // Fetch Quiz details to validate score
-        const quiz = await db.lessonQuiz.findUnique({
-            where: {
-                lessonId: lessonId,
-                published: true,
-            },
+        // 1. Fetch full test with correct answers
+        const mockTest = await db.mockTest.findUnique({
+            where: { lessonId: lessonId },
+            include: { questions: true }
         });
 
-        if (!quiz) {
-            return new NextResponse("Assessment not found", { status: 404 });
+        if (!mockTest) {
+            return NextResponse.json({ error: "Test not found" }, { status: 404 });
         }
 
-        // Validate score
-        if (score > quiz.totalMarks || score < 0) {
-            return new NextResponse("Invalid score", { status: 400 });
-        }
+        // 2. Calculate Score
+        let correctCount = 0;
+        mockTest.questions.forEach((q) => {
+            if (answers[q.id] === q.correctIndex) {
+                correctCount++;
+            }
+        });
 
-        const percentage = (score / quiz.totalMarks) * 100;
+        const totalQuestions = mockTest.questions.length;
+        const score = (correctCount / totalQuestions) * mockTest.totalMarks;
+        const percentage = (correctCount / totalQuestions) * 100;
+        const passed = percentage >= mockTest.passingPercentage;
+        const status = passed ? "PASSED" : "FAILED";
 
-        // Create Attempt
-        const attempt = await db.lessonQuizAttempt.create({
+        // 3. Save Attempt
+        const attempt = await db.mockTestAttempt.create({
             data: {
                 userId,
-                quizId: quiz.id,
-                score,
-                percentage,
-            },
+                mockTestId: mockTest.id,
+                score: Math.round(score),
+                percentage: parseFloat(percentage.toFixed(2)),
+                status,
+                completedAt: new Date()
+            }
         });
 
-        // Award Karma
-        let karmaPoints = 0;
-        if (percentage >= 90) karmaPoints = 50;
-        else if (percentage >= 75) karmaPoints = 30;
-        else if (percentage >= 50) karmaPoints = 10;
+        // 4. Update Karma
+        let karmaChange = 0;
+        let karmaReason = "";
 
-        if (karmaPoints > 0) {
-            // Update user
-            await db.user.update({
-                where: { id: userId },
-                data: { karmaPoints: { increment: karmaPoints } }
-            });
-
-            // Add to Ledger
-            await db.karmaLedger.create({
-                data: {
-                    userId,
-                    amount: karmaPoints,
-                    reason: `Quiz: ${quiz.title} (${score}/${quiz.totalMarks})`
-                }
-            });
+        if (percentage >= 90) {
+            karmaChange = 50;
+            karmaReason = "Ace performance in Mock Test";
+        } else if (percentage >= 75) {
+            karmaChange = 30;
+            karmaReason = "Great performance in Mock Test";
+        } else if (passed) {
+            karmaChange = 10;
+            karmaReason = "Passed Mock Test";
+        } else {
+            karmaChange = -5;
+            karmaReason = "Failed Mock Test";
         }
 
-        return NextResponse.json({ attempt, karmaAwarded: karmaPoints });
-    } catch (error: any) {
-        console.log("[LESSON_QUIZ_POST]", error);
-        return new NextResponse(`Internal Error: ${error.message}`, { status: 500 });
+        // Transaction for Karma
+        await db.$transaction([
+            db.user.update({
+                where: { id: userId },
+                data: { karmaPoints: { increment: karmaChange } }
+            }),
+            db.karmaLedger.create({
+                data: {
+                    userId,
+                    amount: karmaChange,
+                    reason: `${karmaReason} - ${mockTest.lessonId ? "Lesson Test" : "Test"}`
+                }
+            })
+        ]);
+
+        // 5. Return Result
+        return NextResponse.json({
+            success: true,
+            score,
+            percentage,
+            passed,
+            correctCount,
+            totalQuestions,
+            karmaChange,
+            correctAnswers: mockTest.questions.reduce((acc: any, q) => {
+                acc[q.id] = q.correctIndex;
+                return acc;
+            }, {})
+        });
+    } catch (error) {
+        console.error("Error submitting mock test:", error);
+        return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
     }
 }

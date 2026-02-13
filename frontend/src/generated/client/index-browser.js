@@ -290,6 +290,38 @@ exports.Prisma.PaymentScalarFieldEnum = {
   createdAt: 'createdAt'
 };
 
+exports.Prisma.MockTestScalarFieldEnum = {
+  id: 'id',
+  lessonId: 'lessonId',
+  totalMarks: 'totalMarks',
+  passingPercentage: 'passingPercentage',
+  difficulty: 'difficulty',
+  published: 'published',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.MockQuestionScalarFieldEnum = {
+  id: 'id',
+  mockTestId: 'mockTestId',
+  question: 'question',
+  optionA: 'optionA',
+  optionB: 'optionB',
+  optionC: 'optionC',
+  optionD: 'optionD',
+  correctIndex: 'correctIndex'
+};
+
+exports.Prisma.MockTestAttemptScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  mockTestId: 'mockTestId',
+  score: 'score',
+  percentage: 'percentage',
+  status: 'status',
+  completedAt: 'completedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -345,7 +377,10 @@ exports.Prisma.ModelName = {
   QuizAttempt: 'QuizAttempt',
   Notification: 'Notification',
   LiveSession: 'LiveSession',
-  Payment: 'Payment'
+  Payment: 'Payment',
+  MockTest: 'MockTest',
+  MockQuestion: 'MockQuestion',
+  MockTestAttempt: 'MockTestAttempt'
 };
 
 /**

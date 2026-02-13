@@ -2,7 +2,7 @@
 
 import { useState, useEffect, use, Suspense } from "react";
 import { CustomVideoPlayer } from "@/components/player/custom-video-player";
-import { MockTestTab } from "@/components/player/mock-test-tab";
+
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -205,7 +205,6 @@ function CoursePlayerContent({ courseId }: { courseId: string }) {
                         <Tabs value={activeTab} onValueChange={setActiveTab} className="mt-6">
                             <TabsList className="bg-muted/50 p-1">
                                 <TabsTrigger value="overview">Overview</TabsTrigger>
-                                <TabsTrigger value="mock-test">Mock Test</TabsTrigger>
                                 {currentLesson?.status !== 'RECORDED' && currentLesson?.status !== 'PUBLISHED' && (
                                     <TabsTrigger value="live">Live Session</TabsTrigger>
                                 )}
@@ -224,13 +223,7 @@ function CoursePlayerContent({ courseId }: { courseId: string }) {
                                     </CardContent>
                                 </Card>
                             </TabsContent>
-                            <TabsContent value="mock-test" className="mt-4">
-                                {currentLessonId ? (
-                                    <MockTestTab lessonId={currentLessonId} />
-                                ) : (
-                                    <div className="text-center text-muted-foreground p-8">Select a lesson to view mock test.</div>
-                                )}
-                            </TabsContent>
+
                             {currentLesson?.status !== 'RECORDED' && currentLesson?.status !== 'PUBLISHED' && (
                                 <TabsContent value="live" className="mt-4">
                                     <Card className="border-dashed">

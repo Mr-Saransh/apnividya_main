@@ -93,6 +93,21 @@ export type LiveSession = $Result.DefaultSelection<Prisma.$LiveSessionPayload>
  * 
  */
 export type Payment = $Result.DefaultSelection<Prisma.$PaymentPayload>
+/**
+ * Model MockTest
+ * 
+ */
+export type MockTest = $Result.DefaultSelection<Prisma.$MockTestPayload>
+/**
+ * Model MockQuestion
+ * 
+ */
+export type MockQuestion = $Result.DefaultSelection<Prisma.$MockQuestionPayload>
+/**
+ * Model MockTestAttempt
+ * 
+ */
+export type MockTestAttempt = $Result.DefaultSelection<Prisma.$MockTestAttemptPayload>
 
 /**
  * Enums
@@ -434,6 +449,36 @@ export class PrismaClient<
     * ```
     */
   get payment(): Prisma.PaymentDelegate<ExtArgs>;
+
+  /**
+   * `prisma.mockTest`: Exposes CRUD operations for the **MockTest** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more MockTests
+    * const mockTests = await prisma.mockTest.findMany()
+    * ```
+    */
+  get mockTest(): Prisma.MockTestDelegate<ExtArgs>;
+
+  /**
+   * `prisma.mockQuestion`: Exposes CRUD operations for the **MockQuestion** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more MockQuestions
+    * const mockQuestions = await prisma.mockQuestion.findMany()
+    * ```
+    */
+  get mockQuestion(): Prisma.MockQuestionDelegate<ExtArgs>;
+
+  /**
+   * `prisma.mockTestAttempt`: Exposes CRUD operations for the **MockTestAttempt** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more MockTestAttempts
+    * const mockTestAttempts = await prisma.mockTestAttempt.findMany()
+    * ```
+    */
+  get mockTestAttempt(): Prisma.MockTestAttemptDelegate<ExtArgs>;
 }
 
 export namespace Prisma {
@@ -890,7 +935,10 @@ export namespace Prisma {
     QuizAttempt: 'QuizAttempt',
     Notification: 'Notification',
     LiveSession: 'LiveSession',
-    Payment: 'Payment'
+    Payment: 'Payment',
+    MockTest: 'MockTest',
+    MockQuestion: 'MockQuestion',
+    MockTestAttempt: 'MockTestAttempt'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -906,7 +954,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> = {
     meta: {
-      modelProps: "user" | "streak" | "course" | "enrollment" | "lesson" | "lessonCompletion" | "lessonQuiz" | "lessonQuizAttempt" | "karmaLedger" | "communityPost" | "comment" | "postVote" | "quizAttempt" | "notification" | "liveSession" | "payment"
+      modelProps: "user" | "streak" | "course" | "enrollment" | "lesson" | "lessonCompletion" | "lessonQuiz" | "lessonQuizAttempt" | "karmaLedger" | "communityPost" | "comment" | "postVote" | "quizAttempt" | "notification" | "liveSession" | "payment" | "mockTest" | "mockQuestion" | "mockTestAttempt"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -2030,6 +2078,216 @@ export namespace Prisma {
           }
         }
       }
+      MockTest: {
+        payload: Prisma.$MockTestPayload<ExtArgs>
+        fields: Prisma.MockTestFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.MockTestFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MockTestPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.MockTestFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MockTestPayload>
+          }
+          findFirst: {
+            args: Prisma.MockTestFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MockTestPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.MockTestFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MockTestPayload>
+          }
+          findMany: {
+            args: Prisma.MockTestFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MockTestPayload>[]
+          }
+          create: {
+            args: Prisma.MockTestCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MockTestPayload>
+          }
+          createMany: {
+            args: Prisma.MockTestCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.MockTestCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MockTestPayload>[]
+          }
+          delete: {
+            args: Prisma.MockTestDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MockTestPayload>
+          }
+          update: {
+            args: Prisma.MockTestUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MockTestPayload>
+          }
+          deleteMany: {
+            args: Prisma.MockTestDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.MockTestUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.MockTestUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MockTestPayload>
+          }
+          aggregate: {
+            args: Prisma.MockTestAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateMockTest>
+          }
+          groupBy: {
+            args: Prisma.MockTestGroupByArgs<ExtArgs>
+            result: $Utils.Optional<MockTestGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.MockTestCountArgs<ExtArgs>
+            result: $Utils.Optional<MockTestCountAggregateOutputType> | number
+          }
+        }
+      }
+      MockQuestion: {
+        payload: Prisma.$MockQuestionPayload<ExtArgs>
+        fields: Prisma.MockQuestionFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.MockQuestionFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MockQuestionPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.MockQuestionFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MockQuestionPayload>
+          }
+          findFirst: {
+            args: Prisma.MockQuestionFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MockQuestionPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.MockQuestionFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MockQuestionPayload>
+          }
+          findMany: {
+            args: Prisma.MockQuestionFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MockQuestionPayload>[]
+          }
+          create: {
+            args: Prisma.MockQuestionCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MockQuestionPayload>
+          }
+          createMany: {
+            args: Prisma.MockQuestionCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.MockQuestionCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MockQuestionPayload>[]
+          }
+          delete: {
+            args: Prisma.MockQuestionDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MockQuestionPayload>
+          }
+          update: {
+            args: Prisma.MockQuestionUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MockQuestionPayload>
+          }
+          deleteMany: {
+            args: Prisma.MockQuestionDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.MockQuestionUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.MockQuestionUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MockQuestionPayload>
+          }
+          aggregate: {
+            args: Prisma.MockQuestionAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateMockQuestion>
+          }
+          groupBy: {
+            args: Prisma.MockQuestionGroupByArgs<ExtArgs>
+            result: $Utils.Optional<MockQuestionGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.MockQuestionCountArgs<ExtArgs>
+            result: $Utils.Optional<MockQuestionCountAggregateOutputType> | number
+          }
+        }
+      }
+      MockTestAttempt: {
+        payload: Prisma.$MockTestAttemptPayload<ExtArgs>
+        fields: Prisma.MockTestAttemptFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.MockTestAttemptFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MockTestAttemptPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.MockTestAttemptFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MockTestAttemptPayload>
+          }
+          findFirst: {
+            args: Prisma.MockTestAttemptFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MockTestAttemptPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.MockTestAttemptFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MockTestAttemptPayload>
+          }
+          findMany: {
+            args: Prisma.MockTestAttemptFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MockTestAttemptPayload>[]
+          }
+          create: {
+            args: Prisma.MockTestAttemptCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MockTestAttemptPayload>
+          }
+          createMany: {
+            args: Prisma.MockTestAttemptCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.MockTestAttemptCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MockTestAttemptPayload>[]
+          }
+          delete: {
+            args: Prisma.MockTestAttemptDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MockTestAttemptPayload>
+          }
+          update: {
+            args: Prisma.MockTestAttemptUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MockTestAttemptPayload>
+          }
+          deleteMany: {
+            args: Prisma.MockTestAttemptDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.MockTestAttemptUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.MockTestAttemptUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MockTestAttemptPayload>
+          }
+          aggregate: {
+            args: Prisma.MockTestAttemptAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateMockTestAttempt>
+          }
+          groupBy: {
+            args: Prisma.MockTestAttemptGroupByArgs<ExtArgs>
+            result: $Utils.Optional<MockTestAttemptGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.MockTestAttemptCountArgs<ExtArgs>
+            result: $Utils.Optional<MockTestAttemptCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -2202,6 +2460,7 @@ export namespace Prisma {
     notifications: number
     payments: number
     lessonCompletions: number
+    newMockTestAttempts: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2216,6 +2475,7 @@ export namespace Prisma {
     notifications?: boolean | UserCountOutputTypeCountNotificationsArgs
     payments?: boolean | UserCountOutputTypeCountPaymentsArgs
     lessonCompletions?: boolean | UserCountOutputTypeCountLessonCompletionsArgs
+    newMockTestAttempts?: boolean | UserCountOutputTypeCountNewMockTestAttemptsArgs
   }
 
   // Custom InputTypes
@@ -2304,6 +2564,13 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountLessonCompletionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: LessonCompletionWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountNewMockTestAttemptsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MockTestAttemptWhereInput
   }
 
 
@@ -2464,6 +2731,46 @@ export namespace Prisma {
    */
   export type CommunityPostCountOutputTypeCountVotesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: PostVoteWhereInput
+  }
+
+
+  /**
+   * Count Type MockTestCountOutputType
+   */
+
+  export type MockTestCountOutputType = {
+    questions: number
+    attempts: number
+  }
+
+  export type MockTestCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    questions?: boolean | MockTestCountOutputTypeCountQuestionsArgs
+    attempts?: boolean | MockTestCountOutputTypeCountAttemptsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * MockTestCountOutputType without action
+   */
+  export type MockTestCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MockTestCountOutputType
+     */
+    select?: MockTestCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * MockTestCountOutputType without action
+   */
+  export type MockTestCountOutputTypeCountQuestionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MockQuestionWhereInput
+  }
+
+  /**
+   * MockTestCountOutputType without action
+   */
+  export type MockTestCountOutputTypeCountAttemptsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MockTestAttemptWhereInput
   }
 
 
@@ -2729,6 +3036,7 @@ export namespace Prisma {
     notifications?: boolean | User$notificationsArgs<ExtArgs>
     payments?: boolean | User$paymentsArgs<ExtArgs>
     lessonCompletions?: boolean | User$lessonCompletionsArgs<ExtArgs>
+    newMockTestAttempts?: boolean | User$newMockTestAttemptsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -2773,6 +3081,7 @@ export namespace Prisma {
     notifications?: boolean | User$notificationsArgs<ExtArgs>
     payments?: boolean | User$paymentsArgs<ExtArgs>
     lessonCompletions?: boolean | User$lessonCompletionsArgs<ExtArgs>
+    newMockTestAttempts?: boolean | User$newMockTestAttemptsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -2792,6 +3101,7 @@ export namespace Prisma {
       notifications: Prisma.$NotificationPayload<ExtArgs>[]
       payments: Prisma.$PaymentPayload<ExtArgs>[]
       lessonCompletions: Prisma.$LessonCompletionPayload<ExtArgs>[]
+      newMockTestAttempts: Prisma.$MockTestAttemptPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -3181,6 +3491,7 @@ export namespace Prisma {
     notifications<T extends User$notificationsArgs<ExtArgs> = {}>(args?: Subset<T, User$notificationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findMany"> | Null>
     payments<T extends User$paymentsArgs<ExtArgs> = {}>(args?: Subset<T, User$paymentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PaymentPayload<ExtArgs>, T, "findMany"> | Null>
     lessonCompletions<T extends User$lessonCompletionsArgs<ExtArgs> = {}>(args?: Subset<T, User$lessonCompletionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LessonCompletionPayload<ExtArgs>, T, "findMany"> | Null>
+    newMockTestAttempts<T extends User$newMockTestAttemptsArgs<ExtArgs> = {}>(args?: Subset<T, User$newMockTestAttemptsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MockTestAttemptPayload<ExtArgs>, T, "findMany"> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3767,6 +4078,26 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: LessonCompletionScalarFieldEnum | LessonCompletionScalarFieldEnum[]
+  }
+
+  /**
+   * User.newMockTestAttempts
+   */
+  export type User$newMockTestAttemptsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MockTestAttempt
+     */
+    select?: MockTestAttemptSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MockTestAttemptInclude<ExtArgs> | null
+    where?: MockTestAttemptWhereInput
+    orderBy?: MockTestAttemptOrderByWithRelationInput | MockTestAttemptOrderByWithRelationInput[]
+    cursor?: MockTestAttemptWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: MockTestAttemptScalarFieldEnum | MockTestAttemptScalarFieldEnum[]
   }
 
   /**
@@ -7138,6 +7469,7 @@ export namespace Prisma {
     course?: boolean | CourseDefaultArgs<ExtArgs>
     completions?: boolean | Lesson$completionsArgs<ExtArgs>
     quiz?: boolean | Lesson$quizArgs<ExtArgs>
+    mockTest?: boolean | Lesson$mockTestArgs<ExtArgs>
     _count?: boolean | LessonCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["lesson"]>
 
@@ -7180,6 +7512,7 @@ export namespace Prisma {
     course?: boolean | CourseDefaultArgs<ExtArgs>
     completions?: boolean | Lesson$completionsArgs<ExtArgs>
     quiz?: boolean | Lesson$quizArgs<ExtArgs>
+    mockTest?: boolean | Lesson$mockTestArgs<ExtArgs>
     _count?: boolean | LessonCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type LessonIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -7192,6 +7525,7 @@ export namespace Prisma {
       course: Prisma.$CoursePayload<ExtArgs>
       completions: Prisma.$LessonCompletionPayload<ExtArgs>[]
       quiz: Prisma.$LessonQuizPayload<ExtArgs> | null
+      mockTest: Prisma.$MockTestPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -7575,6 +7909,7 @@ export namespace Prisma {
     course<T extends CourseDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CourseDefaultArgs<ExtArgs>>): Prisma__CourseClient<$Result.GetResult<Prisma.$CoursePayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
     completions<T extends Lesson$completionsArgs<ExtArgs> = {}>(args?: Subset<T, Lesson$completionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LessonCompletionPayload<ExtArgs>, T, "findMany"> | Null>
     quiz<T extends Lesson$quizArgs<ExtArgs> = {}>(args?: Subset<T, Lesson$quizArgs<ExtArgs>>): Prisma__LessonQuizClient<$Result.GetResult<Prisma.$LessonQuizPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
+    mockTest<T extends Lesson$mockTestArgs<ExtArgs> = {}>(args?: Subset<T, Lesson$mockTestArgs<ExtArgs>>): Prisma__MockTestClient<$Result.GetResult<Prisma.$MockTestPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -7968,6 +8303,21 @@ export namespace Prisma {
      */
     include?: LessonQuizInclude<ExtArgs> | null
     where?: LessonQuizWhereInput
+  }
+
+  /**
+   * Lesson.mockTest
+   */
+  export type Lesson$mockTestArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MockTest
+     */
+    select?: MockTestSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MockTestInclude<ExtArgs> | null
+    where?: MockTestWhereInput
   }
 
   /**
@@ -18837,6 +19187,3067 @@ export namespace Prisma {
 
 
   /**
+   * Model MockTest
+   */
+
+  export type AggregateMockTest = {
+    _count: MockTestCountAggregateOutputType | null
+    _avg: MockTestAvgAggregateOutputType | null
+    _sum: MockTestSumAggregateOutputType | null
+    _min: MockTestMinAggregateOutputType | null
+    _max: MockTestMaxAggregateOutputType | null
+  }
+
+  export type MockTestAvgAggregateOutputType = {
+    totalMarks: number | null
+    passingPercentage: number | null
+  }
+
+  export type MockTestSumAggregateOutputType = {
+    totalMarks: number | null
+    passingPercentage: number | null
+  }
+
+  export type MockTestMinAggregateOutputType = {
+    id: string | null
+    lessonId: string | null
+    totalMarks: number | null
+    passingPercentage: number | null
+    difficulty: string | null
+    published: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type MockTestMaxAggregateOutputType = {
+    id: string | null
+    lessonId: string | null
+    totalMarks: number | null
+    passingPercentage: number | null
+    difficulty: string | null
+    published: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type MockTestCountAggregateOutputType = {
+    id: number
+    lessonId: number
+    totalMarks: number
+    passingPercentage: number
+    difficulty: number
+    published: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type MockTestAvgAggregateInputType = {
+    totalMarks?: true
+    passingPercentage?: true
+  }
+
+  export type MockTestSumAggregateInputType = {
+    totalMarks?: true
+    passingPercentage?: true
+  }
+
+  export type MockTestMinAggregateInputType = {
+    id?: true
+    lessonId?: true
+    totalMarks?: true
+    passingPercentage?: true
+    difficulty?: true
+    published?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type MockTestMaxAggregateInputType = {
+    id?: true
+    lessonId?: true
+    totalMarks?: true
+    passingPercentage?: true
+    difficulty?: true
+    published?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type MockTestCountAggregateInputType = {
+    id?: true
+    lessonId?: true
+    totalMarks?: true
+    passingPercentage?: true
+    difficulty?: true
+    published?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type MockTestAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which MockTest to aggregate.
+     */
+    where?: MockTestWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MockTests to fetch.
+     */
+    orderBy?: MockTestOrderByWithRelationInput | MockTestOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: MockTestWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MockTests from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MockTests.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned MockTests
+    **/
+    _count?: true | MockTestCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: MockTestAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: MockTestSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: MockTestMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: MockTestMaxAggregateInputType
+  }
+
+  export type GetMockTestAggregateType<T extends MockTestAggregateArgs> = {
+        [P in keyof T & keyof AggregateMockTest]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateMockTest[P]>
+      : GetScalarType<T[P], AggregateMockTest[P]>
+  }
+
+
+
+
+  export type MockTestGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MockTestWhereInput
+    orderBy?: MockTestOrderByWithAggregationInput | MockTestOrderByWithAggregationInput[]
+    by: MockTestScalarFieldEnum[] | MockTestScalarFieldEnum
+    having?: MockTestScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: MockTestCountAggregateInputType | true
+    _avg?: MockTestAvgAggregateInputType
+    _sum?: MockTestSumAggregateInputType
+    _min?: MockTestMinAggregateInputType
+    _max?: MockTestMaxAggregateInputType
+  }
+
+  export type MockTestGroupByOutputType = {
+    id: string
+    lessonId: string
+    totalMarks: number
+    passingPercentage: number
+    difficulty: string
+    published: boolean
+    createdAt: Date
+    updatedAt: Date
+    _count: MockTestCountAggregateOutputType | null
+    _avg: MockTestAvgAggregateOutputType | null
+    _sum: MockTestSumAggregateOutputType | null
+    _min: MockTestMinAggregateOutputType | null
+    _max: MockTestMaxAggregateOutputType | null
+  }
+
+  type GetMockTestGroupByPayload<T extends MockTestGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<MockTestGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof MockTestGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], MockTestGroupByOutputType[P]>
+            : GetScalarType<T[P], MockTestGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type MockTestSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    lessonId?: boolean
+    totalMarks?: boolean
+    passingPercentage?: boolean
+    difficulty?: boolean
+    published?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    lesson?: boolean | LessonDefaultArgs<ExtArgs>
+    questions?: boolean | MockTest$questionsArgs<ExtArgs>
+    attempts?: boolean | MockTest$attemptsArgs<ExtArgs>
+    _count?: boolean | MockTestCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["mockTest"]>
+
+  export type MockTestSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    lessonId?: boolean
+    totalMarks?: boolean
+    passingPercentage?: boolean
+    difficulty?: boolean
+    published?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    lesson?: boolean | LessonDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["mockTest"]>
+
+  export type MockTestSelectScalar = {
+    id?: boolean
+    lessonId?: boolean
+    totalMarks?: boolean
+    passingPercentage?: boolean
+    difficulty?: boolean
+    published?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type MockTestInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    lesson?: boolean | LessonDefaultArgs<ExtArgs>
+    questions?: boolean | MockTest$questionsArgs<ExtArgs>
+    attempts?: boolean | MockTest$attemptsArgs<ExtArgs>
+    _count?: boolean | MockTestCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type MockTestIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    lesson?: boolean | LessonDefaultArgs<ExtArgs>
+  }
+
+  export type $MockTestPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "MockTest"
+    objects: {
+      lesson: Prisma.$LessonPayload<ExtArgs>
+      questions: Prisma.$MockQuestionPayload<ExtArgs>[]
+      attempts: Prisma.$MockTestAttemptPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      lessonId: string
+      totalMarks: number
+      passingPercentage: number
+      difficulty: string
+      published: boolean
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["mockTest"]>
+    composites: {}
+  }
+
+  type MockTestGetPayload<S extends boolean | null | undefined | MockTestDefaultArgs> = $Result.GetResult<Prisma.$MockTestPayload, S>
+
+  type MockTestCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<MockTestFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: MockTestCountAggregateInputType | true
+    }
+
+  export interface MockTestDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['MockTest'], meta: { name: 'MockTest' } }
+    /**
+     * Find zero or one MockTest that matches the filter.
+     * @param {MockTestFindUniqueArgs} args - Arguments to find a MockTest
+     * @example
+     * // Get one MockTest
+     * const mockTest = await prisma.mockTest.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends MockTestFindUniqueArgs>(args: SelectSubset<T, MockTestFindUniqueArgs<ExtArgs>>): Prisma__MockTestClient<$Result.GetResult<Prisma.$MockTestPayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
+
+    /**
+     * Find one MockTest that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
+     * @param {MockTestFindUniqueOrThrowArgs} args - Arguments to find a MockTest
+     * @example
+     * // Get one MockTest
+     * const mockTest = await prisma.mockTest.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends MockTestFindUniqueOrThrowArgs>(args: SelectSubset<T, MockTestFindUniqueOrThrowArgs<ExtArgs>>): Prisma__MockTestClient<$Result.GetResult<Prisma.$MockTestPayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
+
+    /**
+     * Find the first MockTest that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MockTestFindFirstArgs} args - Arguments to find a MockTest
+     * @example
+     * // Get one MockTest
+     * const mockTest = await prisma.mockTest.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends MockTestFindFirstArgs>(args?: SelectSubset<T, MockTestFindFirstArgs<ExtArgs>>): Prisma__MockTestClient<$Result.GetResult<Prisma.$MockTestPayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
+
+    /**
+     * Find the first MockTest that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MockTestFindFirstOrThrowArgs} args - Arguments to find a MockTest
+     * @example
+     * // Get one MockTest
+     * const mockTest = await prisma.mockTest.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends MockTestFindFirstOrThrowArgs>(args?: SelectSubset<T, MockTestFindFirstOrThrowArgs<ExtArgs>>): Prisma__MockTestClient<$Result.GetResult<Prisma.$MockTestPayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
+
+    /**
+     * Find zero or more MockTests that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MockTestFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all MockTests
+     * const mockTests = await prisma.mockTest.findMany()
+     * 
+     * // Get first 10 MockTests
+     * const mockTests = await prisma.mockTest.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const mockTestWithIdOnly = await prisma.mockTest.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends MockTestFindManyArgs>(args?: SelectSubset<T, MockTestFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MockTestPayload<ExtArgs>, T, "findMany">>
+
+    /**
+     * Create a MockTest.
+     * @param {MockTestCreateArgs} args - Arguments to create a MockTest.
+     * @example
+     * // Create one MockTest
+     * const MockTest = await prisma.mockTest.create({
+     *   data: {
+     *     // ... data to create a MockTest
+     *   }
+     * })
+     * 
+     */
+    create<T extends MockTestCreateArgs>(args: SelectSubset<T, MockTestCreateArgs<ExtArgs>>): Prisma__MockTestClient<$Result.GetResult<Prisma.$MockTestPayload<ExtArgs>, T, "create">, never, ExtArgs>
+
+    /**
+     * Create many MockTests.
+     * @param {MockTestCreateManyArgs} args - Arguments to create many MockTests.
+     * @example
+     * // Create many MockTests
+     * const mockTest = await prisma.mockTest.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends MockTestCreateManyArgs>(args?: SelectSubset<T, MockTestCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many MockTests and returns the data saved in the database.
+     * @param {MockTestCreateManyAndReturnArgs} args - Arguments to create many MockTests.
+     * @example
+     * // Create many MockTests
+     * const mockTest = await prisma.mockTest.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many MockTests and only return the `id`
+     * const mockTestWithIdOnly = await prisma.mockTest.createManyAndReturn({ 
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends MockTestCreateManyAndReturnArgs>(args?: SelectSubset<T, MockTestCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MockTestPayload<ExtArgs>, T, "createManyAndReturn">>
+
+    /**
+     * Delete a MockTest.
+     * @param {MockTestDeleteArgs} args - Arguments to delete one MockTest.
+     * @example
+     * // Delete one MockTest
+     * const MockTest = await prisma.mockTest.delete({
+     *   where: {
+     *     // ... filter to delete one MockTest
+     *   }
+     * })
+     * 
+     */
+    delete<T extends MockTestDeleteArgs>(args: SelectSubset<T, MockTestDeleteArgs<ExtArgs>>): Prisma__MockTestClient<$Result.GetResult<Prisma.$MockTestPayload<ExtArgs>, T, "delete">, never, ExtArgs>
+
+    /**
+     * Update one MockTest.
+     * @param {MockTestUpdateArgs} args - Arguments to update one MockTest.
+     * @example
+     * // Update one MockTest
+     * const mockTest = await prisma.mockTest.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends MockTestUpdateArgs>(args: SelectSubset<T, MockTestUpdateArgs<ExtArgs>>): Prisma__MockTestClient<$Result.GetResult<Prisma.$MockTestPayload<ExtArgs>, T, "update">, never, ExtArgs>
+
+    /**
+     * Delete zero or more MockTests.
+     * @param {MockTestDeleteManyArgs} args - Arguments to filter MockTests to delete.
+     * @example
+     * // Delete a few MockTests
+     * const { count } = await prisma.mockTest.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends MockTestDeleteManyArgs>(args?: SelectSubset<T, MockTestDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more MockTests.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MockTestUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many MockTests
+     * const mockTest = await prisma.mockTest.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends MockTestUpdateManyArgs>(args: SelectSubset<T, MockTestUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one MockTest.
+     * @param {MockTestUpsertArgs} args - Arguments to update or create a MockTest.
+     * @example
+     * // Update or create a MockTest
+     * const mockTest = await prisma.mockTest.upsert({
+     *   create: {
+     *     // ... data to create a MockTest
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the MockTest we want to update
+     *   }
+     * })
+     */
+    upsert<T extends MockTestUpsertArgs>(args: SelectSubset<T, MockTestUpsertArgs<ExtArgs>>): Prisma__MockTestClient<$Result.GetResult<Prisma.$MockTestPayload<ExtArgs>, T, "upsert">, never, ExtArgs>
+
+
+    /**
+     * Count the number of MockTests.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MockTestCountArgs} args - Arguments to filter MockTests to count.
+     * @example
+     * // Count the number of MockTests
+     * const count = await prisma.mockTest.count({
+     *   where: {
+     *     // ... the filter for the MockTests we want to count
+     *   }
+     * })
+    **/
+    count<T extends MockTestCountArgs>(
+      args?: Subset<T, MockTestCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], MockTestCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a MockTest.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MockTestAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends MockTestAggregateArgs>(args: Subset<T, MockTestAggregateArgs>): Prisma.PrismaPromise<GetMockTestAggregateType<T>>
+
+    /**
+     * Group by MockTest.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MockTestGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends MockTestGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: MockTestGroupByArgs['orderBy'] }
+        : { orderBy?: MockTestGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, MockTestGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetMockTestGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the MockTest model
+   */
+  readonly fields: MockTestFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for MockTest.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__MockTestClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    lesson<T extends LessonDefaultArgs<ExtArgs> = {}>(args?: Subset<T, LessonDefaultArgs<ExtArgs>>): Prisma__LessonClient<$Result.GetResult<Prisma.$LessonPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    questions<T extends MockTest$questionsArgs<ExtArgs> = {}>(args?: Subset<T, MockTest$questionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MockQuestionPayload<ExtArgs>, T, "findMany"> | Null>
+    attempts<T extends MockTest$attemptsArgs<ExtArgs> = {}>(args?: Subset<T, MockTest$attemptsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MockTestAttemptPayload<ExtArgs>, T, "findMany"> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the MockTest model
+   */ 
+  interface MockTestFieldRefs {
+    readonly id: FieldRef<"MockTest", 'String'>
+    readonly lessonId: FieldRef<"MockTest", 'String'>
+    readonly totalMarks: FieldRef<"MockTest", 'Int'>
+    readonly passingPercentage: FieldRef<"MockTest", 'Int'>
+    readonly difficulty: FieldRef<"MockTest", 'String'>
+    readonly published: FieldRef<"MockTest", 'Boolean'>
+    readonly createdAt: FieldRef<"MockTest", 'DateTime'>
+    readonly updatedAt: FieldRef<"MockTest", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * MockTest findUnique
+   */
+  export type MockTestFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MockTest
+     */
+    select?: MockTestSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MockTestInclude<ExtArgs> | null
+    /**
+     * Filter, which MockTest to fetch.
+     */
+    where: MockTestWhereUniqueInput
+  }
+
+  /**
+   * MockTest findUniqueOrThrow
+   */
+  export type MockTestFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MockTest
+     */
+    select?: MockTestSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MockTestInclude<ExtArgs> | null
+    /**
+     * Filter, which MockTest to fetch.
+     */
+    where: MockTestWhereUniqueInput
+  }
+
+  /**
+   * MockTest findFirst
+   */
+  export type MockTestFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MockTest
+     */
+    select?: MockTestSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MockTestInclude<ExtArgs> | null
+    /**
+     * Filter, which MockTest to fetch.
+     */
+    where?: MockTestWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MockTests to fetch.
+     */
+    orderBy?: MockTestOrderByWithRelationInput | MockTestOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for MockTests.
+     */
+    cursor?: MockTestWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MockTests from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MockTests.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of MockTests.
+     */
+    distinct?: MockTestScalarFieldEnum | MockTestScalarFieldEnum[]
+  }
+
+  /**
+   * MockTest findFirstOrThrow
+   */
+  export type MockTestFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MockTest
+     */
+    select?: MockTestSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MockTestInclude<ExtArgs> | null
+    /**
+     * Filter, which MockTest to fetch.
+     */
+    where?: MockTestWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MockTests to fetch.
+     */
+    orderBy?: MockTestOrderByWithRelationInput | MockTestOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for MockTests.
+     */
+    cursor?: MockTestWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MockTests from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MockTests.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of MockTests.
+     */
+    distinct?: MockTestScalarFieldEnum | MockTestScalarFieldEnum[]
+  }
+
+  /**
+   * MockTest findMany
+   */
+  export type MockTestFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MockTest
+     */
+    select?: MockTestSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MockTestInclude<ExtArgs> | null
+    /**
+     * Filter, which MockTests to fetch.
+     */
+    where?: MockTestWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MockTests to fetch.
+     */
+    orderBy?: MockTestOrderByWithRelationInput | MockTestOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing MockTests.
+     */
+    cursor?: MockTestWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MockTests from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MockTests.
+     */
+    skip?: number
+    distinct?: MockTestScalarFieldEnum | MockTestScalarFieldEnum[]
+  }
+
+  /**
+   * MockTest create
+   */
+  export type MockTestCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MockTest
+     */
+    select?: MockTestSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MockTestInclude<ExtArgs> | null
+    /**
+     * The data needed to create a MockTest.
+     */
+    data: XOR<MockTestCreateInput, MockTestUncheckedCreateInput>
+  }
+
+  /**
+   * MockTest createMany
+   */
+  export type MockTestCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many MockTests.
+     */
+    data: MockTestCreateManyInput | MockTestCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * MockTest createManyAndReturn
+   */
+  export type MockTestCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MockTest
+     */
+    select?: MockTestSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * The data used to create many MockTests.
+     */
+    data: MockTestCreateManyInput | MockTestCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MockTestIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * MockTest update
+   */
+  export type MockTestUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MockTest
+     */
+    select?: MockTestSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MockTestInclude<ExtArgs> | null
+    /**
+     * The data needed to update a MockTest.
+     */
+    data: XOR<MockTestUpdateInput, MockTestUncheckedUpdateInput>
+    /**
+     * Choose, which MockTest to update.
+     */
+    where: MockTestWhereUniqueInput
+  }
+
+  /**
+   * MockTest updateMany
+   */
+  export type MockTestUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update MockTests.
+     */
+    data: XOR<MockTestUpdateManyMutationInput, MockTestUncheckedUpdateManyInput>
+    /**
+     * Filter which MockTests to update
+     */
+    where?: MockTestWhereInput
+  }
+
+  /**
+   * MockTest upsert
+   */
+  export type MockTestUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MockTest
+     */
+    select?: MockTestSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MockTestInclude<ExtArgs> | null
+    /**
+     * The filter to search for the MockTest to update in case it exists.
+     */
+    where: MockTestWhereUniqueInput
+    /**
+     * In case the MockTest found by the `where` argument doesn't exist, create a new MockTest with this data.
+     */
+    create: XOR<MockTestCreateInput, MockTestUncheckedCreateInput>
+    /**
+     * In case the MockTest was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<MockTestUpdateInput, MockTestUncheckedUpdateInput>
+  }
+
+  /**
+   * MockTest delete
+   */
+  export type MockTestDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MockTest
+     */
+    select?: MockTestSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MockTestInclude<ExtArgs> | null
+    /**
+     * Filter which MockTest to delete.
+     */
+    where: MockTestWhereUniqueInput
+  }
+
+  /**
+   * MockTest deleteMany
+   */
+  export type MockTestDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which MockTests to delete
+     */
+    where?: MockTestWhereInput
+  }
+
+  /**
+   * MockTest.questions
+   */
+  export type MockTest$questionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MockQuestion
+     */
+    select?: MockQuestionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MockQuestionInclude<ExtArgs> | null
+    where?: MockQuestionWhereInput
+    orderBy?: MockQuestionOrderByWithRelationInput | MockQuestionOrderByWithRelationInput[]
+    cursor?: MockQuestionWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: MockQuestionScalarFieldEnum | MockQuestionScalarFieldEnum[]
+  }
+
+  /**
+   * MockTest.attempts
+   */
+  export type MockTest$attemptsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MockTestAttempt
+     */
+    select?: MockTestAttemptSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MockTestAttemptInclude<ExtArgs> | null
+    where?: MockTestAttemptWhereInput
+    orderBy?: MockTestAttemptOrderByWithRelationInput | MockTestAttemptOrderByWithRelationInput[]
+    cursor?: MockTestAttemptWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: MockTestAttemptScalarFieldEnum | MockTestAttemptScalarFieldEnum[]
+  }
+
+  /**
+   * MockTest without action
+   */
+  export type MockTestDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MockTest
+     */
+    select?: MockTestSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MockTestInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model MockQuestion
+   */
+
+  export type AggregateMockQuestion = {
+    _count: MockQuestionCountAggregateOutputType | null
+    _avg: MockQuestionAvgAggregateOutputType | null
+    _sum: MockQuestionSumAggregateOutputType | null
+    _min: MockQuestionMinAggregateOutputType | null
+    _max: MockQuestionMaxAggregateOutputType | null
+  }
+
+  export type MockQuestionAvgAggregateOutputType = {
+    correctIndex: number | null
+  }
+
+  export type MockQuestionSumAggregateOutputType = {
+    correctIndex: number | null
+  }
+
+  export type MockQuestionMinAggregateOutputType = {
+    id: string | null
+    mockTestId: string | null
+    question: string | null
+    optionA: string | null
+    optionB: string | null
+    optionC: string | null
+    optionD: string | null
+    correctIndex: number | null
+  }
+
+  export type MockQuestionMaxAggregateOutputType = {
+    id: string | null
+    mockTestId: string | null
+    question: string | null
+    optionA: string | null
+    optionB: string | null
+    optionC: string | null
+    optionD: string | null
+    correctIndex: number | null
+  }
+
+  export type MockQuestionCountAggregateOutputType = {
+    id: number
+    mockTestId: number
+    question: number
+    optionA: number
+    optionB: number
+    optionC: number
+    optionD: number
+    correctIndex: number
+    _all: number
+  }
+
+
+  export type MockQuestionAvgAggregateInputType = {
+    correctIndex?: true
+  }
+
+  export type MockQuestionSumAggregateInputType = {
+    correctIndex?: true
+  }
+
+  export type MockQuestionMinAggregateInputType = {
+    id?: true
+    mockTestId?: true
+    question?: true
+    optionA?: true
+    optionB?: true
+    optionC?: true
+    optionD?: true
+    correctIndex?: true
+  }
+
+  export type MockQuestionMaxAggregateInputType = {
+    id?: true
+    mockTestId?: true
+    question?: true
+    optionA?: true
+    optionB?: true
+    optionC?: true
+    optionD?: true
+    correctIndex?: true
+  }
+
+  export type MockQuestionCountAggregateInputType = {
+    id?: true
+    mockTestId?: true
+    question?: true
+    optionA?: true
+    optionB?: true
+    optionC?: true
+    optionD?: true
+    correctIndex?: true
+    _all?: true
+  }
+
+  export type MockQuestionAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which MockQuestion to aggregate.
+     */
+    where?: MockQuestionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MockQuestions to fetch.
+     */
+    orderBy?: MockQuestionOrderByWithRelationInput | MockQuestionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: MockQuestionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MockQuestions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MockQuestions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned MockQuestions
+    **/
+    _count?: true | MockQuestionCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: MockQuestionAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: MockQuestionSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: MockQuestionMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: MockQuestionMaxAggregateInputType
+  }
+
+  export type GetMockQuestionAggregateType<T extends MockQuestionAggregateArgs> = {
+        [P in keyof T & keyof AggregateMockQuestion]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateMockQuestion[P]>
+      : GetScalarType<T[P], AggregateMockQuestion[P]>
+  }
+
+
+
+
+  export type MockQuestionGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MockQuestionWhereInput
+    orderBy?: MockQuestionOrderByWithAggregationInput | MockQuestionOrderByWithAggregationInput[]
+    by: MockQuestionScalarFieldEnum[] | MockQuestionScalarFieldEnum
+    having?: MockQuestionScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: MockQuestionCountAggregateInputType | true
+    _avg?: MockQuestionAvgAggregateInputType
+    _sum?: MockQuestionSumAggregateInputType
+    _min?: MockQuestionMinAggregateInputType
+    _max?: MockQuestionMaxAggregateInputType
+  }
+
+  export type MockQuestionGroupByOutputType = {
+    id: string
+    mockTestId: string
+    question: string
+    optionA: string
+    optionB: string
+    optionC: string
+    optionD: string
+    correctIndex: number
+    _count: MockQuestionCountAggregateOutputType | null
+    _avg: MockQuestionAvgAggregateOutputType | null
+    _sum: MockQuestionSumAggregateOutputType | null
+    _min: MockQuestionMinAggregateOutputType | null
+    _max: MockQuestionMaxAggregateOutputType | null
+  }
+
+  type GetMockQuestionGroupByPayload<T extends MockQuestionGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<MockQuestionGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof MockQuestionGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], MockQuestionGroupByOutputType[P]>
+            : GetScalarType<T[P], MockQuestionGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type MockQuestionSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    mockTestId?: boolean
+    question?: boolean
+    optionA?: boolean
+    optionB?: boolean
+    optionC?: boolean
+    optionD?: boolean
+    correctIndex?: boolean
+    mockTest?: boolean | MockTestDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["mockQuestion"]>
+
+  export type MockQuestionSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    mockTestId?: boolean
+    question?: boolean
+    optionA?: boolean
+    optionB?: boolean
+    optionC?: boolean
+    optionD?: boolean
+    correctIndex?: boolean
+    mockTest?: boolean | MockTestDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["mockQuestion"]>
+
+  export type MockQuestionSelectScalar = {
+    id?: boolean
+    mockTestId?: boolean
+    question?: boolean
+    optionA?: boolean
+    optionB?: boolean
+    optionC?: boolean
+    optionD?: boolean
+    correctIndex?: boolean
+  }
+
+  export type MockQuestionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    mockTest?: boolean | MockTestDefaultArgs<ExtArgs>
+  }
+  export type MockQuestionIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    mockTest?: boolean | MockTestDefaultArgs<ExtArgs>
+  }
+
+  export type $MockQuestionPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "MockQuestion"
+    objects: {
+      mockTest: Prisma.$MockTestPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      mockTestId: string
+      question: string
+      optionA: string
+      optionB: string
+      optionC: string
+      optionD: string
+      correctIndex: number
+    }, ExtArgs["result"]["mockQuestion"]>
+    composites: {}
+  }
+
+  type MockQuestionGetPayload<S extends boolean | null | undefined | MockQuestionDefaultArgs> = $Result.GetResult<Prisma.$MockQuestionPayload, S>
+
+  type MockQuestionCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<MockQuestionFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: MockQuestionCountAggregateInputType | true
+    }
+
+  export interface MockQuestionDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['MockQuestion'], meta: { name: 'MockQuestion' } }
+    /**
+     * Find zero or one MockQuestion that matches the filter.
+     * @param {MockQuestionFindUniqueArgs} args - Arguments to find a MockQuestion
+     * @example
+     * // Get one MockQuestion
+     * const mockQuestion = await prisma.mockQuestion.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends MockQuestionFindUniqueArgs>(args: SelectSubset<T, MockQuestionFindUniqueArgs<ExtArgs>>): Prisma__MockQuestionClient<$Result.GetResult<Prisma.$MockQuestionPayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
+
+    /**
+     * Find one MockQuestion that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
+     * @param {MockQuestionFindUniqueOrThrowArgs} args - Arguments to find a MockQuestion
+     * @example
+     * // Get one MockQuestion
+     * const mockQuestion = await prisma.mockQuestion.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends MockQuestionFindUniqueOrThrowArgs>(args: SelectSubset<T, MockQuestionFindUniqueOrThrowArgs<ExtArgs>>): Prisma__MockQuestionClient<$Result.GetResult<Prisma.$MockQuestionPayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
+
+    /**
+     * Find the first MockQuestion that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MockQuestionFindFirstArgs} args - Arguments to find a MockQuestion
+     * @example
+     * // Get one MockQuestion
+     * const mockQuestion = await prisma.mockQuestion.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends MockQuestionFindFirstArgs>(args?: SelectSubset<T, MockQuestionFindFirstArgs<ExtArgs>>): Prisma__MockQuestionClient<$Result.GetResult<Prisma.$MockQuestionPayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
+
+    /**
+     * Find the first MockQuestion that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MockQuestionFindFirstOrThrowArgs} args - Arguments to find a MockQuestion
+     * @example
+     * // Get one MockQuestion
+     * const mockQuestion = await prisma.mockQuestion.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends MockQuestionFindFirstOrThrowArgs>(args?: SelectSubset<T, MockQuestionFindFirstOrThrowArgs<ExtArgs>>): Prisma__MockQuestionClient<$Result.GetResult<Prisma.$MockQuestionPayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
+
+    /**
+     * Find zero or more MockQuestions that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MockQuestionFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all MockQuestions
+     * const mockQuestions = await prisma.mockQuestion.findMany()
+     * 
+     * // Get first 10 MockQuestions
+     * const mockQuestions = await prisma.mockQuestion.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const mockQuestionWithIdOnly = await prisma.mockQuestion.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends MockQuestionFindManyArgs>(args?: SelectSubset<T, MockQuestionFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MockQuestionPayload<ExtArgs>, T, "findMany">>
+
+    /**
+     * Create a MockQuestion.
+     * @param {MockQuestionCreateArgs} args - Arguments to create a MockQuestion.
+     * @example
+     * // Create one MockQuestion
+     * const MockQuestion = await prisma.mockQuestion.create({
+     *   data: {
+     *     // ... data to create a MockQuestion
+     *   }
+     * })
+     * 
+     */
+    create<T extends MockQuestionCreateArgs>(args: SelectSubset<T, MockQuestionCreateArgs<ExtArgs>>): Prisma__MockQuestionClient<$Result.GetResult<Prisma.$MockQuestionPayload<ExtArgs>, T, "create">, never, ExtArgs>
+
+    /**
+     * Create many MockQuestions.
+     * @param {MockQuestionCreateManyArgs} args - Arguments to create many MockQuestions.
+     * @example
+     * // Create many MockQuestions
+     * const mockQuestion = await prisma.mockQuestion.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends MockQuestionCreateManyArgs>(args?: SelectSubset<T, MockQuestionCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many MockQuestions and returns the data saved in the database.
+     * @param {MockQuestionCreateManyAndReturnArgs} args - Arguments to create many MockQuestions.
+     * @example
+     * // Create many MockQuestions
+     * const mockQuestion = await prisma.mockQuestion.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many MockQuestions and only return the `id`
+     * const mockQuestionWithIdOnly = await prisma.mockQuestion.createManyAndReturn({ 
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends MockQuestionCreateManyAndReturnArgs>(args?: SelectSubset<T, MockQuestionCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MockQuestionPayload<ExtArgs>, T, "createManyAndReturn">>
+
+    /**
+     * Delete a MockQuestion.
+     * @param {MockQuestionDeleteArgs} args - Arguments to delete one MockQuestion.
+     * @example
+     * // Delete one MockQuestion
+     * const MockQuestion = await prisma.mockQuestion.delete({
+     *   where: {
+     *     // ... filter to delete one MockQuestion
+     *   }
+     * })
+     * 
+     */
+    delete<T extends MockQuestionDeleteArgs>(args: SelectSubset<T, MockQuestionDeleteArgs<ExtArgs>>): Prisma__MockQuestionClient<$Result.GetResult<Prisma.$MockQuestionPayload<ExtArgs>, T, "delete">, never, ExtArgs>
+
+    /**
+     * Update one MockQuestion.
+     * @param {MockQuestionUpdateArgs} args - Arguments to update one MockQuestion.
+     * @example
+     * // Update one MockQuestion
+     * const mockQuestion = await prisma.mockQuestion.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends MockQuestionUpdateArgs>(args: SelectSubset<T, MockQuestionUpdateArgs<ExtArgs>>): Prisma__MockQuestionClient<$Result.GetResult<Prisma.$MockQuestionPayload<ExtArgs>, T, "update">, never, ExtArgs>
+
+    /**
+     * Delete zero or more MockQuestions.
+     * @param {MockQuestionDeleteManyArgs} args - Arguments to filter MockQuestions to delete.
+     * @example
+     * // Delete a few MockQuestions
+     * const { count } = await prisma.mockQuestion.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends MockQuestionDeleteManyArgs>(args?: SelectSubset<T, MockQuestionDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more MockQuestions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MockQuestionUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many MockQuestions
+     * const mockQuestion = await prisma.mockQuestion.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends MockQuestionUpdateManyArgs>(args: SelectSubset<T, MockQuestionUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one MockQuestion.
+     * @param {MockQuestionUpsertArgs} args - Arguments to update or create a MockQuestion.
+     * @example
+     * // Update or create a MockQuestion
+     * const mockQuestion = await prisma.mockQuestion.upsert({
+     *   create: {
+     *     // ... data to create a MockQuestion
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the MockQuestion we want to update
+     *   }
+     * })
+     */
+    upsert<T extends MockQuestionUpsertArgs>(args: SelectSubset<T, MockQuestionUpsertArgs<ExtArgs>>): Prisma__MockQuestionClient<$Result.GetResult<Prisma.$MockQuestionPayload<ExtArgs>, T, "upsert">, never, ExtArgs>
+
+
+    /**
+     * Count the number of MockQuestions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MockQuestionCountArgs} args - Arguments to filter MockQuestions to count.
+     * @example
+     * // Count the number of MockQuestions
+     * const count = await prisma.mockQuestion.count({
+     *   where: {
+     *     // ... the filter for the MockQuestions we want to count
+     *   }
+     * })
+    **/
+    count<T extends MockQuestionCountArgs>(
+      args?: Subset<T, MockQuestionCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], MockQuestionCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a MockQuestion.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MockQuestionAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends MockQuestionAggregateArgs>(args: Subset<T, MockQuestionAggregateArgs>): Prisma.PrismaPromise<GetMockQuestionAggregateType<T>>
+
+    /**
+     * Group by MockQuestion.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MockQuestionGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends MockQuestionGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: MockQuestionGroupByArgs['orderBy'] }
+        : { orderBy?: MockQuestionGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, MockQuestionGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetMockQuestionGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the MockQuestion model
+   */
+  readonly fields: MockQuestionFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for MockQuestion.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__MockQuestionClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    mockTest<T extends MockTestDefaultArgs<ExtArgs> = {}>(args?: Subset<T, MockTestDefaultArgs<ExtArgs>>): Prisma__MockTestClient<$Result.GetResult<Prisma.$MockTestPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the MockQuestion model
+   */ 
+  interface MockQuestionFieldRefs {
+    readonly id: FieldRef<"MockQuestion", 'String'>
+    readonly mockTestId: FieldRef<"MockQuestion", 'String'>
+    readonly question: FieldRef<"MockQuestion", 'String'>
+    readonly optionA: FieldRef<"MockQuestion", 'String'>
+    readonly optionB: FieldRef<"MockQuestion", 'String'>
+    readonly optionC: FieldRef<"MockQuestion", 'String'>
+    readonly optionD: FieldRef<"MockQuestion", 'String'>
+    readonly correctIndex: FieldRef<"MockQuestion", 'Int'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * MockQuestion findUnique
+   */
+  export type MockQuestionFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MockQuestion
+     */
+    select?: MockQuestionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MockQuestionInclude<ExtArgs> | null
+    /**
+     * Filter, which MockQuestion to fetch.
+     */
+    where: MockQuestionWhereUniqueInput
+  }
+
+  /**
+   * MockQuestion findUniqueOrThrow
+   */
+  export type MockQuestionFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MockQuestion
+     */
+    select?: MockQuestionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MockQuestionInclude<ExtArgs> | null
+    /**
+     * Filter, which MockQuestion to fetch.
+     */
+    where: MockQuestionWhereUniqueInput
+  }
+
+  /**
+   * MockQuestion findFirst
+   */
+  export type MockQuestionFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MockQuestion
+     */
+    select?: MockQuestionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MockQuestionInclude<ExtArgs> | null
+    /**
+     * Filter, which MockQuestion to fetch.
+     */
+    where?: MockQuestionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MockQuestions to fetch.
+     */
+    orderBy?: MockQuestionOrderByWithRelationInput | MockQuestionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for MockQuestions.
+     */
+    cursor?: MockQuestionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MockQuestions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MockQuestions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of MockQuestions.
+     */
+    distinct?: MockQuestionScalarFieldEnum | MockQuestionScalarFieldEnum[]
+  }
+
+  /**
+   * MockQuestion findFirstOrThrow
+   */
+  export type MockQuestionFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MockQuestion
+     */
+    select?: MockQuestionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MockQuestionInclude<ExtArgs> | null
+    /**
+     * Filter, which MockQuestion to fetch.
+     */
+    where?: MockQuestionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MockQuestions to fetch.
+     */
+    orderBy?: MockQuestionOrderByWithRelationInput | MockQuestionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for MockQuestions.
+     */
+    cursor?: MockQuestionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MockQuestions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MockQuestions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of MockQuestions.
+     */
+    distinct?: MockQuestionScalarFieldEnum | MockQuestionScalarFieldEnum[]
+  }
+
+  /**
+   * MockQuestion findMany
+   */
+  export type MockQuestionFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MockQuestion
+     */
+    select?: MockQuestionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MockQuestionInclude<ExtArgs> | null
+    /**
+     * Filter, which MockQuestions to fetch.
+     */
+    where?: MockQuestionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MockQuestions to fetch.
+     */
+    orderBy?: MockQuestionOrderByWithRelationInput | MockQuestionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing MockQuestions.
+     */
+    cursor?: MockQuestionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MockQuestions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MockQuestions.
+     */
+    skip?: number
+    distinct?: MockQuestionScalarFieldEnum | MockQuestionScalarFieldEnum[]
+  }
+
+  /**
+   * MockQuestion create
+   */
+  export type MockQuestionCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MockQuestion
+     */
+    select?: MockQuestionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MockQuestionInclude<ExtArgs> | null
+    /**
+     * The data needed to create a MockQuestion.
+     */
+    data: XOR<MockQuestionCreateInput, MockQuestionUncheckedCreateInput>
+  }
+
+  /**
+   * MockQuestion createMany
+   */
+  export type MockQuestionCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many MockQuestions.
+     */
+    data: MockQuestionCreateManyInput | MockQuestionCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * MockQuestion createManyAndReturn
+   */
+  export type MockQuestionCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MockQuestion
+     */
+    select?: MockQuestionSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * The data used to create many MockQuestions.
+     */
+    data: MockQuestionCreateManyInput | MockQuestionCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MockQuestionIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * MockQuestion update
+   */
+  export type MockQuestionUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MockQuestion
+     */
+    select?: MockQuestionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MockQuestionInclude<ExtArgs> | null
+    /**
+     * The data needed to update a MockQuestion.
+     */
+    data: XOR<MockQuestionUpdateInput, MockQuestionUncheckedUpdateInput>
+    /**
+     * Choose, which MockQuestion to update.
+     */
+    where: MockQuestionWhereUniqueInput
+  }
+
+  /**
+   * MockQuestion updateMany
+   */
+  export type MockQuestionUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update MockQuestions.
+     */
+    data: XOR<MockQuestionUpdateManyMutationInput, MockQuestionUncheckedUpdateManyInput>
+    /**
+     * Filter which MockQuestions to update
+     */
+    where?: MockQuestionWhereInput
+  }
+
+  /**
+   * MockQuestion upsert
+   */
+  export type MockQuestionUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MockQuestion
+     */
+    select?: MockQuestionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MockQuestionInclude<ExtArgs> | null
+    /**
+     * The filter to search for the MockQuestion to update in case it exists.
+     */
+    where: MockQuestionWhereUniqueInput
+    /**
+     * In case the MockQuestion found by the `where` argument doesn't exist, create a new MockQuestion with this data.
+     */
+    create: XOR<MockQuestionCreateInput, MockQuestionUncheckedCreateInput>
+    /**
+     * In case the MockQuestion was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<MockQuestionUpdateInput, MockQuestionUncheckedUpdateInput>
+  }
+
+  /**
+   * MockQuestion delete
+   */
+  export type MockQuestionDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MockQuestion
+     */
+    select?: MockQuestionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MockQuestionInclude<ExtArgs> | null
+    /**
+     * Filter which MockQuestion to delete.
+     */
+    where: MockQuestionWhereUniqueInput
+  }
+
+  /**
+   * MockQuestion deleteMany
+   */
+  export type MockQuestionDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which MockQuestions to delete
+     */
+    where?: MockQuestionWhereInput
+  }
+
+  /**
+   * MockQuestion without action
+   */
+  export type MockQuestionDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MockQuestion
+     */
+    select?: MockQuestionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MockQuestionInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model MockTestAttempt
+   */
+
+  export type AggregateMockTestAttempt = {
+    _count: MockTestAttemptCountAggregateOutputType | null
+    _avg: MockTestAttemptAvgAggregateOutputType | null
+    _sum: MockTestAttemptSumAggregateOutputType | null
+    _min: MockTestAttemptMinAggregateOutputType | null
+    _max: MockTestAttemptMaxAggregateOutputType | null
+  }
+
+  export type MockTestAttemptAvgAggregateOutputType = {
+    score: number | null
+    percentage: number | null
+  }
+
+  export type MockTestAttemptSumAggregateOutputType = {
+    score: number | null
+    percentage: number | null
+  }
+
+  export type MockTestAttemptMinAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    mockTestId: string | null
+    score: number | null
+    percentage: number | null
+    status: string | null
+    completedAt: Date | null
+  }
+
+  export type MockTestAttemptMaxAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    mockTestId: string | null
+    score: number | null
+    percentage: number | null
+    status: string | null
+    completedAt: Date | null
+  }
+
+  export type MockTestAttemptCountAggregateOutputType = {
+    id: number
+    userId: number
+    mockTestId: number
+    score: number
+    percentage: number
+    status: number
+    completedAt: number
+    _all: number
+  }
+
+
+  export type MockTestAttemptAvgAggregateInputType = {
+    score?: true
+    percentage?: true
+  }
+
+  export type MockTestAttemptSumAggregateInputType = {
+    score?: true
+    percentage?: true
+  }
+
+  export type MockTestAttemptMinAggregateInputType = {
+    id?: true
+    userId?: true
+    mockTestId?: true
+    score?: true
+    percentage?: true
+    status?: true
+    completedAt?: true
+  }
+
+  export type MockTestAttemptMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    mockTestId?: true
+    score?: true
+    percentage?: true
+    status?: true
+    completedAt?: true
+  }
+
+  export type MockTestAttemptCountAggregateInputType = {
+    id?: true
+    userId?: true
+    mockTestId?: true
+    score?: true
+    percentage?: true
+    status?: true
+    completedAt?: true
+    _all?: true
+  }
+
+  export type MockTestAttemptAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which MockTestAttempt to aggregate.
+     */
+    where?: MockTestAttemptWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MockTestAttempts to fetch.
+     */
+    orderBy?: MockTestAttemptOrderByWithRelationInput | MockTestAttemptOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: MockTestAttemptWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MockTestAttempts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MockTestAttempts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned MockTestAttempts
+    **/
+    _count?: true | MockTestAttemptCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: MockTestAttemptAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: MockTestAttemptSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: MockTestAttemptMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: MockTestAttemptMaxAggregateInputType
+  }
+
+  export type GetMockTestAttemptAggregateType<T extends MockTestAttemptAggregateArgs> = {
+        [P in keyof T & keyof AggregateMockTestAttempt]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateMockTestAttempt[P]>
+      : GetScalarType<T[P], AggregateMockTestAttempt[P]>
+  }
+
+
+
+
+  export type MockTestAttemptGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MockTestAttemptWhereInput
+    orderBy?: MockTestAttemptOrderByWithAggregationInput | MockTestAttemptOrderByWithAggregationInput[]
+    by: MockTestAttemptScalarFieldEnum[] | MockTestAttemptScalarFieldEnum
+    having?: MockTestAttemptScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: MockTestAttemptCountAggregateInputType | true
+    _avg?: MockTestAttemptAvgAggregateInputType
+    _sum?: MockTestAttemptSumAggregateInputType
+    _min?: MockTestAttemptMinAggregateInputType
+    _max?: MockTestAttemptMaxAggregateInputType
+  }
+
+  export type MockTestAttemptGroupByOutputType = {
+    id: string
+    userId: string
+    mockTestId: string
+    score: number
+    percentage: number
+    status: string
+    completedAt: Date
+    _count: MockTestAttemptCountAggregateOutputType | null
+    _avg: MockTestAttemptAvgAggregateOutputType | null
+    _sum: MockTestAttemptSumAggregateOutputType | null
+    _min: MockTestAttemptMinAggregateOutputType | null
+    _max: MockTestAttemptMaxAggregateOutputType | null
+  }
+
+  type GetMockTestAttemptGroupByPayload<T extends MockTestAttemptGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<MockTestAttemptGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof MockTestAttemptGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], MockTestAttemptGroupByOutputType[P]>
+            : GetScalarType<T[P], MockTestAttemptGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type MockTestAttemptSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    mockTestId?: boolean
+    score?: boolean
+    percentage?: boolean
+    status?: boolean
+    completedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    mockTest?: boolean | MockTestDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["mockTestAttempt"]>
+
+  export type MockTestAttemptSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    mockTestId?: boolean
+    score?: boolean
+    percentage?: boolean
+    status?: boolean
+    completedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    mockTest?: boolean | MockTestDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["mockTestAttempt"]>
+
+  export type MockTestAttemptSelectScalar = {
+    id?: boolean
+    userId?: boolean
+    mockTestId?: boolean
+    score?: boolean
+    percentage?: boolean
+    status?: boolean
+    completedAt?: boolean
+  }
+
+  export type MockTestAttemptInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    mockTest?: boolean | MockTestDefaultArgs<ExtArgs>
+  }
+  export type MockTestAttemptIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    mockTest?: boolean | MockTestDefaultArgs<ExtArgs>
+  }
+
+  export type $MockTestAttemptPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "MockTestAttempt"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+      mockTest: Prisma.$MockTestPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      userId: string
+      mockTestId: string
+      score: number
+      percentage: number
+      status: string
+      completedAt: Date
+    }, ExtArgs["result"]["mockTestAttempt"]>
+    composites: {}
+  }
+
+  type MockTestAttemptGetPayload<S extends boolean | null | undefined | MockTestAttemptDefaultArgs> = $Result.GetResult<Prisma.$MockTestAttemptPayload, S>
+
+  type MockTestAttemptCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<MockTestAttemptFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: MockTestAttemptCountAggregateInputType | true
+    }
+
+  export interface MockTestAttemptDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['MockTestAttempt'], meta: { name: 'MockTestAttempt' } }
+    /**
+     * Find zero or one MockTestAttempt that matches the filter.
+     * @param {MockTestAttemptFindUniqueArgs} args - Arguments to find a MockTestAttempt
+     * @example
+     * // Get one MockTestAttempt
+     * const mockTestAttempt = await prisma.mockTestAttempt.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends MockTestAttemptFindUniqueArgs>(args: SelectSubset<T, MockTestAttemptFindUniqueArgs<ExtArgs>>): Prisma__MockTestAttemptClient<$Result.GetResult<Prisma.$MockTestAttemptPayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
+
+    /**
+     * Find one MockTestAttempt that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
+     * @param {MockTestAttemptFindUniqueOrThrowArgs} args - Arguments to find a MockTestAttempt
+     * @example
+     * // Get one MockTestAttempt
+     * const mockTestAttempt = await prisma.mockTestAttempt.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends MockTestAttemptFindUniqueOrThrowArgs>(args: SelectSubset<T, MockTestAttemptFindUniqueOrThrowArgs<ExtArgs>>): Prisma__MockTestAttemptClient<$Result.GetResult<Prisma.$MockTestAttemptPayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
+
+    /**
+     * Find the first MockTestAttempt that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MockTestAttemptFindFirstArgs} args - Arguments to find a MockTestAttempt
+     * @example
+     * // Get one MockTestAttempt
+     * const mockTestAttempt = await prisma.mockTestAttempt.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends MockTestAttemptFindFirstArgs>(args?: SelectSubset<T, MockTestAttemptFindFirstArgs<ExtArgs>>): Prisma__MockTestAttemptClient<$Result.GetResult<Prisma.$MockTestAttemptPayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
+
+    /**
+     * Find the first MockTestAttempt that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MockTestAttemptFindFirstOrThrowArgs} args - Arguments to find a MockTestAttempt
+     * @example
+     * // Get one MockTestAttempt
+     * const mockTestAttempt = await prisma.mockTestAttempt.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends MockTestAttemptFindFirstOrThrowArgs>(args?: SelectSubset<T, MockTestAttemptFindFirstOrThrowArgs<ExtArgs>>): Prisma__MockTestAttemptClient<$Result.GetResult<Prisma.$MockTestAttemptPayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
+
+    /**
+     * Find zero or more MockTestAttempts that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MockTestAttemptFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all MockTestAttempts
+     * const mockTestAttempts = await prisma.mockTestAttempt.findMany()
+     * 
+     * // Get first 10 MockTestAttempts
+     * const mockTestAttempts = await prisma.mockTestAttempt.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const mockTestAttemptWithIdOnly = await prisma.mockTestAttempt.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends MockTestAttemptFindManyArgs>(args?: SelectSubset<T, MockTestAttemptFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MockTestAttemptPayload<ExtArgs>, T, "findMany">>
+
+    /**
+     * Create a MockTestAttempt.
+     * @param {MockTestAttemptCreateArgs} args - Arguments to create a MockTestAttempt.
+     * @example
+     * // Create one MockTestAttempt
+     * const MockTestAttempt = await prisma.mockTestAttempt.create({
+     *   data: {
+     *     // ... data to create a MockTestAttempt
+     *   }
+     * })
+     * 
+     */
+    create<T extends MockTestAttemptCreateArgs>(args: SelectSubset<T, MockTestAttemptCreateArgs<ExtArgs>>): Prisma__MockTestAttemptClient<$Result.GetResult<Prisma.$MockTestAttemptPayload<ExtArgs>, T, "create">, never, ExtArgs>
+
+    /**
+     * Create many MockTestAttempts.
+     * @param {MockTestAttemptCreateManyArgs} args - Arguments to create many MockTestAttempts.
+     * @example
+     * // Create many MockTestAttempts
+     * const mockTestAttempt = await prisma.mockTestAttempt.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends MockTestAttemptCreateManyArgs>(args?: SelectSubset<T, MockTestAttemptCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many MockTestAttempts and returns the data saved in the database.
+     * @param {MockTestAttemptCreateManyAndReturnArgs} args - Arguments to create many MockTestAttempts.
+     * @example
+     * // Create many MockTestAttempts
+     * const mockTestAttempt = await prisma.mockTestAttempt.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many MockTestAttempts and only return the `id`
+     * const mockTestAttemptWithIdOnly = await prisma.mockTestAttempt.createManyAndReturn({ 
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends MockTestAttemptCreateManyAndReturnArgs>(args?: SelectSubset<T, MockTestAttemptCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MockTestAttemptPayload<ExtArgs>, T, "createManyAndReturn">>
+
+    /**
+     * Delete a MockTestAttempt.
+     * @param {MockTestAttemptDeleteArgs} args - Arguments to delete one MockTestAttempt.
+     * @example
+     * // Delete one MockTestAttempt
+     * const MockTestAttempt = await prisma.mockTestAttempt.delete({
+     *   where: {
+     *     // ... filter to delete one MockTestAttempt
+     *   }
+     * })
+     * 
+     */
+    delete<T extends MockTestAttemptDeleteArgs>(args: SelectSubset<T, MockTestAttemptDeleteArgs<ExtArgs>>): Prisma__MockTestAttemptClient<$Result.GetResult<Prisma.$MockTestAttemptPayload<ExtArgs>, T, "delete">, never, ExtArgs>
+
+    /**
+     * Update one MockTestAttempt.
+     * @param {MockTestAttemptUpdateArgs} args - Arguments to update one MockTestAttempt.
+     * @example
+     * // Update one MockTestAttempt
+     * const mockTestAttempt = await prisma.mockTestAttempt.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends MockTestAttemptUpdateArgs>(args: SelectSubset<T, MockTestAttemptUpdateArgs<ExtArgs>>): Prisma__MockTestAttemptClient<$Result.GetResult<Prisma.$MockTestAttemptPayload<ExtArgs>, T, "update">, never, ExtArgs>
+
+    /**
+     * Delete zero or more MockTestAttempts.
+     * @param {MockTestAttemptDeleteManyArgs} args - Arguments to filter MockTestAttempts to delete.
+     * @example
+     * // Delete a few MockTestAttempts
+     * const { count } = await prisma.mockTestAttempt.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends MockTestAttemptDeleteManyArgs>(args?: SelectSubset<T, MockTestAttemptDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more MockTestAttempts.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MockTestAttemptUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many MockTestAttempts
+     * const mockTestAttempt = await prisma.mockTestAttempt.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends MockTestAttemptUpdateManyArgs>(args: SelectSubset<T, MockTestAttemptUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one MockTestAttempt.
+     * @param {MockTestAttemptUpsertArgs} args - Arguments to update or create a MockTestAttempt.
+     * @example
+     * // Update or create a MockTestAttempt
+     * const mockTestAttempt = await prisma.mockTestAttempt.upsert({
+     *   create: {
+     *     // ... data to create a MockTestAttempt
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the MockTestAttempt we want to update
+     *   }
+     * })
+     */
+    upsert<T extends MockTestAttemptUpsertArgs>(args: SelectSubset<T, MockTestAttemptUpsertArgs<ExtArgs>>): Prisma__MockTestAttemptClient<$Result.GetResult<Prisma.$MockTestAttemptPayload<ExtArgs>, T, "upsert">, never, ExtArgs>
+
+
+    /**
+     * Count the number of MockTestAttempts.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MockTestAttemptCountArgs} args - Arguments to filter MockTestAttempts to count.
+     * @example
+     * // Count the number of MockTestAttempts
+     * const count = await prisma.mockTestAttempt.count({
+     *   where: {
+     *     // ... the filter for the MockTestAttempts we want to count
+     *   }
+     * })
+    **/
+    count<T extends MockTestAttemptCountArgs>(
+      args?: Subset<T, MockTestAttemptCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], MockTestAttemptCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a MockTestAttempt.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MockTestAttemptAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends MockTestAttemptAggregateArgs>(args: Subset<T, MockTestAttemptAggregateArgs>): Prisma.PrismaPromise<GetMockTestAttemptAggregateType<T>>
+
+    /**
+     * Group by MockTestAttempt.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MockTestAttemptGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends MockTestAttemptGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: MockTestAttemptGroupByArgs['orderBy'] }
+        : { orderBy?: MockTestAttemptGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, MockTestAttemptGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetMockTestAttemptGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the MockTestAttempt model
+   */
+  readonly fields: MockTestAttemptFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for MockTestAttempt.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__MockTestAttemptClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    mockTest<T extends MockTestDefaultArgs<ExtArgs> = {}>(args?: Subset<T, MockTestDefaultArgs<ExtArgs>>): Prisma__MockTestClient<$Result.GetResult<Prisma.$MockTestPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the MockTestAttempt model
+   */ 
+  interface MockTestAttemptFieldRefs {
+    readonly id: FieldRef<"MockTestAttempt", 'String'>
+    readonly userId: FieldRef<"MockTestAttempt", 'String'>
+    readonly mockTestId: FieldRef<"MockTestAttempt", 'String'>
+    readonly score: FieldRef<"MockTestAttempt", 'Int'>
+    readonly percentage: FieldRef<"MockTestAttempt", 'Float'>
+    readonly status: FieldRef<"MockTestAttempt", 'String'>
+    readonly completedAt: FieldRef<"MockTestAttempt", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * MockTestAttempt findUnique
+   */
+  export type MockTestAttemptFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MockTestAttempt
+     */
+    select?: MockTestAttemptSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MockTestAttemptInclude<ExtArgs> | null
+    /**
+     * Filter, which MockTestAttempt to fetch.
+     */
+    where: MockTestAttemptWhereUniqueInput
+  }
+
+  /**
+   * MockTestAttempt findUniqueOrThrow
+   */
+  export type MockTestAttemptFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MockTestAttempt
+     */
+    select?: MockTestAttemptSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MockTestAttemptInclude<ExtArgs> | null
+    /**
+     * Filter, which MockTestAttempt to fetch.
+     */
+    where: MockTestAttemptWhereUniqueInput
+  }
+
+  /**
+   * MockTestAttempt findFirst
+   */
+  export type MockTestAttemptFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MockTestAttempt
+     */
+    select?: MockTestAttemptSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MockTestAttemptInclude<ExtArgs> | null
+    /**
+     * Filter, which MockTestAttempt to fetch.
+     */
+    where?: MockTestAttemptWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MockTestAttempts to fetch.
+     */
+    orderBy?: MockTestAttemptOrderByWithRelationInput | MockTestAttemptOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for MockTestAttempts.
+     */
+    cursor?: MockTestAttemptWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MockTestAttempts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MockTestAttempts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of MockTestAttempts.
+     */
+    distinct?: MockTestAttemptScalarFieldEnum | MockTestAttemptScalarFieldEnum[]
+  }
+
+  /**
+   * MockTestAttempt findFirstOrThrow
+   */
+  export type MockTestAttemptFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MockTestAttempt
+     */
+    select?: MockTestAttemptSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MockTestAttemptInclude<ExtArgs> | null
+    /**
+     * Filter, which MockTestAttempt to fetch.
+     */
+    where?: MockTestAttemptWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MockTestAttempts to fetch.
+     */
+    orderBy?: MockTestAttemptOrderByWithRelationInput | MockTestAttemptOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for MockTestAttempts.
+     */
+    cursor?: MockTestAttemptWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MockTestAttempts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MockTestAttempts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of MockTestAttempts.
+     */
+    distinct?: MockTestAttemptScalarFieldEnum | MockTestAttemptScalarFieldEnum[]
+  }
+
+  /**
+   * MockTestAttempt findMany
+   */
+  export type MockTestAttemptFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MockTestAttempt
+     */
+    select?: MockTestAttemptSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MockTestAttemptInclude<ExtArgs> | null
+    /**
+     * Filter, which MockTestAttempts to fetch.
+     */
+    where?: MockTestAttemptWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MockTestAttempts to fetch.
+     */
+    orderBy?: MockTestAttemptOrderByWithRelationInput | MockTestAttemptOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing MockTestAttempts.
+     */
+    cursor?: MockTestAttemptWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MockTestAttempts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MockTestAttempts.
+     */
+    skip?: number
+    distinct?: MockTestAttemptScalarFieldEnum | MockTestAttemptScalarFieldEnum[]
+  }
+
+  /**
+   * MockTestAttempt create
+   */
+  export type MockTestAttemptCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MockTestAttempt
+     */
+    select?: MockTestAttemptSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MockTestAttemptInclude<ExtArgs> | null
+    /**
+     * The data needed to create a MockTestAttempt.
+     */
+    data: XOR<MockTestAttemptCreateInput, MockTestAttemptUncheckedCreateInput>
+  }
+
+  /**
+   * MockTestAttempt createMany
+   */
+  export type MockTestAttemptCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many MockTestAttempts.
+     */
+    data: MockTestAttemptCreateManyInput | MockTestAttemptCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * MockTestAttempt createManyAndReturn
+   */
+  export type MockTestAttemptCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MockTestAttempt
+     */
+    select?: MockTestAttemptSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * The data used to create many MockTestAttempts.
+     */
+    data: MockTestAttemptCreateManyInput | MockTestAttemptCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MockTestAttemptIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * MockTestAttempt update
+   */
+  export type MockTestAttemptUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MockTestAttempt
+     */
+    select?: MockTestAttemptSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MockTestAttemptInclude<ExtArgs> | null
+    /**
+     * The data needed to update a MockTestAttempt.
+     */
+    data: XOR<MockTestAttemptUpdateInput, MockTestAttemptUncheckedUpdateInput>
+    /**
+     * Choose, which MockTestAttempt to update.
+     */
+    where: MockTestAttemptWhereUniqueInput
+  }
+
+  /**
+   * MockTestAttempt updateMany
+   */
+  export type MockTestAttemptUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update MockTestAttempts.
+     */
+    data: XOR<MockTestAttemptUpdateManyMutationInput, MockTestAttemptUncheckedUpdateManyInput>
+    /**
+     * Filter which MockTestAttempts to update
+     */
+    where?: MockTestAttemptWhereInput
+  }
+
+  /**
+   * MockTestAttempt upsert
+   */
+  export type MockTestAttemptUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MockTestAttempt
+     */
+    select?: MockTestAttemptSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MockTestAttemptInclude<ExtArgs> | null
+    /**
+     * The filter to search for the MockTestAttempt to update in case it exists.
+     */
+    where: MockTestAttemptWhereUniqueInput
+    /**
+     * In case the MockTestAttempt found by the `where` argument doesn't exist, create a new MockTestAttempt with this data.
+     */
+    create: XOR<MockTestAttemptCreateInput, MockTestAttemptUncheckedCreateInput>
+    /**
+     * In case the MockTestAttempt was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<MockTestAttemptUpdateInput, MockTestAttemptUncheckedUpdateInput>
+  }
+
+  /**
+   * MockTestAttempt delete
+   */
+  export type MockTestAttemptDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MockTestAttempt
+     */
+    select?: MockTestAttemptSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MockTestAttemptInclude<ExtArgs> | null
+    /**
+     * Filter which MockTestAttempt to delete.
+     */
+    where: MockTestAttemptWhereUniqueInput
+  }
+
+  /**
+   * MockTestAttempt deleteMany
+   */
+  export type MockTestAttemptDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which MockTestAttempts to delete
+     */
+    where?: MockTestAttemptWhereInput
+  }
+
+  /**
+   * MockTestAttempt without action
+   */
+  export type MockTestAttemptDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MockTestAttempt
+     */
+    select?: MockTestAttemptSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MockTestAttemptInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -19066,6 +22477,47 @@ export namespace Prisma {
   export type PaymentScalarFieldEnum = (typeof PaymentScalarFieldEnum)[keyof typeof PaymentScalarFieldEnum]
 
 
+  export const MockTestScalarFieldEnum: {
+    id: 'id',
+    lessonId: 'lessonId',
+    totalMarks: 'totalMarks',
+    passingPercentage: 'passingPercentage',
+    difficulty: 'difficulty',
+    published: 'published',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type MockTestScalarFieldEnum = (typeof MockTestScalarFieldEnum)[keyof typeof MockTestScalarFieldEnum]
+
+
+  export const MockQuestionScalarFieldEnum: {
+    id: 'id',
+    mockTestId: 'mockTestId',
+    question: 'question',
+    optionA: 'optionA',
+    optionB: 'optionB',
+    optionC: 'optionC',
+    optionD: 'optionD',
+    correctIndex: 'correctIndex'
+  };
+
+  export type MockQuestionScalarFieldEnum = (typeof MockQuestionScalarFieldEnum)[keyof typeof MockQuestionScalarFieldEnum]
+
+
+  export const MockTestAttemptScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    mockTestId: 'mockTestId',
+    score: 'score',
+    percentage: 'percentage',
+    status: 'status',
+    completedAt: 'completedAt'
+  };
+
+  export type MockTestAttemptScalarFieldEnum = (typeof MockTestAttemptScalarFieldEnum)[keyof typeof MockTestAttemptScalarFieldEnum]
+
+
   export const SortOrder: {
     asc: 'asc',
     desc: 'desc'
@@ -19244,6 +22696,7 @@ export namespace Prisma {
     notifications?: NotificationListRelationFilter
     payments?: PaymentListRelationFilter
     lessonCompletions?: LessonCompletionListRelationFilter
+    newMockTestAttempts?: MockTestAttemptListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -19270,6 +22723,7 @@ export namespace Prisma {
     notifications?: NotificationOrderByRelationAggregateInput
     payments?: PaymentOrderByRelationAggregateInput
     lessonCompletions?: LessonCompletionOrderByRelationAggregateInput
+    newMockTestAttempts?: MockTestAttemptOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -19299,6 +22753,7 @@ export namespace Prisma {
     notifications?: NotificationListRelationFilter
     payments?: PaymentListRelationFilter
     lessonCompletions?: LessonCompletionListRelationFilter
+    newMockTestAttempts?: MockTestAttemptListRelationFilter
   }, "id" | "email" | "phone">
 
   export type UserOrderByWithAggregationInput = {
@@ -19575,6 +23030,7 @@ export namespace Prisma {
     course?: XOR<CourseRelationFilter, CourseWhereInput>
     completions?: LessonCompletionListRelationFilter
     quiz?: XOR<LessonQuizNullableRelationFilter, LessonQuizWhereInput> | null
+    mockTest?: XOR<MockTestNullableRelationFilter, MockTestWhereInput> | null
   }
 
   export type LessonOrderByWithRelationInput = {
@@ -19595,6 +23051,7 @@ export namespace Prisma {
     course?: CourseOrderByWithRelationInput
     completions?: LessonCompletionOrderByRelationAggregateInput
     quiz?: LessonQuizOrderByWithRelationInput
+    mockTest?: MockTestOrderByWithRelationInput
   }
 
   export type LessonWhereUniqueInput = Prisma.AtLeast<{
@@ -19618,6 +23075,7 @@ export namespace Prisma {
     course?: XOR<CourseRelationFilter, CourseWhereInput>
     completions?: LessonCompletionListRelationFilter
     quiz?: XOR<LessonQuizNullableRelationFilter, LessonQuizWhereInput> | null
+    mockTest?: XOR<MockTestNullableRelationFilter, MockTestWhereInput> | null
   }, "id">
 
   export type LessonOrderByWithAggregationInput = {
@@ -20402,6 +23860,226 @@ export namespace Prisma {
     createdAt?: DateTimeWithAggregatesFilter<"Payment"> | Date | string
   }
 
+  export type MockTestWhereInput = {
+    AND?: MockTestWhereInput | MockTestWhereInput[]
+    OR?: MockTestWhereInput[]
+    NOT?: MockTestWhereInput | MockTestWhereInput[]
+    id?: StringFilter<"MockTest"> | string
+    lessonId?: StringFilter<"MockTest"> | string
+    totalMarks?: IntFilter<"MockTest"> | number
+    passingPercentage?: IntFilter<"MockTest"> | number
+    difficulty?: StringFilter<"MockTest"> | string
+    published?: BoolFilter<"MockTest"> | boolean
+    createdAt?: DateTimeFilter<"MockTest"> | Date | string
+    updatedAt?: DateTimeFilter<"MockTest"> | Date | string
+    lesson?: XOR<LessonRelationFilter, LessonWhereInput>
+    questions?: MockQuestionListRelationFilter
+    attempts?: MockTestAttemptListRelationFilter
+  }
+
+  export type MockTestOrderByWithRelationInput = {
+    id?: SortOrder
+    lessonId?: SortOrder
+    totalMarks?: SortOrder
+    passingPercentage?: SortOrder
+    difficulty?: SortOrder
+    published?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    lesson?: LessonOrderByWithRelationInput
+    questions?: MockQuestionOrderByRelationAggregateInput
+    attempts?: MockTestAttemptOrderByRelationAggregateInput
+  }
+
+  export type MockTestWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    lessonId?: string
+    AND?: MockTestWhereInput | MockTestWhereInput[]
+    OR?: MockTestWhereInput[]
+    NOT?: MockTestWhereInput | MockTestWhereInput[]
+    totalMarks?: IntFilter<"MockTest"> | number
+    passingPercentage?: IntFilter<"MockTest"> | number
+    difficulty?: StringFilter<"MockTest"> | string
+    published?: BoolFilter<"MockTest"> | boolean
+    createdAt?: DateTimeFilter<"MockTest"> | Date | string
+    updatedAt?: DateTimeFilter<"MockTest"> | Date | string
+    lesson?: XOR<LessonRelationFilter, LessonWhereInput>
+    questions?: MockQuestionListRelationFilter
+    attempts?: MockTestAttemptListRelationFilter
+  }, "id" | "lessonId">
+
+  export type MockTestOrderByWithAggregationInput = {
+    id?: SortOrder
+    lessonId?: SortOrder
+    totalMarks?: SortOrder
+    passingPercentage?: SortOrder
+    difficulty?: SortOrder
+    published?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: MockTestCountOrderByAggregateInput
+    _avg?: MockTestAvgOrderByAggregateInput
+    _max?: MockTestMaxOrderByAggregateInput
+    _min?: MockTestMinOrderByAggregateInput
+    _sum?: MockTestSumOrderByAggregateInput
+  }
+
+  export type MockTestScalarWhereWithAggregatesInput = {
+    AND?: MockTestScalarWhereWithAggregatesInput | MockTestScalarWhereWithAggregatesInput[]
+    OR?: MockTestScalarWhereWithAggregatesInput[]
+    NOT?: MockTestScalarWhereWithAggregatesInput | MockTestScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"MockTest"> | string
+    lessonId?: StringWithAggregatesFilter<"MockTest"> | string
+    totalMarks?: IntWithAggregatesFilter<"MockTest"> | number
+    passingPercentage?: IntWithAggregatesFilter<"MockTest"> | number
+    difficulty?: StringWithAggregatesFilter<"MockTest"> | string
+    published?: BoolWithAggregatesFilter<"MockTest"> | boolean
+    createdAt?: DateTimeWithAggregatesFilter<"MockTest"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"MockTest"> | Date | string
+  }
+
+  export type MockQuestionWhereInput = {
+    AND?: MockQuestionWhereInput | MockQuestionWhereInput[]
+    OR?: MockQuestionWhereInput[]
+    NOT?: MockQuestionWhereInput | MockQuestionWhereInput[]
+    id?: StringFilter<"MockQuestion"> | string
+    mockTestId?: StringFilter<"MockQuestion"> | string
+    question?: StringFilter<"MockQuestion"> | string
+    optionA?: StringFilter<"MockQuestion"> | string
+    optionB?: StringFilter<"MockQuestion"> | string
+    optionC?: StringFilter<"MockQuestion"> | string
+    optionD?: StringFilter<"MockQuestion"> | string
+    correctIndex?: IntFilter<"MockQuestion"> | number
+    mockTest?: XOR<MockTestRelationFilter, MockTestWhereInput>
+  }
+
+  export type MockQuestionOrderByWithRelationInput = {
+    id?: SortOrder
+    mockTestId?: SortOrder
+    question?: SortOrder
+    optionA?: SortOrder
+    optionB?: SortOrder
+    optionC?: SortOrder
+    optionD?: SortOrder
+    correctIndex?: SortOrder
+    mockTest?: MockTestOrderByWithRelationInput
+  }
+
+  export type MockQuestionWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: MockQuestionWhereInput | MockQuestionWhereInput[]
+    OR?: MockQuestionWhereInput[]
+    NOT?: MockQuestionWhereInput | MockQuestionWhereInput[]
+    mockTestId?: StringFilter<"MockQuestion"> | string
+    question?: StringFilter<"MockQuestion"> | string
+    optionA?: StringFilter<"MockQuestion"> | string
+    optionB?: StringFilter<"MockQuestion"> | string
+    optionC?: StringFilter<"MockQuestion"> | string
+    optionD?: StringFilter<"MockQuestion"> | string
+    correctIndex?: IntFilter<"MockQuestion"> | number
+    mockTest?: XOR<MockTestRelationFilter, MockTestWhereInput>
+  }, "id">
+
+  export type MockQuestionOrderByWithAggregationInput = {
+    id?: SortOrder
+    mockTestId?: SortOrder
+    question?: SortOrder
+    optionA?: SortOrder
+    optionB?: SortOrder
+    optionC?: SortOrder
+    optionD?: SortOrder
+    correctIndex?: SortOrder
+    _count?: MockQuestionCountOrderByAggregateInput
+    _avg?: MockQuestionAvgOrderByAggregateInput
+    _max?: MockQuestionMaxOrderByAggregateInput
+    _min?: MockQuestionMinOrderByAggregateInput
+    _sum?: MockQuestionSumOrderByAggregateInput
+  }
+
+  export type MockQuestionScalarWhereWithAggregatesInput = {
+    AND?: MockQuestionScalarWhereWithAggregatesInput | MockQuestionScalarWhereWithAggregatesInput[]
+    OR?: MockQuestionScalarWhereWithAggregatesInput[]
+    NOT?: MockQuestionScalarWhereWithAggregatesInput | MockQuestionScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"MockQuestion"> | string
+    mockTestId?: StringWithAggregatesFilter<"MockQuestion"> | string
+    question?: StringWithAggregatesFilter<"MockQuestion"> | string
+    optionA?: StringWithAggregatesFilter<"MockQuestion"> | string
+    optionB?: StringWithAggregatesFilter<"MockQuestion"> | string
+    optionC?: StringWithAggregatesFilter<"MockQuestion"> | string
+    optionD?: StringWithAggregatesFilter<"MockQuestion"> | string
+    correctIndex?: IntWithAggregatesFilter<"MockQuestion"> | number
+  }
+
+  export type MockTestAttemptWhereInput = {
+    AND?: MockTestAttemptWhereInput | MockTestAttemptWhereInput[]
+    OR?: MockTestAttemptWhereInput[]
+    NOT?: MockTestAttemptWhereInput | MockTestAttemptWhereInput[]
+    id?: StringFilter<"MockTestAttempt"> | string
+    userId?: StringFilter<"MockTestAttempt"> | string
+    mockTestId?: StringFilter<"MockTestAttempt"> | string
+    score?: IntFilter<"MockTestAttempt"> | number
+    percentage?: FloatFilter<"MockTestAttempt"> | number
+    status?: StringFilter<"MockTestAttempt"> | string
+    completedAt?: DateTimeFilter<"MockTestAttempt"> | Date | string
+    user?: XOR<UserRelationFilter, UserWhereInput>
+    mockTest?: XOR<MockTestRelationFilter, MockTestWhereInput>
+  }
+
+  export type MockTestAttemptOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    mockTestId?: SortOrder
+    score?: SortOrder
+    percentage?: SortOrder
+    status?: SortOrder
+    completedAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+    mockTest?: MockTestOrderByWithRelationInput
+  }
+
+  export type MockTestAttemptWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: MockTestAttemptWhereInput | MockTestAttemptWhereInput[]
+    OR?: MockTestAttemptWhereInput[]
+    NOT?: MockTestAttemptWhereInput | MockTestAttemptWhereInput[]
+    userId?: StringFilter<"MockTestAttempt"> | string
+    mockTestId?: StringFilter<"MockTestAttempt"> | string
+    score?: IntFilter<"MockTestAttempt"> | number
+    percentage?: FloatFilter<"MockTestAttempt"> | number
+    status?: StringFilter<"MockTestAttempt"> | string
+    completedAt?: DateTimeFilter<"MockTestAttempt"> | Date | string
+    user?: XOR<UserRelationFilter, UserWhereInput>
+    mockTest?: XOR<MockTestRelationFilter, MockTestWhereInput>
+  }, "id">
+
+  export type MockTestAttemptOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    mockTestId?: SortOrder
+    score?: SortOrder
+    percentage?: SortOrder
+    status?: SortOrder
+    completedAt?: SortOrder
+    _count?: MockTestAttemptCountOrderByAggregateInput
+    _avg?: MockTestAttemptAvgOrderByAggregateInput
+    _max?: MockTestAttemptMaxOrderByAggregateInput
+    _min?: MockTestAttemptMinOrderByAggregateInput
+    _sum?: MockTestAttemptSumOrderByAggregateInput
+  }
+
+  export type MockTestAttemptScalarWhereWithAggregatesInput = {
+    AND?: MockTestAttemptScalarWhereWithAggregatesInput | MockTestAttemptScalarWhereWithAggregatesInput[]
+    OR?: MockTestAttemptScalarWhereWithAggregatesInput[]
+    NOT?: MockTestAttemptScalarWhereWithAggregatesInput | MockTestAttemptScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"MockTestAttempt"> | string
+    userId?: StringWithAggregatesFilter<"MockTestAttempt"> | string
+    mockTestId?: StringWithAggregatesFilter<"MockTestAttempt"> | string
+    score?: IntWithAggregatesFilter<"MockTestAttempt"> | number
+    percentage?: FloatWithAggregatesFilter<"MockTestAttempt"> | number
+    status?: StringWithAggregatesFilter<"MockTestAttempt"> | string
+    completedAt?: DateTimeWithAggregatesFilter<"MockTestAttempt"> | Date | string
+  }
+
   export type UserCreateInput = {
     id?: string
     email: string
@@ -20426,6 +24104,7 @@ export namespace Prisma {
     notifications?: NotificationCreateNestedManyWithoutUserInput
     payments?: PaymentCreateNestedManyWithoutUserInput
     lessonCompletions?: LessonCompletionCreateNestedManyWithoutUserInput
+    newMockTestAttempts?: MockTestAttemptCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -20452,6 +24131,7 @@ export namespace Prisma {
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     payments?: PaymentUncheckedCreateNestedManyWithoutUserInput
     lessonCompletions?: LessonCompletionUncheckedCreateNestedManyWithoutUserInput
+    newMockTestAttempts?: MockTestAttemptUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -20478,6 +24158,7 @@ export namespace Prisma {
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     payments?: PaymentUpdateManyWithoutUserNestedInput
     lessonCompletions?: LessonCompletionUpdateManyWithoutUserNestedInput
+    newMockTestAttempts?: MockTestAttemptUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -20504,6 +24185,7 @@ export namespace Prisma {
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     payments?: PaymentUncheckedUpdateManyWithoutUserNestedInput
     lessonCompletions?: LessonCompletionUncheckedUpdateManyWithoutUserNestedInput
+    newMockTestAttempts?: MockTestAttemptUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -20787,6 +24469,7 @@ export namespace Prisma {
     course: CourseCreateNestedOneWithoutLessonsInput
     completions?: LessonCompletionCreateNestedManyWithoutLessonInput
     quiz?: LessonQuizCreateNestedOneWithoutLessonInput
+    mockTest?: MockTestCreateNestedOneWithoutLessonInput
   }
 
   export type LessonUncheckedCreateInput = {
@@ -20806,6 +24489,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     completions?: LessonCompletionUncheckedCreateNestedManyWithoutLessonInput
     quiz?: LessonQuizUncheckedCreateNestedOneWithoutLessonInput
+    mockTest?: MockTestUncheckedCreateNestedOneWithoutLessonInput
   }
 
   export type LessonUpdateInput = {
@@ -20825,6 +24509,7 @@ export namespace Prisma {
     course?: CourseUpdateOneRequiredWithoutLessonsNestedInput
     completions?: LessonCompletionUpdateManyWithoutLessonNestedInput
     quiz?: LessonQuizUpdateOneWithoutLessonNestedInput
+    mockTest?: MockTestUpdateOneWithoutLessonNestedInput
   }
 
   export type LessonUncheckedUpdateInput = {
@@ -20844,6 +24529,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     completions?: LessonCompletionUncheckedUpdateManyWithoutLessonNestedInput
     quiz?: LessonQuizUncheckedUpdateOneWithoutLessonNestedInput
+    mockTest?: MockTestUncheckedUpdateOneWithoutLessonNestedInput
   }
 
   export type LessonCreateManyInput = {
@@ -21641,6 +25327,234 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type MockTestCreateInput = {
+    id?: string
+    totalMarks: number
+    passingPercentage: number
+    difficulty: string
+    published?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    lesson: LessonCreateNestedOneWithoutMockTestInput
+    questions?: MockQuestionCreateNestedManyWithoutMockTestInput
+    attempts?: MockTestAttemptCreateNestedManyWithoutMockTestInput
+  }
+
+  export type MockTestUncheckedCreateInput = {
+    id?: string
+    lessonId: string
+    totalMarks: number
+    passingPercentage: number
+    difficulty: string
+    published?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    questions?: MockQuestionUncheckedCreateNestedManyWithoutMockTestInput
+    attempts?: MockTestAttemptUncheckedCreateNestedManyWithoutMockTestInput
+  }
+
+  export type MockTestUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    totalMarks?: IntFieldUpdateOperationsInput | number
+    passingPercentage?: IntFieldUpdateOperationsInput | number
+    difficulty?: StringFieldUpdateOperationsInput | string
+    published?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    lesson?: LessonUpdateOneRequiredWithoutMockTestNestedInput
+    questions?: MockQuestionUpdateManyWithoutMockTestNestedInput
+    attempts?: MockTestAttemptUpdateManyWithoutMockTestNestedInput
+  }
+
+  export type MockTestUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    lessonId?: StringFieldUpdateOperationsInput | string
+    totalMarks?: IntFieldUpdateOperationsInput | number
+    passingPercentage?: IntFieldUpdateOperationsInput | number
+    difficulty?: StringFieldUpdateOperationsInput | string
+    published?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    questions?: MockQuestionUncheckedUpdateManyWithoutMockTestNestedInput
+    attempts?: MockTestAttemptUncheckedUpdateManyWithoutMockTestNestedInput
+  }
+
+  export type MockTestCreateManyInput = {
+    id?: string
+    lessonId: string
+    totalMarks: number
+    passingPercentage: number
+    difficulty: string
+    published?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type MockTestUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    totalMarks?: IntFieldUpdateOperationsInput | number
+    passingPercentage?: IntFieldUpdateOperationsInput | number
+    difficulty?: StringFieldUpdateOperationsInput | string
+    published?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MockTestUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    lessonId?: StringFieldUpdateOperationsInput | string
+    totalMarks?: IntFieldUpdateOperationsInput | number
+    passingPercentage?: IntFieldUpdateOperationsInput | number
+    difficulty?: StringFieldUpdateOperationsInput | string
+    published?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MockQuestionCreateInput = {
+    id?: string
+    question: string
+    optionA: string
+    optionB: string
+    optionC: string
+    optionD: string
+    correctIndex: number
+    mockTest: MockTestCreateNestedOneWithoutQuestionsInput
+  }
+
+  export type MockQuestionUncheckedCreateInput = {
+    id?: string
+    mockTestId: string
+    question: string
+    optionA: string
+    optionB: string
+    optionC: string
+    optionD: string
+    correctIndex: number
+  }
+
+  export type MockQuestionUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    question?: StringFieldUpdateOperationsInput | string
+    optionA?: StringFieldUpdateOperationsInput | string
+    optionB?: StringFieldUpdateOperationsInput | string
+    optionC?: StringFieldUpdateOperationsInput | string
+    optionD?: StringFieldUpdateOperationsInput | string
+    correctIndex?: IntFieldUpdateOperationsInput | number
+    mockTest?: MockTestUpdateOneRequiredWithoutQuestionsNestedInput
+  }
+
+  export type MockQuestionUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    mockTestId?: StringFieldUpdateOperationsInput | string
+    question?: StringFieldUpdateOperationsInput | string
+    optionA?: StringFieldUpdateOperationsInput | string
+    optionB?: StringFieldUpdateOperationsInput | string
+    optionC?: StringFieldUpdateOperationsInput | string
+    optionD?: StringFieldUpdateOperationsInput | string
+    correctIndex?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type MockQuestionCreateManyInput = {
+    id?: string
+    mockTestId: string
+    question: string
+    optionA: string
+    optionB: string
+    optionC: string
+    optionD: string
+    correctIndex: number
+  }
+
+  export type MockQuestionUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    question?: StringFieldUpdateOperationsInput | string
+    optionA?: StringFieldUpdateOperationsInput | string
+    optionB?: StringFieldUpdateOperationsInput | string
+    optionC?: StringFieldUpdateOperationsInput | string
+    optionD?: StringFieldUpdateOperationsInput | string
+    correctIndex?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type MockQuestionUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    mockTestId?: StringFieldUpdateOperationsInput | string
+    question?: StringFieldUpdateOperationsInput | string
+    optionA?: StringFieldUpdateOperationsInput | string
+    optionB?: StringFieldUpdateOperationsInput | string
+    optionC?: StringFieldUpdateOperationsInput | string
+    optionD?: StringFieldUpdateOperationsInput | string
+    correctIndex?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type MockTestAttemptCreateInput = {
+    id?: string
+    score: number
+    percentage: number
+    status: string
+    completedAt?: Date | string
+    user: UserCreateNestedOneWithoutNewMockTestAttemptsInput
+    mockTest: MockTestCreateNestedOneWithoutAttemptsInput
+  }
+
+  export type MockTestAttemptUncheckedCreateInput = {
+    id?: string
+    userId: string
+    mockTestId: string
+    score: number
+    percentage: number
+    status: string
+    completedAt?: Date | string
+  }
+
+  export type MockTestAttemptUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    score?: IntFieldUpdateOperationsInput | number
+    percentage?: FloatFieldUpdateOperationsInput | number
+    status?: StringFieldUpdateOperationsInput | string
+    completedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutNewMockTestAttemptsNestedInput
+    mockTest?: MockTestUpdateOneRequiredWithoutAttemptsNestedInput
+  }
+
+  export type MockTestAttemptUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    mockTestId?: StringFieldUpdateOperationsInput | string
+    score?: IntFieldUpdateOperationsInput | number
+    percentage?: FloatFieldUpdateOperationsInput | number
+    status?: StringFieldUpdateOperationsInput | string
+    completedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MockTestAttemptCreateManyInput = {
+    id?: string
+    userId: string
+    mockTestId: string
+    score: number
+    percentage: number
+    status: string
+    completedAt?: Date | string
+  }
+
+  export type MockTestAttemptUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    score?: IntFieldUpdateOperationsInput | number
+    percentage?: FloatFieldUpdateOperationsInput | number
+    status?: StringFieldUpdateOperationsInput | string
+    completedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MockTestAttemptUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    mockTestId?: StringFieldUpdateOperationsInput | string
+    score?: IntFieldUpdateOperationsInput | number
+    percentage?: FloatFieldUpdateOperationsInput | number
+    status?: StringFieldUpdateOperationsInput | string
+    completedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -21771,6 +25685,12 @@ export namespace Prisma {
     none?: LessonCompletionWhereInput
   }
 
+  export type MockTestAttemptListRelationFilter = {
+    every?: MockTestAttemptWhereInput
+    some?: MockTestAttemptWhereInput
+    none?: MockTestAttemptWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -21817,6 +25737,10 @@ export namespace Prisma {
   }
 
   export type LessonCompletionOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type MockTestAttemptOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -22174,6 +26098,11 @@ export namespace Prisma {
   export type LessonQuizNullableRelationFilter = {
     is?: LessonQuizWhereInput | null
     isNot?: LessonQuizWhereInput | null
+  }
+
+  export type MockTestNullableRelationFilter = {
+    is?: MockTestWhereInput | null
+    isNot?: MockTestWhereInput | null
   }
 
   export type LessonCountOrderByAggregateInput = {
@@ -22714,6 +26643,145 @@ export namespace Prisma {
     amount?: SortOrder
   }
 
+  export type MockQuestionListRelationFilter = {
+    every?: MockQuestionWhereInput
+    some?: MockQuestionWhereInput
+    none?: MockQuestionWhereInput
+  }
+
+  export type MockQuestionOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type MockTestCountOrderByAggregateInput = {
+    id?: SortOrder
+    lessonId?: SortOrder
+    totalMarks?: SortOrder
+    passingPercentage?: SortOrder
+    difficulty?: SortOrder
+    published?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type MockTestAvgOrderByAggregateInput = {
+    totalMarks?: SortOrder
+    passingPercentage?: SortOrder
+  }
+
+  export type MockTestMaxOrderByAggregateInput = {
+    id?: SortOrder
+    lessonId?: SortOrder
+    totalMarks?: SortOrder
+    passingPercentage?: SortOrder
+    difficulty?: SortOrder
+    published?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type MockTestMinOrderByAggregateInput = {
+    id?: SortOrder
+    lessonId?: SortOrder
+    totalMarks?: SortOrder
+    passingPercentage?: SortOrder
+    difficulty?: SortOrder
+    published?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type MockTestSumOrderByAggregateInput = {
+    totalMarks?: SortOrder
+    passingPercentage?: SortOrder
+  }
+
+  export type MockTestRelationFilter = {
+    is?: MockTestWhereInput
+    isNot?: MockTestWhereInput
+  }
+
+  export type MockQuestionCountOrderByAggregateInput = {
+    id?: SortOrder
+    mockTestId?: SortOrder
+    question?: SortOrder
+    optionA?: SortOrder
+    optionB?: SortOrder
+    optionC?: SortOrder
+    optionD?: SortOrder
+    correctIndex?: SortOrder
+  }
+
+  export type MockQuestionAvgOrderByAggregateInput = {
+    correctIndex?: SortOrder
+  }
+
+  export type MockQuestionMaxOrderByAggregateInput = {
+    id?: SortOrder
+    mockTestId?: SortOrder
+    question?: SortOrder
+    optionA?: SortOrder
+    optionB?: SortOrder
+    optionC?: SortOrder
+    optionD?: SortOrder
+    correctIndex?: SortOrder
+  }
+
+  export type MockQuestionMinOrderByAggregateInput = {
+    id?: SortOrder
+    mockTestId?: SortOrder
+    question?: SortOrder
+    optionA?: SortOrder
+    optionB?: SortOrder
+    optionC?: SortOrder
+    optionD?: SortOrder
+    correctIndex?: SortOrder
+  }
+
+  export type MockQuestionSumOrderByAggregateInput = {
+    correctIndex?: SortOrder
+  }
+
+  export type MockTestAttemptCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    mockTestId?: SortOrder
+    score?: SortOrder
+    percentage?: SortOrder
+    status?: SortOrder
+    completedAt?: SortOrder
+  }
+
+  export type MockTestAttemptAvgOrderByAggregateInput = {
+    score?: SortOrder
+    percentage?: SortOrder
+  }
+
+  export type MockTestAttemptMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    mockTestId?: SortOrder
+    score?: SortOrder
+    percentage?: SortOrder
+    status?: SortOrder
+    completedAt?: SortOrder
+  }
+
+  export type MockTestAttemptMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    mockTestId?: SortOrder
+    score?: SortOrder
+    percentage?: SortOrder
+    status?: SortOrder
+    completedAt?: SortOrder
+  }
+
+  export type MockTestAttemptSumOrderByAggregateInput = {
+    score?: SortOrder
+    percentage?: SortOrder
+  }
+
   export type EnrollmentCreateNestedManyWithoutUserInput = {
     create?: XOR<EnrollmentCreateWithoutUserInput, EnrollmentUncheckedCreateWithoutUserInput> | EnrollmentCreateWithoutUserInput[] | EnrollmentUncheckedCreateWithoutUserInput[]
     connectOrCreate?: EnrollmentCreateOrConnectWithoutUserInput | EnrollmentCreateOrConnectWithoutUserInput[]
@@ -22797,6 +26865,13 @@ export namespace Prisma {
     connect?: LessonCompletionWhereUniqueInput | LessonCompletionWhereUniqueInput[]
   }
 
+  export type MockTestAttemptCreateNestedManyWithoutUserInput = {
+    create?: XOR<MockTestAttemptCreateWithoutUserInput, MockTestAttemptUncheckedCreateWithoutUserInput> | MockTestAttemptCreateWithoutUserInput[] | MockTestAttemptUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: MockTestAttemptCreateOrConnectWithoutUserInput | MockTestAttemptCreateOrConnectWithoutUserInput[]
+    createMany?: MockTestAttemptCreateManyUserInputEnvelope
+    connect?: MockTestAttemptWhereUniqueInput | MockTestAttemptWhereUniqueInput[]
+  }
+
   export type EnrollmentUncheckedCreateNestedManyWithoutUserInput = {
     create?: XOR<EnrollmentCreateWithoutUserInput, EnrollmentUncheckedCreateWithoutUserInput> | EnrollmentCreateWithoutUserInput[] | EnrollmentUncheckedCreateWithoutUserInput[]
     connectOrCreate?: EnrollmentCreateOrConnectWithoutUserInput | EnrollmentCreateOrConnectWithoutUserInput[]
@@ -22878,6 +26953,13 @@ export namespace Prisma {
     connectOrCreate?: LessonCompletionCreateOrConnectWithoutUserInput | LessonCompletionCreateOrConnectWithoutUserInput[]
     createMany?: LessonCompletionCreateManyUserInputEnvelope
     connect?: LessonCompletionWhereUniqueInput | LessonCompletionWhereUniqueInput[]
+  }
+
+  export type MockTestAttemptUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<MockTestAttemptCreateWithoutUserInput, MockTestAttemptUncheckedCreateWithoutUserInput> | MockTestAttemptCreateWithoutUserInput[] | MockTestAttemptUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: MockTestAttemptCreateOrConnectWithoutUserInput | MockTestAttemptCreateOrConnectWithoutUserInput[]
+    createMany?: MockTestAttemptCreateManyUserInputEnvelope
+    connect?: MockTestAttemptWhereUniqueInput | MockTestAttemptWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -23068,6 +27150,20 @@ export namespace Prisma {
     deleteMany?: LessonCompletionScalarWhereInput | LessonCompletionScalarWhereInput[]
   }
 
+  export type MockTestAttemptUpdateManyWithoutUserNestedInput = {
+    create?: XOR<MockTestAttemptCreateWithoutUserInput, MockTestAttemptUncheckedCreateWithoutUserInput> | MockTestAttemptCreateWithoutUserInput[] | MockTestAttemptUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: MockTestAttemptCreateOrConnectWithoutUserInput | MockTestAttemptCreateOrConnectWithoutUserInput[]
+    upsert?: MockTestAttemptUpsertWithWhereUniqueWithoutUserInput | MockTestAttemptUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: MockTestAttemptCreateManyUserInputEnvelope
+    set?: MockTestAttemptWhereUniqueInput | MockTestAttemptWhereUniqueInput[]
+    disconnect?: MockTestAttemptWhereUniqueInput | MockTestAttemptWhereUniqueInput[]
+    delete?: MockTestAttemptWhereUniqueInput | MockTestAttemptWhereUniqueInput[]
+    connect?: MockTestAttemptWhereUniqueInput | MockTestAttemptWhereUniqueInput[]
+    update?: MockTestAttemptUpdateWithWhereUniqueWithoutUserInput | MockTestAttemptUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: MockTestAttemptUpdateManyWithWhereWithoutUserInput | MockTestAttemptUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: MockTestAttemptScalarWhereInput | MockTestAttemptScalarWhereInput[]
+  }
+
   export type EnrollmentUncheckedUpdateManyWithoutUserNestedInput = {
     create?: XOR<EnrollmentCreateWithoutUserInput, EnrollmentUncheckedCreateWithoutUserInput> | EnrollmentCreateWithoutUserInput[] | EnrollmentUncheckedCreateWithoutUserInput[]
     connectOrCreate?: EnrollmentCreateOrConnectWithoutUserInput | EnrollmentCreateOrConnectWithoutUserInput[]
@@ -23230,6 +27326,20 @@ export namespace Prisma {
     update?: LessonCompletionUpdateWithWhereUniqueWithoutUserInput | LessonCompletionUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: LessonCompletionUpdateManyWithWhereWithoutUserInput | LessonCompletionUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: LessonCompletionScalarWhereInput | LessonCompletionScalarWhereInput[]
+  }
+
+  export type MockTestAttemptUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<MockTestAttemptCreateWithoutUserInput, MockTestAttemptUncheckedCreateWithoutUserInput> | MockTestAttemptCreateWithoutUserInput[] | MockTestAttemptUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: MockTestAttemptCreateOrConnectWithoutUserInput | MockTestAttemptCreateOrConnectWithoutUserInput[]
+    upsert?: MockTestAttemptUpsertWithWhereUniqueWithoutUserInput | MockTestAttemptUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: MockTestAttemptCreateManyUserInputEnvelope
+    set?: MockTestAttemptWhereUniqueInput | MockTestAttemptWhereUniqueInput[]
+    disconnect?: MockTestAttemptWhereUniqueInput | MockTestAttemptWhereUniqueInput[]
+    delete?: MockTestAttemptWhereUniqueInput | MockTestAttemptWhereUniqueInput[]
+    connect?: MockTestAttemptWhereUniqueInput | MockTestAttemptWhereUniqueInput[]
+    update?: MockTestAttemptUpdateWithWhereUniqueWithoutUserInput | MockTestAttemptUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: MockTestAttemptUpdateManyWithWhereWithoutUserInput | MockTestAttemptUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: MockTestAttemptScalarWhereInput | MockTestAttemptScalarWhereInput[]
   }
 
   export type UserCreateNestedOneWithoutStreakInput = {
@@ -23487,6 +27597,12 @@ export namespace Prisma {
     connect?: LessonQuizWhereUniqueInput
   }
 
+  export type MockTestCreateNestedOneWithoutLessonInput = {
+    create?: XOR<MockTestCreateWithoutLessonInput, MockTestUncheckedCreateWithoutLessonInput>
+    connectOrCreate?: MockTestCreateOrConnectWithoutLessonInput
+    connect?: MockTestWhereUniqueInput
+  }
+
   export type LessonCompletionUncheckedCreateNestedManyWithoutLessonInput = {
     create?: XOR<LessonCompletionCreateWithoutLessonInput, LessonCompletionUncheckedCreateWithoutLessonInput> | LessonCompletionCreateWithoutLessonInput[] | LessonCompletionUncheckedCreateWithoutLessonInput[]
     connectOrCreate?: LessonCompletionCreateOrConnectWithoutLessonInput | LessonCompletionCreateOrConnectWithoutLessonInput[]
@@ -23498,6 +27614,12 @@ export namespace Prisma {
     create?: XOR<LessonQuizCreateWithoutLessonInput, LessonQuizUncheckedCreateWithoutLessonInput>
     connectOrCreate?: LessonQuizCreateOrConnectWithoutLessonInput
     connect?: LessonQuizWhereUniqueInput
+  }
+
+  export type MockTestUncheckedCreateNestedOneWithoutLessonInput = {
+    create?: XOR<MockTestCreateWithoutLessonInput, MockTestUncheckedCreateWithoutLessonInput>
+    connectOrCreate?: MockTestCreateOrConnectWithoutLessonInput
+    connect?: MockTestWhereUniqueInput
   }
 
   export type EnumContentTypeFieldUpdateOperationsInput = {
@@ -23552,6 +27674,16 @@ export namespace Prisma {
     update?: XOR<XOR<LessonQuizUpdateToOneWithWhereWithoutLessonInput, LessonQuizUpdateWithoutLessonInput>, LessonQuizUncheckedUpdateWithoutLessonInput>
   }
 
+  export type MockTestUpdateOneWithoutLessonNestedInput = {
+    create?: XOR<MockTestCreateWithoutLessonInput, MockTestUncheckedCreateWithoutLessonInput>
+    connectOrCreate?: MockTestCreateOrConnectWithoutLessonInput
+    upsert?: MockTestUpsertWithoutLessonInput
+    disconnect?: MockTestWhereInput | boolean
+    delete?: MockTestWhereInput | boolean
+    connect?: MockTestWhereUniqueInput
+    update?: XOR<XOR<MockTestUpdateToOneWithWhereWithoutLessonInput, MockTestUpdateWithoutLessonInput>, MockTestUncheckedUpdateWithoutLessonInput>
+  }
+
   export type LessonCompletionUncheckedUpdateManyWithoutLessonNestedInput = {
     create?: XOR<LessonCompletionCreateWithoutLessonInput, LessonCompletionUncheckedCreateWithoutLessonInput> | LessonCompletionCreateWithoutLessonInput[] | LessonCompletionUncheckedCreateWithoutLessonInput[]
     connectOrCreate?: LessonCompletionCreateOrConnectWithoutLessonInput | LessonCompletionCreateOrConnectWithoutLessonInput[]
@@ -23574,6 +27706,16 @@ export namespace Prisma {
     delete?: LessonQuizWhereInput | boolean
     connect?: LessonQuizWhereUniqueInput
     update?: XOR<XOR<LessonQuizUpdateToOneWithWhereWithoutLessonInput, LessonQuizUpdateWithoutLessonInput>, LessonQuizUncheckedUpdateWithoutLessonInput>
+  }
+
+  export type MockTestUncheckedUpdateOneWithoutLessonNestedInput = {
+    create?: XOR<MockTestCreateWithoutLessonInput, MockTestUncheckedCreateWithoutLessonInput>
+    connectOrCreate?: MockTestCreateOrConnectWithoutLessonInput
+    upsert?: MockTestUpsertWithoutLessonInput
+    disconnect?: MockTestWhereInput | boolean
+    delete?: MockTestWhereInput | boolean
+    connect?: MockTestWhereUniqueInput
+    update?: XOR<XOR<MockTestUpdateToOneWithWhereWithoutLessonInput, MockTestUpdateWithoutLessonInput>, MockTestUncheckedUpdateWithoutLessonInput>
   }
 
   export type UserCreateNestedOneWithoutLessonCompletionsInput = {
@@ -23928,6 +28070,146 @@ export namespace Prisma {
     upsert?: CourseUpsertWithoutPaymentsInput
     connect?: CourseWhereUniqueInput
     update?: XOR<XOR<CourseUpdateToOneWithWhereWithoutPaymentsInput, CourseUpdateWithoutPaymentsInput>, CourseUncheckedUpdateWithoutPaymentsInput>
+  }
+
+  export type LessonCreateNestedOneWithoutMockTestInput = {
+    create?: XOR<LessonCreateWithoutMockTestInput, LessonUncheckedCreateWithoutMockTestInput>
+    connectOrCreate?: LessonCreateOrConnectWithoutMockTestInput
+    connect?: LessonWhereUniqueInput
+  }
+
+  export type MockQuestionCreateNestedManyWithoutMockTestInput = {
+    create?: XOR<MockQuestionCreateWithoutMockTestInput, MockQuestionUncheckedCreateWithoutMockTestInput> | MockQuestionCreateWithoutMockTestInput[] | MockQuestionUncheckedCreateWithoutMockTestInput[]
+    connectOrCreate?: MockQuestionCreateOrConnectWithoutMockTestInput | MockQuestionCreateOrConnectWithoutMockTestInput[]
+    createMany?: MockQuestionCreateManyMockTestInputEnvelope
+    connect?: MockQuestionWhereUniqueInput | MockQuestionWhereUniqueInput[]
+  }
+
+  export type MockTestAttemptCreateNestedManyWithoutMockTestInput = {
+    create?: XOR<MockTestAttemptCreateWithoutMockTestInput, MockTestAttemptUncheckedCreateWithoutMockTestInput> | MockTestAttemptCreateWithoutMockTestInput[] | MockTestAttemptUncheckedCreateWithoutMockTestInput[]
+    connectOrCreate?: MockTestAttemptCreateOrConnectWithoutMockTestInput | MockTestAttemptCreateOrConnectWithoutMockTestInput[]
+    createMany?: MockTestAttemptCreateManyMockTestInputEnvelope
+    connect?: MockTestAttemptWhereUniqueInput | MockTestAttemptWhereUniqueInput[]
+  }
+
+  export type MockQuestionUncheckedCreateNestedManyWithoutMockTestInput = {
+    create?: XOR<MockQuestionCreateWithoutMockTestInput, MockQuestionUncheckedCreateWithoutMockTestInput> | MockQuestionCreateWithoutMockTestInput[] | MockQuestionUncheckedCreateWithoutMockTestInput[]
+    connectOrCreate?: MockQuestionCreateOrConnectWithoutMockTestInput | MockQuestionCreateOrConnectWithoutMockTestInput[]
+    createMany?: MockQuestionCreateManyMockTestInputEnvelope
+    connect?: MockQuestionWhereUniqueInput | MockQuestionWhereUniqueInput[]
+  }
+
+  export type MockTestAttemptUncheckedCreateNestedManyWithoutMockTestInput = {
+    create?: XOR<MockTestAttemptCreateWithoutMockTestInput, MockTestAttemptUncheckedCreateWithoutMockTestInput> | MockTestAttemptCreateWithoutMockTestInput[] | MockTestAttemptUncheckedCreateWithoutMockTestInput[]
+    connectOrCreate?: MockTestAttemptCreateOrConnectWithoutMockTestInput | MockTestAttemptCreateOrConnectWithoutMockTestInput[]
+    createMany?: MockTestAttemptCreateManyMockTestInputEnvelope
+    connect?: MockTestAttemptWhereUniqueInput | MockTestAttemptWhereUniqueInput[]
+  }
+
+  export type LessonUpdateOneRequiredWithoutMockTestNestedInput = {
+    create?: XOR<LessonCreateWithoutMockTestInput, LessonUncheckedCreateWithoutMockTestInput>
+    connectOrCreate?: LessonCreateOrConnectWithoutMockTestInput
+    upsert?: LessonUpsertWithoutMockTestInput
+    connect?: LessonWhereUniqueInput
+    update?: XOR<XOR<LessonUpdateToOneWithWhereWithoutMockTestInput, LessonUpdateWithoutMockTestInput>, LessonUncheckedUpdateWithoutMockTestInput>
+  }
+
+  export type MockQuestionUpdateManyWithoutMockTestNestedInput = {
+    create?: XOR<MockQuestionCreateWithoutMockTestInput, MockQuestionUncheckedCreateWithoutMockTestInput> | MockQuestionCreateWithoutMockTestInput[] | MockQuestionUncheckedCreateWithoutMockTestInput[]
+    connectOrCreate?: MockQuestionCreateOrConnectWithoutMockTestInput | MockQuestionCreateOrConnectWithoutMockTestInput[]
+    upsert?: MockQuestionUpsertWithWhereUniqueWithoutMockTestInput | MockQuestionUpsertWithWhereUniqueWithoutMockTestInput[]
+    createMany?: MockQuestionCreateManyMockTestInputEnvelope
+    set?: MockQuestionWhereUniqueInput | MockQuestionWhereUniqueInput[]
+    disconnect?: MockQuestionWhereUniqueInput | MockQuestionWhereUniqueInput[]
+    delete?: MockQuestionWhereUniqueInput | MockQuestionWhereUniqueInput[]
+    connect?: MockQuestionWhereUniqueInput | MockQuestionWhereUniqueInput[]
+    update?: MockQuestionUpdateWithWhereUniqueWithoutMockTestInput | MockQuestionUpdateWithWhereUniqueWithoutMockTestInput[]
+    updateMany?: MockQuestionUpdateManyWithWhereWithoutMockTestInput | MockQuestionUpdateManyWithWhereWithoutMockTestInput[]
+    deleteMany?: MockQuestionScalarWhereInput | MockQuestionScalarWhereInput[]
+  }
+
+  export type MockTestAttemptUpdateManyWithoutMockTestNestedInput = {
+    create?: XOR<MockTestAttemptCreateWithoutMockTestInput, MockTestAttemptUncheckedCreateWithoutMockTestInput> | MockTestAttemptCreateWithoutMockTestInput[] | MockTestAttemptUncheckedCreateWithoutMockTestInput[]
+    connectOrCreate?: MockTestAttemptCreateOrConnectWithoutMockTestInput | MockTestAttemptCreateOrConnectWithoutMockTestInput[]
+    upsert?: MockTestAttemptUpsertWithWhereUniqueWithoutMockTestInput | MockTestAttemptUpsertWithWhereUniqueWithoutMockTestInput[]
+    createMany?: MockTestAttemptCreateManyMockTestInputEnvelope
+    set?: MockTestAttemptWhereUniqueInput | MockTestAttemptWhereUniqueInput[]
+    disconnect?: MockTestAttemptWhereUniqueInput | MockTestAttemptWhereUniqueInput[]
+    delete?: MockTestAttemptWhereUniqueInput | MockTestAttemptWhereUniqueInput[]
+    connect?: MockTestAttemptWhereUniqueInput | MockTestAttemptWhereUniqueInput[]
+    update?: MockTestAttemptUpdateWithWhereUniqueWithoutMockTestInput | MockTestAttemptUpdateWithWhereUniqueWithoutMockTestInput[]
+    updateMany?: MockTestAttemptUpdateManyWithWhereWithoutMockTestInput | MockTestAttemptUpdateManyWithWhereWithoutMockTestInput[]
+    deleteMany?: MockTestAttemptScalarWhereInput | MockTestAttemptScalarWhereInput[]
+  }
+
+  export type MockQuestionUncheckedUpdateManyWithoutMockTestNestedInput = {
+    create?: XOR<MockQuestionCreateWithoutMockTestInput, MockQuestionUncheckedCreateWithoutMockTestInput> | MockQuestionCreateWithoutMockTestInput[] | MockQuestionUncheckedCreateWithoutMockTestInput[]
+    connectOrCreate?: MockQuestionCreateOrConnectWithoutMockTestInput | MockQuestionCreateOrConnectWithoutMockTestInput[]
+    upsert?: MockQuestionUpsertWithWhereUniqueWithoutMockTestInput | MockQuestionUpsertWithWhereUniqueWithoutMockTestInput[]
+    createMany?: MockQuestionCreateManyMockTestInputEnvelope
+    set?: MockQuestionWhereUniqueInput | MockQuestionWhereUniqueInput[]
+    disconnect?: MockQuestionWhereUniqueInput | MockQuestionWhereUniqueInput[]
+    delete?: MockQuestionWhereUniqueInput | MockQuestionWhereUniqueInput[]
+    connect?: MockQuestionWhereUniqueInput | MockQuestionWhereUniqueInput[]
+    update?: MockQuestionUpdateWithWhereUniqueWithoutMockTestInput | MockQuestionUpdateWithWhereUniqueWithoutMockTestInput[]
+    updateMany?: MockQuestionUpdateManyWithWhereWithoutMockTestInput | MockQuestionUpdateManyWithWhereWithoutMockTestInput[]
+    deleteMany?: MockQuestionScalarWhereInput | MockQuestionScalarWhereInput[]
+  }
+
+  export type MockTestAttemptUncheckedUpdateManyWithoutMockTestNestedInput = {
+    create?: XOR<MockTestAttemptCreateWithoutMockTestInput, MockTestAttemptUncheckedCreateWithoutMockTestInput> | MockTestAttemptCreateWithoutMockTestInput[] | MockTestAttemptUncheckedCreateWithoutMockTestInput[]
+    connectOrCreate?: MockTestAttemptCreateOrConnectWithoutMockTestInput | MockTestAttemptCreateOrConnectWithoutMockTestInput[]
+    upsert?: MockTestAttemptUpsertWithWhereUniqueWithoutMockTestInput | MockTestAttemptUpsertWithWhereUniqueWithoutMockTestInput[]
+    createMany?: MockTestAttemptCreateManyMockTestInputEnvelope
+    set?: MockTestAttemptWhereUniqueInput | MockTestAttemptWhereUniqueInput[]
+    disconnect?: MockTestAttemptWhereUniqueInput | MockTestAttemptWhereUniqueInput[]
+    delete?: MockTestAttemptWhereUniqueInput | MockTestAttemptWhereUniqueInput[]
+    connect?: MockTestAttemptWhereUniqueInput | MockTestAttemptWhereUniqueInput[]
+    update?: MockTestAttemptUpdateWithWhereUniqueWithoutMockTestInput | MockTestAttemptUpdateWithWhereUniqueWithoutMockTestInput[]
+    updateMany?: MockTestAttemptUpdateManyWithWhereWithoutMockTestInput | MockTestAttemptUpdateManyWithWhereWithoutMockTestInput[]
+    deleteMany?: MockTestAttemptScalarWhereInput | MockTestAttemptScalarWhereInput[]
+  }
+
+  export type MockTestCreateNestedOneWithoutQuestionsInput = {
+    create?: XOR<MockTestCreateWithoutQuestionsInput, MockTestUncheckedCreateWithoutQuestionsInput>
+    connectOrCreate?: MockTestCreateOrConnectWithoutQuestionsInput
+    connect?: MockTestWhereUniqueInput
+  }
+
+  export type MockTestUpdateOneRequiredWithoutQuestionsNestedInput = {
+    create?: XOR<MockTestCreateWithoutQuestionsInput, MockTestUncheckedCreateWithoutQuestionsInput>
+    connectOrCreate?: MockTestCreateOrConnectWithoutQuestionsInput
+    upsert?: MockTestUpsertWithoutQuestionsInput
+    connect?: MockTestWhereUniqueInput
+    update?: XOR<XOR<MockTestUpdateToOneWithWhereWithoutQuestionsInput, MockTestUpdateWithoutQuestionsInput>, MockTestUncheckedUpdateWithoutQuestionsInput>
+  }
+
+  export type UserCreateNestedOneWithoutNewMockTestAttemptsInput = {
+    create?: XOR<UserCreateWithoutNewMockTestAttemptsInput, UserUncheckedCreateWithoutNewMockTestAttemptsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutNewMockTestAttemptsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type MockTestCreateNestedOneWithoutAttemptsInput = {
+    create?: XOR<MockTestCreateWithoutAttemptsInput, MockTestUncheckedCreateWithoutAttemptsInput>
+    connectOrCreate?: MockTestCreateOrConnectWithoutAttemptsInput
+    connect?: MockTestWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutNewMockTestAttemptsNestedInput = {
+    create?: XOR<UserCreateWithoutNewMockTestAttemptsInput, UserUncheckedCreateWithoutNewMockTestAttemptsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutNewMockTestAttemptsInput
+    upsert?: UserUpsertWithoutNewMockTestAttemptsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutNewMockTestAttemptsInput, UserUpdateWithoutNewMockTestAttemptsInput>, UserUncheckedUpdateWithoutNewMockTestAttemptsInput>
+  }
+
+  export type MockTestUpdateOneRequiredWithoutAttemptsNestedInput = {
+    create?: XOR<MockTestCreateWithoutAttemptsInput, MockTestUncheckedCreateWithoutAttemptsInput>
+    connectOrCreate?: MockTestCreateOrConnectWithoutAttemptsInput
+    upsert?: MockTestUpsertWithoutAttemptsInput
+    connect?: MockTestWhereUniqueInput
+    update?: XOR<XOR<MockTestUpdateToOneWithWhereWithoutAttemptsInput, MockTestUpdateWithoutAttemptsInput>, MockTestUncheckedUpdateWithoutAttemptsInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -24542,6 +28824,34 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type MockTestAttemptCreateWithoutUserInput = {
+    id?: string
+    score: number
+    percentage: number
+    status: string
+    completedAt?: Date | string
+    mockTest: MockTestCreateNestedOneWithoutAttemptsInput
+  }
+
+  export type MockTestAttemptUncheckedCreateWithoutUserInput = {
+    id?: string
+    mockTestId: string
+    score: number
+    percentage: number
+    status: string
+    completedAt?: Date | string
+  }
+
+  export type MockTestAttemptCreateOrConnectWithoutUserInput = {
+    where: MockTestAttemptWhereUniqueInput
+    create: XOR<MockTestAttemptCreateWithoutUserInput, MockTestAttemptUncheckedCreateWithoutUserInput>
+  }
+
+  export type MockTestAttemptCreateManyUserInputEnvelope = {
+    data: MockTestAttemptCreateManyUserInput | MockTestAttemptCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
   export type EnrollmentUpsertWithWhereUniqueWithoutUserInput = {
     where: EnrollmentWhereUniqueInput
     update: XOR<EnrollmentUpdateWithoutUserInput, EnrollmentUncheckedUpdateWithoutUserInput>
@@ -24879,6 +29189,35 @@ export namespace Prisma {
     completedAt?: DateTimeFilter<"LessonCompletion"> | Date | string
   }
 
+  export type MockTestAttemptUpsertWithWhereUniqueWithoutUserInput = {
+    where: MockTestAttemptWhereUniqueInput
+    update: XOR<MockTestAttemptUpdateWithoutUserInput, MockTestAttemptUncheckedUpdateWithoutUserInput>
+    create: XOR<MockTestAttemptCreateWithoutUserInput, MockTestAttemptUncheckedCreateWithoutUserInput>
+  }
+
+  export type MockTestAttemptUpdateWithWhereUniqueWithoutUserInput = {
+    where: MockTestAttemptWhereUniqueInput
+    data: XOR<MockTestAttemptUpdateWithoutUserInput, MockTestAttemptUncheckedUpdateWithoutUserInput>
+  }
+
+  export type MockTestAttemptUpdateManyWithWhereWithoutUserInput = {
+    where: MockTestAttemptScalarWhereInput
+    data: XOR<MockTestAttemptUpdateManyMutationInput, MockTestAttemptUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type MockTestAttemptScalarWhereInput = {
+    AND?: MockTestAttemptScalarWhereInput | MockTestAttemptScalarWhereInput[]
+    OR?: MockTestAttemptScalarWhereInput[]
+    NOT?: MockTestAttemptScalarWhereInput | MockTestAttemptScalarWhereInput[]
+    id?: StringFilter<"MockTestAttempt"> | string
+    userId?: StringFilter<"MockTestAttempt"> | string
+    mockTestId?: StringFilter<"MockTestAttempt"> | string
+    score?: IntFilter<"MockTestAttempt"> | number
+    percentage?: FloatFilter<"MockTestAttempt"> | number
+    status?: StringFilter<"MockTestAttempt"> | string
+    completedAt?: DateTimeFilter<"MockTestAttempt"> | Date | string
+  }
+
   export type UserCreateWithoutStreakInput = {
     id?: string
     email: string
@@ -24902,6 +29241,7 @@ export namespace Prisma {
     notifications?: NotificationCreateNestedManyWithoutUserInput
     payments?: PaymentCreateNestedManyWithoutUserInput
     lessonCompletions?: LessonCompletionCreateNestedManyWithoutUserInput
+    newMockTestAttempts?: MockTestAttemptCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutStreakInput = {
@@ -24927,6 +29267,7 @@ export namespace Prisma {
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     payments?: PaymentUncheckedCreateNestedManyWithoutUserInput
     lessonCompletions?: LessonCompletionUncheckedCreateNestedManyWithoutUserInput
+    newMockTestAttempts?: MockTestAttemptUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutStreakInput = {
@@ -24968,6 +29309,7 @@ export namespace Prisma {
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     payments?: PaymentUpdateManyWithoutUserNestedInput
     lessonCompletions?: LessonCompletionUpdateManyWithoutUserNestedInput
+    newMockTestAttempts?: MockTestAttemptUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutStreakInput = {
@@ -24993,6 +29335,7 @@ export namespace Prisma {
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     payments?: PaymentUncheckedUpdateManyWithoutUserNestedInput
     lessonCompletions?: LessonCompletionUncheckedUpdateManyWithoutUserNestedInput
+    newMockTestAttempts?: MockTestAttemptUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutOwnedCoursesInput = {
@@ -25018,6 +29361,7 @@ export namespace Prisma {
     notifications?: NotificationCreateNestedManyWithoutUserInput
     payments?: PaymentCreateNestedManyWithoutUserInput
     lessonCompletions?: LessonCompletionCreateNestedManyWithoutUserInput
+    newMockTestAttempts?: MockTestAttemptCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutOwnedCoursesInput = {
@@ -25043,6 +29387,7 @@ export namespace Prisma {
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     payments?: PaymentUncheckedCreateNestedManyWithoutUserInput
     lessonCompletions?: LessonCompletionUncheckedCreateNestedManyWithoutUserInput
+    newMockTestAttempts?: MockTestAttemptUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutOwnedCoursesInput = {
@@ -25066,6 +29411,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     completions?: LessonCompletionCreateNestedManyWithoutLessonInput
     quiz?: LessonQuizCreateNestedOneWithoutLessonInput
+    mockTest?: MockTestCreateNestedOneWithoutLessonInput
   }
 
   export type LessonUncheckedCreateWithoutCourseInput = {
@@ -25084,6 +29430,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     completions?: LessonCompletionUncheckedCreateNestedManyWithoutLessonInput
     quiz?: LessonQuizUncheckedCreateNestedOneWithoutLessonInput
+    mockTest?: MockTestUncheckedCreateNestedOneWithoutLessonInput
   }
 
   export type LessonCreateOrConnectWithoutCourseInput = {
@@ -25220,6 +29567,7 @@ export namespace Prisma {
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     payments?: PaymentUpdateManyWithoutUserNestedInput
     lessonCompletions?: LessonCompletionUpdateManyWithoutUserNestedInput
+    newMockTestAttempts?: MockTestAttemptUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutOwnedCoursesInput = {
@@ -25245,6 +29593,7 @@ export namespace Prisma {
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     payments?: PaymentUncheckedUpdateManyWithoutUserNestedInput
     lessonCompletions?: LessonCompletionUncheckedUpdateManyWithoutUserNestedInput
+    newMockTestAttempts?: MockTestAttemptUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type LessonUpsertWithWhereUniqueWithoutCourseInput = {
@@ -25370,6 +29719,7 @@ export namespace Prisma {
     notifications?: NotificationCreateNestedManyWithoutUserInput
     payments?: PaymentCreateNestedManyWithoutUserInput
     lessonCompletions?: LessonCompletionCreateNestedManyWithoutUserInput
+    newMockTestAttempts?: MockTestAttemptCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutEnrollmentsInput = {
@@ -25395,6 +29745,7 @@ export namespace Prisma {
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     payments?: PaymentUncheckedCreateNestedManyWithoutUserInput
     lessonCompletions?: LessonCompletionUncheckedCreateNestedManyWithoutUserInput
+    newMockTestAttempts?: MockTestAttemptUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutEnrollmentsInput = {
@@ -25477,6 +29828,7 @@ export namespace Prisma {
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     payments?: PaymentUpdateManyWithoutUserNestedInput
     lessonCompletions?: LessonCompletionUpdateManyWithoutUserNestedInput
+    newMockTestAttempts?: MockTestAttemptUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutEnrollmentsInput = {
@@ -25502,6 +29854,7 @@ export namespace Prisma {
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     payments?: PaymentUncheckedUpdateManyWithoutUserNestedInput
     lessonCompletions?: LessonCompletionUncheckedUpdateManyWithoutUserNestedInput
+    newMockTestAttempts?: MockTestAttemptUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type CourseUpsertWithoutEnrollmentsInput = {
@@ -25643,6 +29996,35 @@ export namespace Prisma {
     create: XOR<LessonQuizCreateWithoutLessonInput, LessonQuizUncheckedCreateWithoutLessonInput>
   }
 
+  export type MockTestCreateWithoutLessonInput = {
+    id?: string
+    totalMarks: number
+    passingPercentage: number
+    difficulty: string
+    published?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    questions?: MockQuestionCreateNestedManyWithoutMockTestInput
+    attempts?: MockTestAttemptCreateNestedManyWithoutMockTestInput
+  }
+
+  export type MockTestUncheckedCreateWithoutLessonInput = {
+    id?: string
+    totalMarks: number
+    passingPercentage: number
+    difficulty: string
+    published?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    questions?: MockQuestionUncheckedCreateNestedManyWithoutMockTestInput
+    attempts?: MockTestAttemptUncheckedCreateNestedManyWithoutMockTestInput
+  }
+
+  export type MockTestCreateOrConnectWithoutLessonInput = {
+    where: MockTestWhereUniqueInput
+    create: XOR<MockTestCreateWithoutLessonInput, MockTestUncheckedCreateWithoutLessonInput>
+  }
+
   export type CourseUpsertWithoutLessonsInput = {
     update: XOR<CourseUpdateWithoutLessonsInput, CourseUncheckedUpdateWithoutLessonsInput>
     create: XOR<CourseCreateWithoutLessonsInput, CourseUncheckedCreateWithoutLessonsInput>
@@ -25741,6 +30123,41 @@ export namespace Prisma {
     attempts?: LessonQuizAttemptUncheckedUpdateManyWithoutQuizNestedInput
   }
 
+  export type MockTestUpsertWithoutLessonInput = {
+    update: XOR<MockTestUpdateWithoutLessonInput, MockTestUncheckedUpdateWithoutLessonInput>
+    create: XOR<MockTestCreateWithoutLessonInput, MockTestUncheckedCreateWithoutLessonInput>
+    where?: MockTestWhereInput
+  }
+
+  export type MockTestUpdateToOneWithWhereWithoutLessonInput = {
+    where?: MockTestWhereInput
+    data: XOR<MockTestUpdateWithoutLessonInput, MockTestUncheckedUpdateWithoutLessonInput>
+  }
+
+  export type MockTestUpdateWithoutLessonInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    totalMarks?: IntFieldUpdateOperationsInput | number
+    passingPercentage?: IntFieldUpdateOperationsInput | number
+    difficulty?: StringFieldUpdateOperationsInput | string
+    published?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    questions?: MockQuestionUpdateManyWithoutMockTestNestedInput
+    attempts?: MockTestAttemptUpdateManyWithoutMockTestNestedInput
+  }
+
+  export type MockTestUncheckedUpdateWithoutLessonInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    totalMarks?: IntFieldUpdateOperationsInput | number
+    passingPercentage?: IntFieldUpdateOperationsInput | number
+    difficulty?: StringFieldUpdateOperationsInput | string
+    published?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    questions?: MockQuestionUncheckedUpdateManyWithoutMockTestNestedInput
+    attempts?: MockTestAttemptUncheckedUpdateManyWithoutMockTestNestedInput
+  }
+
   export type UserCreateWithoutLessonCompletionsInput = {
     id?: string
     email: string
@@ -25764,6 +30181,7 @@ export namespace Prisma {
     ownedCourses?: CourseCreateNestedManyWithoutInstructorInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
     payments?: PaymentCreateNestedManyWithoutUserInput
+    newMockTestAttempts?: MockTestAttemptCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutLessonCompletionsInput = {
@@ -25789,6 +30207,7 @@ export namespace Prisma {
     ownedCourses?: CourseUncheckedCreateNestedManyWithoutInstructorInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     payments?: PaymentUncheckedCreateNestedManyWithoutUserInput
+    newMockTestAttempts?: MockTestAttemptUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutLessonCompletionsInput = {
@@ -25812,6 +30231,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     course: CourseCreateNestedOneWithoutLessonsInput
     quiz?: LessonQuizCreateNestedOneWithoutLessonInput
+    mockTest?: MockTestCreateNestedOneWithoutLessonInput
   }
 
   export type LessonUncheckedCreateWithoutCompletionsInput = {
@@ -25830,6 +30250,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     quiz?: LessonQuizUncheckedCreateNestedOneWithoutLessonInput
+    mockTest?: MockTestUncheckedCreateNestedOneWithoutLessonInput
   }
 
   export type LessonCreateOrConnectWithoutCompletionsInput = {
@@ -25871,6 +30292,7 @@ export namespace Prisma {
     ownedCourses?: CourseUpdateManyWithoutInstructorNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     payments?: PaymentUpdateManyWithoutUserNestedInput
+    newMockTestAttempts?: MockTestAttemptUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutLessonCompletionsInput = {
@@ -25896,6 +30318,7 @@ export namespace Prisma {
     ownedCourses?: CourseUncheckedUpdateManyWithoutInstructorNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     payments?: PaymentUncheckedUpdateManyWithoutUserNestedInput
+    newMockTestAttempts?: MockTestAttemptUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type LessonUpsertWithoutCompletionsInput = {
@@ -25925,6 +30348,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     course?: CourseUpdateOneRequiredWithoutLessonsNestedInput
     quiz?: LessonQuizUpdateOneWithoutLessonNestedInput
+    mockTest?: MockTestUpdateOneWithoutLessonNestedInput
   }
 
   export type LessonUncheckedUpdateWithoutCompletionsInput = {
@@ -25943,6 +30367,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     quiz?: LessonQuizUncheckedUpdateOneWithoutLessonNestedInput
+    mockTest?: MockTestUncheckedUpdateOneWithoutLessonNestedInput
   }
 
   export type LessonCreateWithoutQuizInput = {
@@ -25961,6 +30386,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     course: CourseCreateNestedOneWithoutLessonsInput
     completions?: LessonCompletionCreateNestedManyWithoutLessonInput
+    mockTest?: MockTestCreateNestedOneWithoutLessonInput
   }
 
   export type LessonUncheckedCreateWithoutQuizInput = {
@@ -25979,6 +30405,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     completions?: LessonCompletionUncheckedCreateNestedManyWithoutLessonInput
+    mockTest?: MockTestUncheckedCreateNestedOneWithoutLessonInput
   }
 
   export type LessonCreateOrConnectWithoutQuizInput = {
@@ -26039,6 +30466,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     course?: CourseUpdateOneRequiredWithoutLessonsNestedInput
     completions?: LessonCompletionUpdateManyWithoutLessonNestedInput
+    mockTest?: MockTestUpdateOneWithoutLessonNestedInput
   }
 
   export type LessonUncheckedUpdateWithoutQuizInput = {
@@ -26057,6 +30485,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     completions?: LessonCompletionUncheckedUpdateManyWithoutLessonNestedInput
+    mockTest?: MockTestUncheckedUpdateOneWithoutLessonNestedInput
   }
 
   export type LessonQuizAttemptUpsertWithWhereUniqueWithoutQuizInput = {
@@ -26098,6 +30527,7 @@ export namespace Prisma {
     notifications?: NotificationCreateNestedManyWithoutUserInput
     payments?: PaymentCreateNestedManyWithoutUserInput
     lessonCompletions?: LessonCompletionCreateNestedManyWithoutUserInput
+    newMockTestAttempts?: MockTestAttemptCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutMockTestAttemptsInput = {
@@ -26123,6 +30553,7 @@ export namespace Prisma {
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     payments?: PaymentUncheckedCreateNestedManyWithoutUserInput
     lessonCompletions?: LessonCompletionUncheckedCreateNestedManyWithoutUserInput
+    newMockTestAttempts?: MockTestAttemptUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutMockTestAttemptsInput = {
@@ -26193,6 +30624,7 @@ export namespace Prisma {
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     payments?: PaymentUpdateManyWithoutUserNestedInput
     lessonCompletions?: LessonCompletionUpdateManyWithoutUserNestedInput
+    newMockTestAttempts?: MockTestAttemptUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutMockTestAttemptsInput = {
@@ -26218,6 +30650,7 @@ export namespace Prisma {
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     payments?: PaymentUncheckedUpdateManyWithoutUserNestedInput
     lessonCompletions?: LessonCompletionUncheckedUpdateManyWithoutUserNestedInput
+    newMockTestAttempts?: MockTestAttemptUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type LessonQuizUpsertWithoutAttemptsInput = {
@@ -26278,6 +30711,7 @@ export namespace Prisma {
     notifications?: NotificationCreateNestedManyWithoutUserInput
     payments?: PaymentCreateNestedManyWithoutUserInput
     lessonCompletions?: LessonCompletionCreateNestedManyWithoutUserInput
+    newMockTestAttempts?: MockTestAttemptCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutKarmaLedgerInput = {
@@ -26303,6 +30737,7 @@ export namespace Prisma {
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     payments?: PaymentUncheckedCreateNestedManyWithoutUserInput
     lessonCompletions?: LessonCompletionUncheckedCreateNestedManyWithoutUserInput
+    newMockTestAttempts?: MockTestAttemptUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutKarmaLedgerInput = {
@@ -26344,6 +30779,7 @@ export namespace Prisma {
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     payments?: PaymentUpdateManyWithoutUserNestedInput
     lessonCompletions?: LessonCompletionUpdateManyWithoutUserNestedInput
+    newMockTestAttempts?: MockTestAttemptUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutKarmaLedgerInput = {
@@ -26369,6 +30805,7 @@ export namespace Prisma {
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     payments?: PaymentUncheckedUpdateManyWithoutUserNestedInput
     lessonCompletions?: LessonCompletionUncheckedUpdateManyWithoutUserNestedInput
+    newMockTestAttempts?: MockTestAttemptUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutPostsInput = {
@@ -26394,6 +30831,7 @@ export namespace Prisma {
     notifications?: NotificationCreateNestedManyWithoutUserInput
     payments?: PaymentCreateNestedManyWithoutUserInput
     lessonCompletions?: LessonCompletionCreateNestedManyWithoutUserInput
+    newMockTestAttempts?: MockTestAttemptCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutPostsInput = {
@@ -26419,6 +30857,7 @@ export namespace Prisma {
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     payments?: PaymentUncheckedCreateNestedManyWithoutUserInput
     lessonCompletions?: LessonCompletionUncheckedCreateNestedManyWithoutUserInput
+    newMockTestAttempts?: MockTestAttemptUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutPostsInput = {
@@ -26506,6 +30945,7 @@ export namespace Prisma {
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     payments?: PaymentUpdateManyWithoutUserNestedInput
     lessonCompletions?: LessonCompletionUpdateManyWithoutUserNestedInput
+    newMockTestAttempts?: MockTestAttemptUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutPostsInput = {
@@ -26531,6 +30971,7 @@ export namespace Prisma {
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     payments?: PaymentUncheckedUpdateManyWithoutUserNestedInput
     lessonCompletions?: LessonCompletionUncheckedUpdateManyWithoutUserNestedInput
+    newMockTestAttempts?: MockTestAttemptUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type CommentUpsertWithWhereUniqueWithoutPostInput = {
@@ -26617,6 +31058,7 @@ export namespace Prisma {
     notifications?: NotificationCreateNestedManyWithoutUserInput
     payments?: PaymentCreateNestedManyWithoutUserInput
     lessonCompletions?: LessonCompletionCreateNestedManyWithoutUserInput
+    newMockTestAttempts?: MockTestAttemptCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutCommentsInput = {
@@ -26642,6 +31084,7 @@ export namespace Prisma {
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     payments?: PaymentUncheckedCreateNestedManyWithoutUserInput
     lessonCompletions?: LessonCompletionUncheckedCreateNestedManyWithoutUserInput
+    newMockTestAttempts?: MockTestAttemptUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutCommentsInput = {
@@ -26718,6 +31161,7 @@ export namespace Prisma {
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     payments?: PaymentUpdateManyWithoutUserNestedInput
     lessonCompletions?: LessonCompletionUpdateManyWithoutUserNestedInput
+    newMockTestAttempts?: MockTestAttemptUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCommentsInput = {
@@ -26743,6 +31187,7 @@ export namespace Prisma {
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     payments?: PaymentUncheckedUpdateManyWithoutUserNestedInput
     lessonCompletions?: LessonCompletionUncheckedUpdateManyWithoutUserNestedInput
+    newMockTestAttempts?: MockTestAttemptUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutPostVotesInput = {
@@ -26768,6 +31213,7 @@ export namespace Prisma {
     notifications?: NotificationCreateNestedManyWithoutUserInput
     payments?: PaymentCreateNestedManyWithoutUserInput
     lessonCompletions?: LessonCompletionCreateNestedManyWithoutUserInput
+    newMockTestAttempts?: MockTestAttemptCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutPostVotesInput = {
@@ -26793,6 +31239,7 @@ export namespace Prisma {
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     payments?: PaymentUncheckedCreateNestedManyWithoutUserInput
     lessonCompletions?: LessonCompletionUncheckedCreateNestedManyWithoutUserInput
+    newMockTestAttempts?: MockTestAttemptUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutPostVotesInput = {
@@ -26863,6 +31310,7 @@ export namespace Prisma {
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     payments?: PaymentUpdateManyWithoutUserNestedInput
     lessonCompletions?: LessonCompletionUpdateManyWithoutUserNestedInput
+    newMockTestAttempts?: MockTestAttemptUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutPostVotesInput = {
@@ -26888,6 +31336,7 @@ export namespace Prisma {
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     payments?: PaymentUncheckedUpdateManyWithoutUserNestedInput
     lessonCompletions?: LessonCompletionUncheckedUpdateManyWithoutUserNestedInput
+    newMockTestAttempts?: MockTestAttemptUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type CommunityPostUpsertWithoutVotesInput = {
@@ -26948,6 +31397,7 @@ export namespace Prisma {
     notifications?: NotificationCreateNestedManyWithoutUserInput
     payments?: PaymentCreateNestedManyWithoutUserInput
     lessonCompletions?: LessonCompletionCreateNestedManyWithoutUserInput
+    newMockTestAttempts?: MockTestAttemptCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutQuizAttemptsInput = {
@@ -26973,6 +31423,7 @@ export namespace Prisma {
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     payments?: PaymentUncheckedCreateNestedManyWithoutUserInput
     lessonCompletions?: LessonCompletionUncheckedCreateNestedManyWithoutUserInput
+    newMockTestAttempts?: MockTestAttemptUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutQuizAttemptsInput = {
@@ -27014,6 +31465,7 @@ export namespace Prisma {
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     payments?: PaymentUpdateManyWithoutUserNestedInput
     lessonCompletions?: LessonCompletionUpdateManyWithoutUserNestedInput
+    newMockTestAttempts?: MockTestAttemptUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutQuizAttemptsInput = {
@@ -27039,6 +31491,7 @@ export namespace Prisma {
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     payments?: PaymentUncheckedUpdateManyWithoutUserNestedInput
     lessonCompletions?: LessonCompletionUncheckedUpdateManyWithoutUserNestedInput
+    newMockTestAttempts?: MockTestAttemptUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutNotificationsInput = {
@@ -27064,6 +31517,7 @@ export namespace Prisma {
     ownedCourses?: CourseCreateNestedManyWithoutInstructorInput
     payments?: PaymentCreateNestedManyWithoutUserInput
     lessonCompletions?: LessonCompletionCreateNestedManyWithoutUserInput
+    newMockTestAttempts?: MockTestAttemptCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutNotificationsInput = {
@@ -27089,6 +31543,7 @@ export namespace Prisma {
     ownedCourses?: CourseUncheckedCreateNestedManyWithoutInstructorInput
     payments?: PaymentUncheckedCreateNestedManyWithoutUserInput
     lessonCompletions?: LessonCompletionUncheckedCreateNestedManyWithoutUserInput
+    newMockTestAttempts?: MockTestAttemptUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutNotificationsInput = {
@@ -27130,6 +31585,7 @@ export namespace Prisma {
     ownedCourses?: CourseUpdateManyWithoutInstructorNestedInput
     payments?: PaymentUpdateManyWithoutUserNestedInput
     lessonCompletions?: LessonCompletionUpdateManyWithoutUserNestedInput
+    newMockTestAttempts?: MockTestAttemptUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutNotificationsInput = {
@@ -27155,6 +31611,7 @@ export namespace Prisma {
     ownedCourses?: CourseUncheckedUpdateManyWithoutInstructorNestedInput
     payments?: PaymentUncheckedUpdateManyWithoutUserNestedInput
     lessonCompletions?: LessonCompletionUncheckedUpdateManyWithoutUserNestedInput
+    newMockTestAttempts?: MockTestAttemptUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type CourseCreateWithoutLiveSessionsInput = {
@@ -27268,6 +31725,7 @@ export namespace Prisma {
     ownedCourses?: CourseCreateNestedManyWithoutInstructorInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
     lessonCompletions?: LessonCompletionCreateNestedManyWithoutUserInput
+    newMockTestAttempts?: MockTestAttemptCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutPaymentsInput = {
@@ -27293,6 +31751,7 @@ export namespace Prisma {
     ownedCourses?: CourseUncheckedCreateNestedManyWithoutInstructorInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     lessonCompletions?: LessonCompletionUncheckedCreateNestedManyWithoutUserInput
+    newMockTestAttempts?: MockTestAttemptUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutPaymentsInput = {
@@ -27375,6 +31834,7 @@ export namespace Prisma {
     ownedCourses?: CourseUpdateManyWithoutInstructorNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     lessonCompletions?: LessonCompletionUpdateManyWithoutUserNestedInput
+    newMockTestAttempts?: MockTestAttemptUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutPaymentsInput = {
@@ -27400,6 +31860,7 @@ export namespace Prisma {
     ownedCourses?: CourseUncheckedUpdateManyWithoutInstructorNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     lessonCompletions?: LessonCompletionUncheckedUpdateManyWithoutUserNestedInput
+    newMockTestAttempts?: MockTestAttemptUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type CourseUpsertWithoutPaymentsInput = {
@@ -27447,6 +31908,450 @@ export namespace Prisma {
     lessons?: LessonUncheckedUpdateManyWithoutCourseNestedInput
     enrollments?: EnrollmentUncheckedUpdateManyWithoutCourseNestedInput
     liveSessions?: LiveSessionUncheckedUpdateManyWithoutCourseNestedInput
+  }
+
+  export type LessonCreateWithoutMockTestInput = {
+    id?: string
+    title: string
+    description?: string | null
+    type?: $Enums.ContentType
+    content?: string | null
+    youtubeVideoId?: string | null
+    liveMeetingUrl?: string | null
+    liveMeetingAt?: Date | string | null
+    duration?: number | null
+    order: number
+    status?: $Enums.LessonStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    course: CourseCreateNestedOneWithoutLessonsInput
+    completions?: LessonCompletionCreateNestedManyWithoutLessonInput
+    quiz?: LessonQuizCreateNestedOneWithoutLessonInput
+  }
+
+  export type LessonUncheckedCreateWithoutMockTestInput = {
+    id?: string
+    courseId: string
+    title: string
+    description?: string | null
+    type?: $Enums.ContentType
+    content?: string | null
+    youtubeVideoId?: string | null
+    liveMeetingUrl?: string | null
+    liveMeetingAt?: Date | string | null
+    duration?: number | null
+    order: number
+    status?: $Enums.LessonStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    completions?: LessonCompletionUncheckedCreateNestedManyWithoutLessonInput
+    quiz?: LessonQuizUncheckedCreateNestedOneWithoutLessonInput
+  }
+
+  export type LessonCreateOrConnectWithoutMockTestInput = {
+    where: LessonWhereUniqueInput
+    create: XOR<LessonCreateWithoutMockTestInput, LessonUncheckedCreateWithoutMockTestInput>
+  }
+
+  export type MockQuestionCreateWithoutMockTestInput = {
+    id?: string
+    question: string
+    optionA: string
+    optionB: string
+    optionC: string
+    optionD: string
+    correctIndex: number
+  }
+
+  export type MockQuestionUncheckedCreateWithoutMockTestInput = {
+    id?: string
+    question: string
+    optionA: string
+    optionB: string
+    optionC: string
+    optionD: string
+    correctIndex: number
+  }
+
+  export type MockQuestionCreateOrConnectWithoutMockTestInput = {
+    where: MockQuestionWhereUniqueInput
+    create: XOR<MockQuestionCreateWithoutMockTestInput, MockQuestionUncheckedCreateWithoutMockTestInput>
+  }
+
+  export type MockQuestionCreateManyMockTestInputEnvelope = {
+    data: MockQuestionCreateManyMockTestInput | MockQuestionCreateManyMockTestInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type MockTestAttemptCreateWithoutMockTestInput = {
+    id?: string
+    score: number
+    percentage: number
+    status: string
+    completedAt?: Date | string
+    user: UserCreateNestedOneWithoutNewMockTestAttemptsInput
+  }
+
+  export type MockTestAttemptUncheckedCreateWithoutMockTestInput = {
+    id?: string
+    userId: string
+    score: number
+    percentage: number
+    status: string
+    completedAt?: Date | string
+  }
+
+  export type MockTestAttemptCreateOrConnectWithoutMockTestInput = {
+    where: MockTestAttemptWhereUniqueInput
+    create: XOR<MockTestAttemptCreateWithoutMockTestInput, MockTestAttemptUncheckedCreateWithoutMockTestInput>
+  }
+
+  export type MockTestAttemptCreateManyMockTestInputEnvelope = {
+    data: MockTestAttemptCreateManyMockTestInput | MockTestAttemptCreateManyMockTestInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type LessonUpsertWithoutMockTestInput = {
+    update: XOR<LessonUpdateWithoutMockTestInput, LessonUncheckedUpdateWithoutMockTestInput>
+    create: XOR<LessonCreateWithoutMockTestInput, LessonUncheckedCreateWithoutMockTestInput>
+    where?: LessonWhereInput
+  }
+
+  export type LessonUpdateToOneWithWhereWithoutMockTestInput = {
+    where?: LessonWhereInput
+    data: XOR<LessonUpdateWithoutMockTestInput, LessonUncheckedUpdateWithoutMockTestInput>
+  }
+
+  export type LessonUpdateWithoutMockTestInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: EnumContentTypeFieldUpdateOperationsInput | $Enums.ContentType
+    content?: NullableStringFieldUpdateOperationsInput | string | null
+    youtubeVideoId?: NullableStringFieldUpdateOperationsInput | string | null
+    liveMeetingUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    liveMeetingAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    duration?: NullableIntFieldUpdateOperationsInput | number | null
+    order?: IntFieldUpdateOperationsInput | number
+    status?: EnumLessonStatusFieldUpdateOperationsInput | $Enums.LessonStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    course?: CourseUpdateOneRequiredWithoutLessonsNestedInput
+    completions?: LessonCompletionUpdateManyWithoutLessonNestedInput
+    quiz?: LessonQuizUpdateOneWithoutLessonNestedInput
+  }
+
+  export type LessonUncheckedUpdateWithoutMockTestInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    courseId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: EnumContentTypeFieldUpdateOperationsInput | $Enums.ContentType
+    content?: NullableStringFieldUpdateOperationsInput | string | null
+    youtubeVideoId?: NullableStringFieldUpdateOperationsInput | string | null
+    liveMeetingUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    liveMeetingAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    duration?: NullableIntFieldUpdateOperationsInput | number | null
+    order?: IntFieldUpdateOperationsInput | number
+    status?: EnumLessonStatusFieldUpdateOperationsInput | $Enums.LessonStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    completions?: LessonCompletionUncheckedUpdateManyWithoutLessonNestedInput
+    quiz?: LessonQuizUncheckedUpdateOneWithoutLessonNestedInput
+  }
+
+  export type MockQuestionUpsertWithWhereUniqueWithoutMockTestInput = {
+    where: MockQuestionWhereUniqueInput
+    update: XOR<MockQuestionUpdateWithoutMockTestInput, MockQuestionUncheckedUpdateWithoutMockTestInput>
+    create: XOR<MockQuestionCreateWithoutMockTestInput, MockQuestionUncheckedCreateWithoutMockTestInput>
+  }
+
+  export type MockQuestionUpdateWithWhereUniqueWithoutMockTestInput = {
+    where: MockQuestionWhereUniqueInput
+    data: XOR<MockQuestionUpdateWithoutMockTestInput, MockQuestionUncheckedUpdateWithoutMockTestInput>
+  }
+
+  export type MockQuestionUpdateManyWithWhereWithoutMockTestInput = {
+    where: MockQuestionScalarWhereInput
+    data: XOR<MockQuestionUpdateManyMutationInput, MockQuestionUncheckedUpdateManyWithoutMockTestInput>
+  }
+
+  export type MockQuestionScalarWhereInput = {
+    AND?: MockQuestionScalarWhereInput | MockQuestionScalarWhereInput[]
+    OR?: MockQuestionScalarWhereInput[]
+    NOT?: MockQuestionScalarWhereInput | MockQuestionScalarWhereInput[]
+    id?: StringFilter<"MockQuestion"> | string
+    mockTestId?: StringFilter<"MockQuestion"> | string
+    question?: StringFilter<"MockQuestion"> | string
+    optionA?: StringFilter<"MockQuestion"> | string
+    optionB?: StringFilter<"MockQuestion"> | string
+    optionC?: StringFilter<"MockQuestion"> | string
+    optionD?: StringFilter<"MockQuestion"> | string
+    correctIndex?: IntFilter<"MockQuestion"> | number
+  }
+
+  export type MockTestAttemptUpsertWithWhereUniqueWithoutMockTestInput = {
+    where: MockTestAttemptWhereUniqueInput
+    update: XOR<MockTestAttemptUpdateWithoutMockTestInput, MockTestAttemptUncheckedUpdateWithoutMockTestInput>
+    create: XOR<MockTestAttemptCreateWithoutMockTestInput, MockTestAttemptUncheckedCreateWithoutMockTestInput>
+  }
+
+  export type MockTestAttemptUpdateWithWhereUniqueWithoutMockTestInput = {
+    where: MockTestAttemptWhereUniqueInput
+    data: XOR<MockTestAttemptUpdateWithoutMockTestInput, MockTestAttemptUncheckedUpdateWithoutMockTestInput>
+  }
+
+  export type MockTestAttemptUpdateManyWithWhereWithoutMockTestInput = {
+    where: MockTestAttemptScalarWhereInput
+    data: XOR<MockTestAttemptUpdateManyMutationInput, MockTestAttemptUncheckedUpdateManyWithoutMockTestInput>
+  }
+
+  export type MockTestCreateWithoutQuestionsInput = {
+    id?: string
+    totalMarks: number
+    passingPercentage: number
+    difficulty: string
+    published?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    lesson: LessonCreateNestedOneWithoutMockTestInput
+    attempts?: MockTestAttemptCreateNestedManyWithoutMockTestInput
+  }
+
+  export type MockTestUncheckedCreateWithoutQuestionsInput = {
+    id?: string
+    lessonId: string
+    totalMarks: number
+    passingPercentage: number
+    difficulty: string
+    published?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    attempts?: MockTestAttemptUncheckedCreateNestedManyWithoutMockTestInput
+  }
+
+  export type MockTestCreateOrConnectWithoutQuestionsInput = {
+    where: MockTestWhereUniqueInput
+    create: XOR<MockTestCreateWithoutQuestionsInput, MockTestUncheckedCreateWithoutQuestionsInput>
+  }
+
+  export type MockTestUpsertWithoutQuestionsInput = {
+    update: XOR<MockTestUpdateWithoutQuestionsInput, MockTestUncheckedUpdateWithoutQuestionsInput>
+    create: XOR<MockTestCreateWithoutQuestionsInput, MockTestUncheckedCreateWithoutQuestionsInput>
+    where?: MockTestWhereInput
+  }
+
+  export type MockTestUpdateToOneWithWhereWithoutQuestionsInput = {
+    where?: MockTestWhereInput
+    data: XOR<MockTestUpdateWithoutQuestionsInput, MockTestUncheckedUpdateWithoutQuestionsInput>
+  }
+
+  export type MockTestUpdateWithoutQuestionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    totalMarks?: IntFieldUpdateOperationsInput | number
+    passingPercentage?: IntFieldUpdateOperationsInput | number
+    difficulty?: StringFieldUpdateOperationsInput | string
+    published?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    lesson?: LessonUpdateOneRequiredWithoutMockTestNestedInput
+    attempts?: MockTestAttemptUpdateManyWithoutMockTestNestedInput
+  }
+
+  export type MockTestUncheckedUpdateWithoutQuestionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    lessonId?: StringFieldUpdateOperationsInput | string
+    totalMarks?: IntFieldUpdateOperationsInput | number
+    passingPercentage?: IntFieldUpdateOperationsInput | number
+    difficulty?: StringFieldUpdateOperationsInput | string
+    published?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    attempts?: MockTestAttemptUncheckedUpdateManyWithoutMockTestNestedInput
+  }
+
+  export type UserCreateWithoutNewMockTestAttemptsInput = {
+    id?: string
+    email: string
+    phone?: string | null
+    passwordHash: string
+    role?: $Enums.Role
+    fullName?: string | null
+    bio?: string | null
+    avatar?: string | null
+    karmaPoints?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    enrollments?: EnrollmentCreateNestedManyWithoutUserInput
+    posts?: CommunityPostCreateNestedManyWithoutUserInput
+    comments?: CommentCreateNestedManyWithoutUserInput
+    postVotes?: PostVoteCreateNestedManyWithoutUserInput
+    quizAttempts?: QuizAttemptCreateNestedManyWithoutUserInput
+    karmaLedger?: KarmaLedgerCreateNestedManyWithoutUserInput
+    streak?: StreakCreateNestedOneWithoutUserInput
+    mockTestAttempts?: LessonQuizAttemptCreateNestedManyWithoutUserInput
+    ownedCourses?: CourseCreateNestedManyWithoutInstructorInput
+    notifications?: NotificationCreateNestedManyWithoutUserInput
+    payments?: PaymentCreateNestedManyWithoutUserInput
+    lessonCompletions?: LessonCompletionCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutNewMockTestAttemptsInput = {
+    id?: string
+    email: string
+    phone?: string | null
+    passwordHash: string
+    role?: $Enums.Role
+    fullName?: string | null
+    bio?: string | null
+    avatar?: string | null
+    karmaPoints?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    enrollments?: EnrollmentUncheckedCreateNestedManyWithoutUserInput
+    posts?: CommunityPostUncheckedCreateNestedManyWithoutUserInput
+    comments?: CommentUncheckedCreateNestedManyWithoutUserInput
+    postVotes?: PostVoteUncheckedCreateNestedManyWithoutUserInput
+    quizAttempts?: QuizAttemptUncheckedCreateNestedManyWithoutUserInput
+    karmaLedger?: KarmaLedgerUncheckedCreateNestedManyWithoutUserInput
+    streak?: StreakUncheckedCreateNestedOneWithoutUserInput
+    mockTestAttempts?: LessonQuizAttemptUncheckedCreateNestedManyWithoutUserInput
+    ownedCourses?: CourseUncheckedCreateNestedManyWithoutInstructorInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
+    payments?: PaymentUncheckedCreateNestedManyWithoutUserInput
+    lessonCompletions?: LessonCompletionUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutNewMockTestAttemptsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutNewMockTestAttemptsInput, UserUncheckedCreateWithoutNewMockTestAttemptsInput>
+  }
+
+  export type MockTestCreateWithoutAttemptsInput = {
+    id?: string
+    totalMarks: number
+    passingPercentage: number
+    difficulty: string
+    published?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    lesson: LessonCreateNestedOneWithoutMockTestInput
+    questions?: MockQuestionCreateNestedManyWithoutMockTestInput
+  }
+
+  export type MockTestUncheckedCreateWithoutAttemptsInput = {
+    id?: string
+    lessonId: string
+    totalMarks: number
+    passingPercentage: number
+    difficulty: string
+    published?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    questions?: MockQuestionUncheckedCreateNestedManyWithoutMockTestInput
+  }
+
+  export type MockTestCreateOrConnectWithoutAttemptsInput = {
+    where: MockTestWhereUniqueInput
+    create: XOR<MockTestCreateWithoutAttemptsInput, MockTestUncheckedCreateWithoutAttemptsInput>
+  }
+
+  export type UserUpsertWithoutNewMockTestAttemptsInput = {
+    update: XOR<UserUpdateWithoutNewMockTestAttemptsInput, UserUncheckedUpdateWithoutNewMockTestAttemptsInput>
+    create: XOR<UserCreateWithoutNewMockTestAttemptsInput, UserUncheckedCreateWithoutNewMockTestAttemptsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutNewMockTestAttemptsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutNewMockTestAttemptsInput, UserUncheckedUpdateWithoutNewMockTestAttemptsInput>
+  }
+
+  export type UserUpdateWithoutNewMockTestAttemptsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    fullName?: NullableStringFieldUpdateOperationsInput | string | null
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    karmaPoints?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    enrollments?: EnrollmentUpdateManyWithoutUserNestedInput
+    posts?: CommunityPostUpdateManyWithoutUserNestedInput
+    comments?: CommentUpdateManyWithoutUserNestedInput
+    postVotes?: PostVoteUpdateManyWithoutUserNestedInput
+    quizAttempts?: QuizAttemptUpdateManyWithoutUserNestedInput
+    karmaLedger?: KarmaLedgerUpdateManyWithoutUserNestedInput
+    streak?: StreakUpdateOneWithoutUserNestedInput
+    mockTestAttempts?: LessonQuizAttemptUpdateManyWithoutUserNestedInput
+    ownedCourses?: CourseUpdateManyWithoutInstructorNestedInput
+    notifications?: NotificationUpdateManyWithoutUserNestedInput
+    payments?: PaymentUpdateManyWithoutUserNestedInput
+    lessonCompletions?: LessonCompletionUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutNewMockTestAttemptsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    fullName?: NullableStringFieldUpdateOperationsInput | string | null
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    karmaPoints?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    enrollments?: EnrollmentUncheckedUpdateManyWithoutUserNestedInput
+    posts?: CommunityPostUncheckedUpdateManyWithoutUserNestedInput
+    comments?: CommentUncheckedUpdateManyWithoutUserNestedInput
+    postVotes?: PostVoteUncheckedUpdateManyWithoutUserNestedInput
+    quizAttempts?: QuizAttemptUncheckedUpdateManyWithoutUserNestedInput
+    karmaLedger?: KarmaLedgerUncheckedUpdateManyWithoutUserNestedInput
+    streak?: StreakUncheckedUpdateOneWithoutUserNestedInput
+    mockTestAttempts?: LessonQuizAttemptUncheckedUpdateManyWithoutUserNestedInput
+    ownedCourses?: CourseUncheckedUpdateManyWithoutInstructorNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
+    payments?: PaymentUncheckedUpdateManyWithoutUserNestedInput
+    lessonCompletions?: LessonCompletionUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type MockTestUpsertWithoutAttemptsInput = {
+    update: XOR<MockTestUpdateWithoutAttemptsInput, MockTestUncheckedUpdateWithoutAttemptsInput>
+    create: XOR<MockTestCreateWithoutAttemptsInput, MockTestUncheckedCreateWithoutAttemptsInput>
+    where?: MockTestWhereInput
+  }
+
+  export type MockTestUpdateToOneWithWhereWithoutAttemptsInput = {
+    where?: MockTestWhereInput
+    data: XOR<MockTestUpdateWithoutAttemptsInput, MockTestUncheckedUpdateWithoutAttemptsInput>
+  }
+
+  export type MockTestUpdateWithoutAttemptsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    totalMarks?: IntFieldUpdateOperationsInput | number
+    passingPercentage?: IntFieldUpdateOperationsInput | number
+    difficulty?: StringFieldUpdateOperationsInput | string
+    published?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    lesson?: LessonUpdateOneRequiredWithoutMockTestNestedInput
+    questions?: MockQuestionUpdateManyWithoutMockTestNestedInput
+  }
+
+  export type MockTestUncheckedUpdateWithoutAttemptsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    lessonId?: StringFieldUpdateOperationsInput | string
+    totalMarks?: IntFieldUpdateOperationsInput | number
+    passingPercentage?: IntFieldUpdateOperationsInput | number
+    difficulty?: StringFieldUpdateOperationsInput | string
+    published?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    questions?: MockQuestionUncheckedUpdateManyWithoutMockTestNestedInput
   }
 
   export type EnrollmentCreateManyUserInput = {
@@ -27540,6 +32445,15 @@ export namespace Prisma {
   export type LessonCompletionCreateManyUserInput = {
     id?: string
     lessonId: string
+    completedAt?: Date | string
+  }
+
+  export type MockTestAttemptCreateManyUserInput = {
+    id?: string
+    mockTestId: string
+    score: number
+    percentage: number
+    status: string
     completedAt?: Date | string
   }
 
@@ -27837,6 +32751,33 @@ export namespace Prisma {
     completedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type MockTestAttemptUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    score?: IntFieldUpdateOperationsInput | number
+    percentage?: FloatFieldUpdateOperationsInput | number
+    status?: StringFieldUpdateOperationsInput | string
+    completedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    mockTest?: MockTestUpdateOneRequiredWithoutAttemptsNestedInput
+  }
+
+  export type MockTestAttemptUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    mockTestId?: StringFieldUpdateOperationsInput | string
+    score?: IntFieldUpdateOperationsInput | number
+    percentage?: FloatFieldUpdateOperationsInput | number
+    status?: StringFieldUpdateOperationsInput | string
+    completedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MockTestAttemptUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    mockTestId?: StringFieldUpdateOperationsInput | string
+    score?: IntFieldUpdateOperationsInput | number
+    percentage?: FloatFieldUpdateOperationsInput | number
+    status?: StringFieldUpdateOperationsInput | string
+    completedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type LessonCreateManyCourseInput = {
     id?: string
     title: string
@@ -27899,6 +32840,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     completions?: LessonCompletionUpdateManyWithoutLessonNestedInput
     quiz?: LessonQuizUpdateOneWithoutLessonNestedInput
+    mockTest?: MockTestUpdateOneWithoutLessonNestedInput
   }
 
   export type LessonUncheckedUpdateWithoutCourseInput = {
@@ -27917,6 +32859,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     completions?: LessonCompletionUncheckedUpdateManyWithoutLessonNestedInput
     quiz?: LessonQuizUncheckedUpdateOneWithoutLessonNestedInput
+    mockTest?: MockTestUncheckedUpdateOneWithoutLessonNestedInput
   }
 
   export type LessonUncheckedUpdateManyWithoutCourseInput = {
@@ -28133,6 +33076,82 @@ export namespace Prisma {
     value?: IntFieldUpdateOperationsInput | number
   }
 
+  export type MockQuestionCreateManyMockTestInput = {
+    id?: string
+    question: string
+    optionA: string
+    optionB: string
+    optionC: string
+    optionD: string
+    correctIndex: number
+  }
+
+  export type MockTestAttemptCreateManyMockTestInput = {
+    id?: string
+    userId: string
+    score: number
+    percentage: number
+    status: string
+    completedAt?: Date | string
+  }
+
+  export type MockQuestionUpdateWithoutMockTestInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    question?: StringFieldUpdateOperationsInput | string
+    optionA?: StringFieldUpdateOperationsInput | string
+    optionB?: StringFieldUpdateOperationsInput | string
+    optionC?: StringFieldUpdateOperationsInput | string
+    optionD?: StringFieldUpdateOperationsInput | string
+    correctIndex?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type MockQuestionUncheckedUpdateWithoutMockTestInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    question?: StringFieldUpdateOperationsInput | string
+    optionA?: StringFieldUpdateOperationsInput | string
+    optionB?: StringFieldUpdateOperationsInput | string
+    optionC?: StringFieldUpdateOperationsInput | string
+    optionD?: StringFieldUpdateOperationsInput | string
+    correctIndex?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type MockQuestionUncheckedUpdateManyWithoutMockTestInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    question?: StringFieldUpdateOperationsInput | string
+    optionA?: StringFieldUpdateOperationsInput | string
+    optionB?: StringFieldUpdateOperationsInput | string
+    optionC?: StringFieldUpdateOperationsInput | string
+    optionD?: StringFieldUpdateOperationsInput | string
+    correctIndex?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type MockTestAttemptUpdateWithoutMockTestInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    score?: IntFieldUpdateOperationsInput | number
+    percentage?: FloatFieldUpdateOperationsInput | number
+    status?: StringFieldUpdateOperationsInput | string
+    completedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutNewMockTestAttemptsNestedInput
+  }
+
+  export type MockTestAttemptUncheckedUpdateWithoutMockTestInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    score?: IntFieldUpdateOperationsInput | number
+    percentage?: FloatFieldUpdateOperationsInput | number
+    status?: StringFieldUpdateOperationsInput | string
+    completedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MockTestAttemptUncheckedUpdateManyWithoutMockTestInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    score?: IntFieldUpdateOperationsInput | number
+    percentage?: FloatFieldUpdateOperationsInput | number
+    status?: StringFieldUpdateOperationsInput | string
+    completedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
 
 
   /**
@@ -28158,6 +33177,10 @@ export namespace Prisma {
      * @deprecated Use CommunityPostCountOutputTypeDefaultArgs instead
      */
     export type CommunityPostCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = CommunityPostCountOutputTypeDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use MockTestCountOutputTypeDefaultArgs instead
+     */
+    export type MockTestCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = MockTestCountOutputTypeDefaultArgs<ExtArgs>
     /**
      * @deprecated Use UserDefaultArgs instead
      */
@@ -28222,6 +33245,18 @@ export namespace Prisma {
      * @deprecated Use PaymentDefaultArgs instead
      */
     export type PaymentArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = PaymentDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use MockTestDefaultArgs instead
+     */
+    export type MockTestArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = MockTestDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use MockQuestionDefaultArgs instead
+     */
+    export type MockQuestionArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = MockQuestionDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use MockTestAttemptDefaultArgs instead
+     */
+    export type MockTestAttemptArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = MockTestAttemptDefaultArgs<ExtArgs>
 
   /**
    * Batch Payload for updateMany & deleteMany & createMany
