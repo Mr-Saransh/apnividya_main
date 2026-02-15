@@ -56,9 +56,9 @@ export function Sidebar({ className }: SidebarProps) {
             {/* Logo Area */}
             <div className="h-16 flex items-center px-6 border-b border-border/50">
                 <Link href="/dashboard" className="flex items-center gap-2">
-                    <div className="h-10 w-10 flex-shrink-0 bg-white rounded-full flex items-center justify-center p-1.5 shadow-sm">
+                    <div className="h-10 w-10 flex-shrink-0 bg-white rounded-xl flex items-center justify-center p-1.5 shadow-sm">
                         <Image
-                            src="/logo.png"
+                            src="/logo-new.png"
                             alt="Apni Vidya Logo"
                             width={32}
                             height={32}

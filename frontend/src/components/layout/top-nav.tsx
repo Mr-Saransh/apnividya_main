@@ -72,9 +72,9 @@ export function TopNav({ onMenuClick, className }: { onMenuClick?: () => void, c
 
                     {/* Mobile Logo */}
                     <Link href="/dashboard" className="flex md:hidden items-center gap-2 flex-shrink-0 mr-auto">
-                        <div className="h-9 w-9 flex-shrink-0 bg-white rounded-full flex items-center justify-center p-1 shadow-sm">
+                        <div className="h-9 w-9 flex-shrink-0 bg-white rounded-xl flex items-center justify-center p-1 shadow-sm">
                             <Image
-                                src="/logo.png"
+                                src="/logo-new.png"
                                 alt="Apni Vidya Logo"
                                 width={28}
                                 height={28}
