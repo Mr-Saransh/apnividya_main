@@ -24,7 +24,7 @@ export default function MainOffer() {
     ];
 
     return (
-        <section id="courses" className="py-20 bg-[#e0efff] font-sans overflow-hidden">
+        <section id="main-offer" className="py-20 bg-[#e0efff] font-sans overflow-hidden">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Section Header */}
                 <div className="text-center mb-10">

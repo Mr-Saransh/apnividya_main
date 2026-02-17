@@ -251,6 +251,16 @@ export function CustomVideoPlayer({ url, title, onNext, hasNext, autoPlay = fals
     const toggleFullscreen = () => {
         if (containerRef.current && screenfull.isEnabled) {
             screenfull.toggle(containerRef.current);
+        } else if (playerRef.current && typeof playerRef.current.getIframe === 'function') {
+            // Fallback for iOS/Mobile
+            const iframe = playerRef.current.getIframe();
+            if (iframe.requestFullscreen) {
+                iframe.requestFullscreen();
+            } else if (iframe.webkitEnterFullscreen) {
+                iframe.webkitEnterFullscreen();
+            } else if (iframe.webkitRequestFullscreen) {
+                iframe.webkitRequestFullscreen();
+            }
         }
     };
 
@@ -351,7 +361,6 @@ export function CustomVideoPlayer({ url, title, onNext, hasNext, autoPlay = fals
                             <option value="2">2x</option>
                         </select>
 
-                        {/* Quality Control */}
                         {availableQualities.length > 0 && (
                             <select
                                 className="bg-black/50 text-white text-xs rounded border border-white/20 p-1 cursor-pointer outline-none"
@@ -369,8 +378,6 @@ export function CustomVideoPlayer({ url, title, onNext, hasNext, autoPlay = fals
                                 ))}
                             </select>
                         )}
-
-                        <span className="text-white/80 text-sm font-medium truncate max-w-[150px]">{title}</span>
                     </div>
 
                     <div className="flex items-center gap-4">

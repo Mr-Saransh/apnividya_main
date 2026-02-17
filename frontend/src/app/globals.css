@@ -169,3 +169,30 @@
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
+
+/* Section Highlight Animation */
+@keyframes highlight-pulse-bg {
+  0% {
+    background-color: rgba(59, 130, 246, 0.1);
+    /* blue-500/10 */
+    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.3);
+  }
+
+  50% {
+    background-color: rgba(59, 130, 246, 0.2);
+    /* blue-500/20 */
+    box-shadow: 0 0 0 8px rgba(59, 130, 246, 0.1);
+  }
+
+  100% {
+    background-color: transparent;
+    box-shadow: none;
+  }
+}
+
+.highlight-section {
+  animation: highlight-pulse-bg 1.5s ease-out forwards;
+  position: relative;
+  z-index: 10;
+  border-radius: 1rem;
+}

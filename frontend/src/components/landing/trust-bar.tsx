@@ -20,7 +20,7 @@ export default function TrustBar() {
     ];
 
     return (
-        <div className="bg-gradient-to-r from-blue-600 to-indigo-700 py-10 relative overflow-hidden">
+        <div id="about" className="bg-gradient-to-r from-blue-600 to-indigo-700 py-10 relative overflow-hidden">
             {/* Ambient background glow */}
             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-white/5 opacity-50 blur-3xl"></div>
 

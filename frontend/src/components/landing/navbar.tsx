@@ -10,6 +10,24 @@ export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
     const router = useRouter();
 
+    const handleScroll = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>, id: string) => {
+        e.preventDefault();
+        setIsOpen(false);
+        if (id === 'home') {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            return;
+        }
+
+        const element = document.getElementById(id);
+        if (element) {
+            element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            element.classList.add('highlight-section');
+            setTimeout(() => {
+                element.classList.remove('highlight-section');
+            }, 1500);
+        }
+    };
+
     return (
         <nav className="fixed w-full z-50 top-0 transition-all duration-300 glass shadow-sm">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -32,14 +50,15 @@ export default function Navbar() {
                     {/* Desktop Menu */}
                     <div className="hidden md:flex md:items-center md:space-x-8">
                         {['Home', 'Courses', 'About'].map((item) => (
-                            <Link
+                            <a
                                 key={item}
                                 href={item === 'Home' ? '/' : `#${item.toLowerCase()}`}
-                                className="text-slate-600 hover:text-blue-600 font-bold transition-all hover:-translate-y-0.5 relative group text-sm uppercase tracking-wide"
+                                onClick={(e) => handleScroll(e, item.toLowerCase())}
+                                className="text-slate-600 hover:text-blue-600 font-bold transition-all hover:-translate-y-0.5 relative group text-sm uppercase tracking-wide cursor-pointer"
                             >
                                 {item === 'About' ? 'Why Us?' : item}
                                 <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 transition-all group-hover:w-full duration-300"></span>
-                            </Link>
+                            </a>
                         ))}
                         <button
                             onClick={() => router.push('/login')}
@@ -65,14 +84,14 @@ export default function Navbar() {
             <div className={`md:hidden absolute w-full left-0 bg-white/95 backdrop-blur-xl border-b border-slate-100 transition-all duration-300 ease-in-out origin-top ${isOpen ? 'opacity-100 scale-y-100 translate-y-0' : 'opacity-0 scale-y-0 -translate-y-4 pointer-events-none'}`}>
                 <div className="px-5 pt-4 pb-8 space-y-4 shadow-xl">
                     {['Home', 'Courses', 'About'].map((item) => (
-                        <Link
+                        <a
                             key={item}
                             href={item === 'Home' ? '/' : `#${item.toLowerCase()}`}
-                            onClick={() => setIsOpen(false)}
-                            className="block px-4 py-3 text-slate-600 hover:text-blue-600 font-bold rounded-xl hover:bg-blue-50 transition-colors text-lg"
+                            onClick={(e) => handleScroll(e, item.toLowerCase())}
+                            className="block px-4 py-3 text-slate-600 hover:text-blue-600 font-bold rounded-xl hover:bg-blue-50 transition-colors text-lg cursor-pointer"
                         >
                             {item === 'About' ? 'Why Us?' : item}
-                        </Link>
+                        </a>
                     ))}
                     <div className="pt-2">
                         <button

@@ -49,7 +49,7 @@ export default function Footer() {
                             Quick Links <span className="h-1 w-1 rounded-full bg-blue-500"></span>
                         </h4>
                         <ul className="space-y-3 text-sm font-medium">
-                            {['Home', 'Courses', 'About', 'Become a Mentor'].map((link) => (
+                            {['Home', 'Become a Mentor'].map((link) => (
                                 <li key={link}>
                                     <Link
                                         href={link === 'Become a Mentor' ? '/become-mentor' : `#${link.toLowerCase()}`}
