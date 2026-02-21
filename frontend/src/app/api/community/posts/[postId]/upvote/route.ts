@@ -7,7 +7,7 @@ export async function POST(req: Request, { params }: { params: Promise<{ postId:
         const { postId } = await params;
         const user = await getCurrentUser(req);
         if (!user) {
-            return new NextResponse("Unauthorized", { status: 401 });
+            return NextResponse.json({ message: "Unauthorized. Please log in again." }, { status: 401 });
         }
 
         const post = await db.communityPost.findUnique({
@@ -15,7 +15,7 @@ export async function POST(req: Request, { params }: { params: Promise<{ postId:
         });
 
         if (!post) {
-            return new NextResponse("Post not found", { status: 404 });
+            return NextResponse.json({ message: "Post not found." }, { status: 404 });
         }
 
         const existingVote = await db.postVote.findUnique({
@@ -86,7 +86,7 @@ export async function POST(req: Request, { params }: { params: Promise<{ postId:
 
         return NextResponse.json({ message: "Upvoted" });
     } catch (error) {
-        console.log("[COMMUNITY_UPVOTE_POST]", error);
-        return new NextResponse("Internal Error", { status: 500 });
+        console.error("[COMMUNITY_UPVOTE_POST]", error);
+        return NextResponse.json({ message: error instanceof Error ? error.message : "Internal Error" }, { status: 500 });
     }
 }

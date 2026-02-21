@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException, BadRequestException } from '@nestjs/common';
+import { Injectable, NotFoundException, BadRequestException, ForbiddenException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { GamificationService } from '../gamification/gamification.service';
 
@@ -99,5 +99,44 @@ export class CommunityService {
         }
 
         return { success: true };
+    }
+
+    async deletePost(userId: string, role: string, postId: string) {
+        const post = await this.prisma.communityPost.findUnique({
+            where: { id: postId }
+        });
+
+        if (!post) throw new NotFoundException('Post not found');
+
+        if (role !== 'ADMIN' && post.userId !== userId) {
+            throw new ForbiddenException('You do not have permission to delete this post');
+        }
+
+        // Delete associated records first (PostVote, Comment)
+        await this.prisma.$transaction([
+            this.prisma.postVote.deleteMany({ where: { postId } }),
+            this.prisma.comment.deleteMany({ where: { postId } }),
+            this.prisma.communityPost.delete({ where: { id: postId } })
+        ]);
+
+        return { success: true, message: 'Post deleted successfully' };
+    }
+
+    async deleteComment(userId: string, role: string, commentId: string) {
+        const comment = await this.prisma.comment.findUnique({
+            where: { id: commentId }
+        });
+
+        if (!comment) throw new NotFoundException('Comment not found');
+
+        if (role !== 'ADMIN' && comment.userId !== userId) {
+            throw new ForbiddenException('You do not have permission to delete this comment');
+        }
+
+        await this.prisma.comment.delete({
+            where: { id: commentId }
+        });
+
+        return { success: true, message: 'Comment deleted successfully' };
     }
 }

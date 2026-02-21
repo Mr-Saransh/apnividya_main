@@ -5,31 +5,13 @@ import { api } from "@/lib/api";
 import { useAuth } from "@/context/auth-context";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
-import {
-    MessageSquare,
-    ThumbsUp,
-    Send,
-    Plus,
-    Award,
-    User as UserIcon,
-    Trash2
-} from "lucide-react";
+import { MessageSquare, ThumbsUp, Send, User as UserIcon, Trash2, ShieldAlert } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { formatDistanceToNow } from "date-fns";
-import {
-    Dialog,
-    DialogContent,
-    DialogDescription,
-    DialogFooter,
-    DialogHeader,
-    DialogTitle,
-    DialogTrigger,
-} from "@/components/ui/dialog";
 
 interface Post {
     id: string;
@@ -63,14 +45,11 @@ interface PostDetail extends Post {
     comments: Comment[];
 }
 
-export default function CommunityPage() {
+export default function AdminCommunityPage() {
     const { user } = useAuth();
     const [posts, setPosts] = useState<Post[]>([]);
     const [selectedPost, setSelectedPost] = useState<PostDetail | null>(null);
-    const [newPostTitle, setNewPostTitle] = useState("");
-    const [newPostContent, setNewPostContent] = useState("");
     const [commentContent, setCommentContent] = useState("");
-    const [isCreateOpen, setIsCreateOpen] = useState(false);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -85,22 +64,6 @@ export default function CommunityPage() {
             console.error("Failed to fetch posts:", error);
         } finally {
             setLoading(false);
-        }
-    };
-
-    const createPost = async () => {
-        if (!newPostTitle.trim() || !newPostContent.trim()) return;
-        try {
-            await api.post("/community/posts", {
-                title: newPostTitle,
-                content: newPostContent,
-            });
-            setNewPostTitle("");
-            setNewPostContent("");
-            setIsCreateOpen(false);
-            fetchPosts();
-        } catch (error) {
-            console.error("Failed to create post:", error);
         }
     };
 
@@ -126,21 +89,8 @@ export default function CommunityPage() {
         }
     };
 
-    const upvotePost = async (postId: string) => {
-        try {
-            await api.post(`/community/posts/${postId}/upvote`);
-            fetchPosts(); // Refresh posts
-            if (selectedPost?.id === postId) {
-                viewPost(postId); // Refresh detail view
-            }
-        } catch (error: any) {
-            console.error("Failed to upvote:", error);
-            alert(error.response?.data?.message || "Failed to upvote");
-        }
-    };
-
     const deletePost = async (postId: string) => {
-        if (!confirm("Are you sure you want to delete this post?")) return;
+        if (!confirm("Are you sure you want to delete this post as Admin?")) return;
         try {
             await api.delete(`/community/posts/${postId}`);
             if (selectedPost?.id === postId) {
@@ -154,7 +104,7 @@ export default function CommunityPage() {
     };
 
     const deleteComment = async (commentId: string) => {
-        if (!confirm("Are you sure you want to delete this comment?")) return;
+        if (!confirm("Are you sure you want to delete this comment as Admin?")) return;
         try {
             await api.delete(`/community/comments/${commentId}`);
             if (selectedPost) {
@@ -171,46 +121,9 @@ export default function CommunityPage() {
             {/* Header */}
             <div className="flex items-center justify-between">
                 <div>
-                    <h1 className="text-3xl font-bold">Community</h1>
-                    <p className="text-muted-foreground">Ask questions, solve problems, earn karma!</p>
+                    <h1 className="text-3xl font-bold">Community Moderation</h1>
+                    <p className="text-muted-foreground">Monitor questions, remove inappropriate content, and answer students.</p>
                 </div>
-                <Dialog open={isCreateOpen} onOpenChange={setIsCreateOpen}>
-                    <DialogTrigger asChild>
-                        <Button className="gap-2">
-                            <Plus className="h-4 w-4" />
-                            Ask Question
-                        </Button>
-                    </DialogTrigger>
-                    <DialogContent className="sm:max-w-[600px]">
-                        <DialogHeader>
-                            <DialogTitle>Ask a Question</DialogTitle>
-                            <DialogDescription>
-                                Share your problem with the community. You'll earn +2 karma!
-                            </DialogDescription>
-                        </DialogHeader>
-                        <div className="space-y-4 py-4">
-                            <Input
-                                placeholder="Question title..."
-                                value={newPostTitle}
-                                onChange={(e) => setNewPostTitle(e.target.value)}
-                            />
-                            <Textarea
-                                placeholder="Describe your problem in detail..."
-                                value={newPostContent}
-                                onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setNewPostContent(e.target.value)}
-                                rows={6}
-                            />
-                        </div>
-                        <DialogFooter>
-                            <Button variant="outline" onClick={() => setIsCreateOpen(false)}>
-                                Cancel
-                            </Button>
-                            <Button onClick={createPost} disabled={!newPostTitle.trim() || !newPostContent.trim()}>
-                                Post Question
-                            </Button>
-                        </DialogFooter>
-                    </DialogContent>
-                </Dialog>
             </div>
 
             {/* Posts List */}
@@ -223,9 +136,8 @@ export default function CommunityPage() {
                     ) : posts.length === 0 ? (
                         <Card className="p-10 text-center">
                             <MessageSquare className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
-                            <h3 className="text-lg font-semibold mb-2">No questions yet</h3>
-                            <p className="text-muted-foreground mb-4">Be the first to ask a question!</p>
-                            <Button onClick={() => setIsCreateOpen(true)}>Ask Question</Button>
+                            <h3 className="text-lg font-semibold mb-2">No community activity</h3>
+                            <p className="text-muted-foreground">The forum is currently empty.</p>
                         </Card>
                     ) : (
                         posts.map((post) => (
@@ -258,19 +170,18 @@ export default function CommunityPage() {
                                             </div>
                                             <div className="flex items-start justify-between mt-2">
                                                 <CardTitle className="text-base">{post.title}</CardTitle>
-                                                {(user?.id === post.user.id || user?.role === 'ADMIN') && (
-                                                    <Button
-                                                        variant="ghost"
-                                                        size="icon"
-                                                        className="h-8 w-8 text-destructive hover:text-destructive hover:bg-destructive/10 -mt-1 -mr-2"
-                                                        onClick={(e) => {
-                                                            e.stopPropagation();
-                                                            deletePost(post.id);
-                                                        }}
-                                                    >
-                                                        <Trash2 className="h-4 w-4" />
-                                                    </Button>
-                                                )}
+                                                <Button
+                                                    variant="ghost"
+                                                    size="icon"
+                                                    className="h-8 w-8 text-destructive hover:text-destructive hover:bg-destructive/10 -mt-1 -mr-2"
+                                                    onClick={(e) => {
+                                                        e.stopPropagation();
+                                                        deletePost(post.id);
+                                                    }}
+                                                    title="Delete Post (Admin)"
+                                                >
+                                                    <Trash2 className="h-4 w-4" />
+                                                </Button>
                                             </div>
                                         </div>
                                     </div>
@@ -280,16 +191,10 @@ export default function CommunityPage() {
                                         {post.content}
                                     </p>
                                     <div className="flex items-center gap-4 text-sm text-muted-foreground">
-                                        <button
-                                            className="flex items-center gap-1 hover:text-primary transition-colors"
-                                            onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
-                                                e.stopPropagation();
-                                                upvotePost(post.id);
-                                            }}
-                                        >
+                                        <div className="flex items-center gap-1">
                                             <ThumbsUp className="h-4 w-4" />
                                             <span>{post.upvotes}</span>
-                                        </button>
+                                        </div>
                                         <div className="flex items-center gap-1">
                                             <MessageSquare className="h-4 w-4" />
                                             <span>{post._count.comments}</span>
@@ -306,13 +211,13 @@ export default function CommunityPage() {
                     {selectedPost ? (
                         <Card className="sticky top-6">
                             <CardHeader>
-                                <CardTitle className="text-lg">Answers</CardTitle>
+                                <CardTitle className="text-lg">Discussion Thread</CardTitle>
                             </CardHeader>
                             <CardContent className="space-y-4">
                                 <div className="max-h-[60vh] overflow-y-auto space-y-4 pr-2">
                                     {selectedPost.comments.length === 0 ? (
                                         <p className="text-center text-sm text-muted-foreground py-8">
-                                            No answers yet. Be the first to help!
+                                            No answers yet.
                                         </p>
                                     ) : (
                                         selectedPost.comments.map((comment) => (
@@ -331,16 +236,15 @@ export default function CommunityPage() {
                                                     <span className="text-xs text-muted-foreground ml-auto">
                                                         {formatDistanceToNow(new Date(comment.createdAt), { addSuffix: true })}
                                                     </span>
-                                                    {(user?.id === comment.user.id || user?.role === 'ADMIN') && (
-                                                        <Button
-                                                            variant="ghost"
-                                                            size="icon"
-                                                            className="h-6 w-6 text-destructive hover:text-destructive/80 hover:bg-destructive/10 ml-2"
-                                                            onClick={() => deleteComment(comment.id)}
-                                                        >
-                                                            <Trash2 className="h-3 w-3" />
-                                                        </Button>
-                                                    )}
+                                                    <Button
+                                                        variant="ghost"
+                                                        size="icon"
+                                                        className="h-6 w-6 text-destructive hover:text-destructive/80 hover:bg-destructive/10 ml-2"
+                                                        onClick={() => deleteComment(comment.id)}
+                                                        title="Delete Comment (Admin)"
+                                                    >
+                                                        <Trash2 className="h-3 w-3" />
+                                                    </Button>
                                                 </div>
                                                 <p className="text-sm">{comment.content}</p>
                                             </div>
@@ -350,26 +254,26 @@ export default function CommunityPage() {
                                 <Separator />
                                 <div className="space-y-2">
                                     <Textarea
-                                        placeholder="Share your solution... (+5 karma)"
+                                        placeholder="Add an admin response..."
                                         value={commentContent}
                                         onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setCommentContent(e.target.value)}
                                         rows={3}
                                     />
                                     <Button onClick={addComment} disabled={!commentContent.trim()} className="w-full gap-2">
-                                        <Send className="h-4 w-4" />
-                                        Submit Answer
+                                        <ShieldAlert className="h-4 w-4" />
+                                        Post Admin Reply
                                     </Button>
                                 </div>
                             </CardContent>
                         </Card>
                     ) : (
                         <Card className="p-8 text-center sticky top-6">
-                            <Award className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
-                            <h3 className="font-semibold mb-2">How Karma Works</h3>
+                            <ShieldAlert className="h-12 w-12 mx-auto text-muted-foreground mb-4 opacity-50" />
+                            <h3 className="font-semibold mb-2">Moderation Tools</h3>
                             <div className="text-sm text-muted-foreground space-y-2 text-left">
-                                <p>• Ask a question: <strong>+2 karma</strong></p>
-                                <p>• Answer someone: <strong>+5 karma</strong></p>
-                                <p>• Get upvoted: <strong>+10 karma</strong></p>
+                                <p>• Read through community discussions.</p>
+                                <p>• Delete inappropriate posts or comments.</p>
+                                <p>• Provide official answers marked by the Admin role.</p>
                             </div>
                         </Card>
                     )}

@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Param, UseGuards, Req } from '@nestjs/common';
+import { Controller, Get, Post, Delete, Body, Param, UseGuards, Req } from '@nestjs/common';
 import { CommunityService } from './community.service';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { ApiTags, ApiOperation, ApiBearerAuth } from '@nestjs/swagger';
@@ -46,5 +46,17 @@ export class CommunityController {
     @ApiOperation({ summary: 'Upvote a post' })
     upvotePost(@Req() req: any, @Param('id') postId: string) {
         return this.communityService.upvotePost(req.user.userId, postId);
+    }
+
+    @Delete('posts/:id')
+    @ApiOperation({ summary: 'Delete a post (admin or author)' })
+    deletePost(@Req() req: any, @Param('id') postId: string) {
+        return this.communityService.deletePost(req.user.userId, req.user.role, postId);
+    }
+
+    @Delete('comments/:id')
+    @ApiOperation({ summary: 'Delete a comment (admin or author)' })
+    deleteComment(@Req() req: any, @Param('id') commentId: string) {
+        return this.communityService.deleteComment(req.user.userId, req.user.role, commentId);
     }
 }

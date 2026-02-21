@@ -27,8 +27,8 @@ export async function GET(req: Request) {
 
         return NextResponse.json(posts);
     } catch (error) {
-        console.log("[COMMUNITY_POSTS_GET]", error);
-        return new NextResponse("Internal Error", { status: 500 });
+        console.error("[COMMUNITY_POSTS_GET]", error);
+        return new NextResponse(error instanceof Error ? error.message : "Internal Error", { status: 500 });
     }
 }
 

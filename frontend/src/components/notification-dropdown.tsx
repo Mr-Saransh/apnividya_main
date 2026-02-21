@@ -92,7 +92,7 @@ export function NotificationDropdown() {
                 >
                     <Bell className="h-5 w-5" />
                     {unreadCount > 0 && (
-                        <span className="absolute top-1 right-1 h-4 w-4 bg-primary rounded-full text-[10px] font-bold text-primary-foreground flex items-center justify-center">
+                        <span className="absolute top-1 right-1 h-4 w-4 bg-destructive rounded-full text-[10px] font-bold text-destructive-foreground flex items-center justify-center">
                             {unreadCount > 9 ? "9+" : unreadCount}
                         </span>
                     )}
@@ -137,7 +137,7 @@ export function NotificationDropdown() {
                                             {notification.title}
                                         </span>
                                         {!notification.read && (
-                                            <span className="h-2 w-2 bg-primary rounded-full flex-shrink-0 mt-1"></span>
+                                            <span className="h-2 w-2 bg-destructive rounded-full flex-shrink-0 mt-1"></span>
                                         )}
                                     </div>
                                     <p className="text-xs text-muted-foreground line-clamp-2">

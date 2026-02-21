@@ -113,7 +113,7 @@ export default function AdminLessonsPage() {
 
     return (
         <div className="space-y-6">
-            <div className="flex justify-between items-start">
+            <div className="flex flex-col sm:flex-row justify-between items-start gap-4">
                 <div>
                     <h1 className="text-3xl font-bold tracking-tight">{course?.title}</h1>
                     <p className="text-muted-foreground">{course?.description}</p>
@@ -438,6 +438,7 @@ function EditCourseDialog({ course, onUpdate }: { course: any, onUpdate: () => v
             <DialogContent className="sm:max-w-[425px]">
                 <DialogHeader>
                     <DialogTitle>Edit Course Details</DialogTitle>
+                    <DialogDescription className="sr-only">Make changes to your course details below.</DialogDescription>
                 </DialogHeader>
                 <div className="grid gap-4 py-4 max-h-[80vh] overflow-y-auto">
                     <div className="grid gap-2">

@@ -120,7 +120,7 @@ function CoursePlayerContent({ courseId }: { courseId: string }) {
     };
 
     return (
-        <div className="flex flex-col h-[calc(100vh-4rem)] md:flex-row gap-4 p-4 lg:p-0">
+        <div className="flex flex-col min-h-[calc(100vh-4rem)] md:h-[calc(100vh-4rem)] md:flex-row gap-4 p-4 lg:p-0">
             {/* Main Content Area */}
             <div className="flex-1 flex flex-col min-w-0">
                 <div className="flex-1 lg:p-6 overflow-y-auto">
@@ -261,7 +261,7 @@ function CoursePlayerContent({ courseId }: { courseId: string }) {
             </div>
 
             {/* Course Sidebar */}
-            <div className="w-full md:w-80 lg:w-96 border-l bg-muted/10 flex flex-col">
+            <div className="w-full md:w-80 lg:w-96 border-l border-t md:border-t-0 bg-muted/10 flex flex-col h-[400px] md:h-auto mt-4 md:mt-0">
                 <div className="p-4 border-b font-semibold flex items-center justify-between">
                     Course Lessons
                     <span className="text-xs text-muted-foreground">{course.lessons?.length || 0} Lessons</span>

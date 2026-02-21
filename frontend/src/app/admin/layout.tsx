@@ -3,9 +3,9 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
-import { LayoutDashboard, BookOpen, FileVideo, Users, Settings, LogOut, Menu, Trophy } from "lucide-react";
+import { LayoutDashboard, BookOpen, FileVideo, Users, Settings, LogOut, Menu, Trophy, MessageSquare } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Sheet, SheetContent, SheetTrigger, SheetTitle, SheetDescription } from "@/components/ui/sheet";
 
 const sidebarItems = [
     {
@@ -22,6 +22,11 @@ const sidebarItems = [
         title: "Mock Tests",
         href: "/admin/mock-tests",
         icon: Trophy,
+    },
+    {
+        title: "Community",
+        href: "/admin/community",
+        icon: MessageSquare,
     },
 ];
 
@@ -45,8 +50,8 @@ export default function AdminLayout({
                     </SheetTrigger>
                     <SheetContent side="left" className="p-0 w-64">
                         <div className="p-6 border-b">
-                            <h2 className="text-xl font-bold tracking-tight text-primary">Admin Panel</h2>
-                            <p className="text-sm text-muted-foreground">Apni Vidya Manager</p>
+                            <SheetTitle className="text-xl font-bold tracking-tight text-primary">Admin Panel</SheetTitle>
+                            <SheetDescription className="text-sm text-muted-foreground">Apni Vidya Manager</SheetDescription>
                         </div>
                         <nav className="flex-1 space-y-1 p-4">
                             {sidebarItems.map((item) => (
