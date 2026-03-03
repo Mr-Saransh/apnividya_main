@@ -1,15 +1,15 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import {
-    LayoutDashboard,
-    BookOpen,
-    Trophy,
-    User,
-    Users,
+    BrainCircuit,
+    Medal,
+    FolderKanban,
+    Zap,
+    ChevronLeft,
 } from "lucide-react";
 import React from "react";
 
@@ -17,37 +17,34 @@ interface SidebarProps extends React.HTMLAttributes<HTMLDivElement> { }
 
 export function Sidebar({ className }: SidebarProps) {
     const pathname = usePathname();
+    const router = useRouter();
 
-    const routes = [
+    const routes: { label: string; icon: React.ElementType; href: string; active: boolean }[] = [];
+
+    const exploreRoutes = [
         {
-            label: "Dashboard",
-            icon: LayoutDashboard,
-            href: "/dashboard",
-            active: pathname === "/dashboard",
+            label: "Academic Portal",
+            icon: BrainCircuit,
+            href: "/dashboard/academic",
+            active: pathname.startsWith("/dashboard/academic"),
         },
         {
-            label: "My Courses",
-            icon: BookOpen,
-            href: "/dashboard/courses",
-            active: pathname.startsWith("/dashboard/courses"),
+            label: "Skills",
+            icon: Zap,
+            href: "/dashboard/skills",
+            active: pathname.startsWith("/dashboard/skills"),
         },
         {
-            label: "Mock Tests",
-            icon: Trophy,
-            href: "/dashboard/mock-test",
-            active: pathname.startsWith("/dashboard/mock-test"),
+            label: "Competitions",
+            icon: Medal,
+            href: "/dashboard/competitions",
+            active: pathname.startsWith("/dashboard/competitions"),
         },
         {
-            label: "Community",
-            icon: Users,
-            href: "/dashboard/community",
-            active: pathname.startsWith("/dashboard/community"),
-        },
-        {
-            label: "Profile",
-            icon: User,
-            href: "/dashboard/profile",
-            active: pathname.startsWith("/dashboard/profile"),
+            label: "My Portfolio",
+            icon: FolderKanban,
+            href: "/dashboard/portfolio",
+            active: pathname.startsWith("/dashboard/portfolio"),
         },
     ];
 
@@ -55,7 +52,7 @@ export function Sidebar({ className }: SidebarProps) {
         <div className={cn("flex flex-col h-full bg-card border-r border-border", className)}>
             {/* Logo Area */}
             <div className="h-16 flex items-center px-6 border-b border-border/50">
-                <Link href="/dashboard" className="flex items-center gap-2">
+                <Link href="/dashboard/academic" className="flex items-center gap-2">
                     <div className="h-10 w-10 flex-shrink-0 bg-white rounded-xl flex items-center justify-center p-1.5 shadow-sm">
                         <Image
                             src="/logo-new.png"
@@ -71,8 +68,40 @@ export function Sidebar({ className }: SidebarProps) {
                 </Link>
             </div>
 
-            <div className="flex-1 px-4 space-y-1 py-4">
+            <div className="flex-1 px-4 space-y-1 py-4 overflow-y-auto">
+                {/* Back */}
+                <button
+                    onClick={() => router.back()}
+                    className="flex items-center gap-2 w-full px-4 py-2.5 mb-2 text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted rounded-xl transition-all duration-200 border border-border/50"
+                >
+                    <ChevronLeft className="h-4 w-4" />
+                    <span>Back</span>
+                </button>
+
                 {routes.map((route) => (
+                    <Link
+                        key={route.href}
+                        href={route.href}
+                        className={cn(
+                            "flex items-center gap-3 px-4 py-3.5 text-sm font-medium rounded-xl transition-all duration-200",
+                            route.active
+                                ? "bg-primary text-primary-foreground shadow-md shadow-primary/20"
+                                : "text-muted-foreground hover:bg-muted hover:text-foreground"
+                        )}
+                    >
+                        <route.icon
+                            className={cn(
+                                "h-5 w-5 flex-shrink-0",
+                                route.active ? "text-primary-foreground" : "text-muted-foreground"
+                            )}
+                        />
+                        <span>{route.label}</span>
+                    </Link>
+                ))}
+
+                <div className="pt-2" />
+
+                {exploreRoutes.map((route) => (
                     <Link
                         key={route.href}
                         href={route.href}
@@ -96,4 +125,3 @@ export function Sidebar({ className }: SidebarProps) {
         </div>
     );
 }
-

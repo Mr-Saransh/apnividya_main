@@ -154,7 +154,7 @@ export function TopNav({ onMenuClick, className }: { onMenuClick?: () => void, c
                                 </DropdownMenuLabel>
                                 <DropdownMenuSeparator />
                                 <DropdownMenuItem asChild className="cursor-pointer rounded-lg">
-                                    <Link href="/dashboard/profile" className="w-full">Profile</Link>
+                                    <Link href="/dashboard/portfolio" className="w-full">Portfolio</Link>
                                 </DropdownMenuItem>
                                 <DropdownMenuSeparator />
                                 <DropdownMenuItem

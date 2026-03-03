@@ -4,6 +4,10 @@ import { useState } from "react";
 import { Sidebar } from "@/components/layout/sidebar";
 import { TopNav } from "@/components/layout/top-nav";
 import { Sheet, SheetContent, SheetTitle, SheetDescription } from "@/components/ui/sheet";
+import { LayoutDashboard, BookOpen, User, Trophy, MessageSquare, BrainCircuit, Medal, FolderKanban, MoreHorizontal, Zap } from "lucide-react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { cn } from "@/lib/utils";
 
 export default function DashboardLayout({
     children,
@@ -29,67 +33,74 @@ export default function DashboardLayout({
             </div>
 
             {/* Mobile Bottom Navigation */}
-            <div className="md:hidden fixed bottom-0 left-0 right-0 border-t bg-background z-50">
+            <div className="md:hidden fixed bottom-0 left-0 right-0 border-t bg-background/80 backdrop-blur-lg z-50 pb-safe">
                 <BottomNav />
             </div>
+
+            {/* Mobile Sidebar Sheet (hamburger) */}
+            <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
+                <SheetContent side="left" className="p-0 w-72">
+                    <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
+                    <SheetDescription className="sr-only">Main navigation sidebar</SheetDescription>
+                    <div onClick={() => setIsMobileMenuOpen(false)}>
+                        <Sidebar />
+                    </div>
+                </SheetContent>
+            </Sheet>
         </div>
     );
 }
-
-import { LayoutDashboard, BookOpen, User, Trophy, MessageSquare } from "lucide-react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { cn } from "@/lib/utils";
 
 function BottomNav() {
     const pathname = usePathname();
 
     const routes = [
         {
-            label: "Home",
-            icon: LayoutDashboard,
-            href: "/dashboard",
-            active: pathname === "/dashboard",
+            label: "Academic",
+            icon: BrainCircuit,
+            href: "/dashboard/academic",
+            active: pathname.startsWith("/dashboard/academic"),
         },
         {
-            label: "Courses",
-            icon: BookOpen,
-            href: "/dashboard/courses",
-            active: pathname.startsWith("/dashboard/courses"),
+            label: "Skills",
+            icon: Zap,
+            href: "/dashboard/skills",
+            active: pathname.startsWith("/dashboard/skills"),
         },
         {
-            label: "Tests",
-            icon: Trophy,
-            href: "/dashboard/mock-test",
-            active: pathname.startsWith("/dashboard/mock-test"),
+            label: "Compete",
+            icon: Medal,
+            href: "/dashboard/competitions",
+            active: pathname.startsWith("/dashboard/competitions"),
         },
         {
-            label: "Community",
-            icon: MessageSquare,
-            href: "/dashboard/community",
-            active: pathname.startsWith("/dashboard/community"),
-        },
-        {
-            label: "Profile",
-            icon: User,
-            href: "/dashboard/profile",
-            active: pathname.startsWith("/dashboard/profile"),
+            label: "Portfolio",
+            icon: FolderKanban,
+            href: "/dashboard/portfolio",
+            active: pathname.startsWith("/dashboard/portfolio"),
         },
     ];
 
     return (
-        <nav className="grid grid-cols-5 h-16">
+        <nav className="grid grid-cols-4 h-16 px-2">
             {routes.map((route) => (
                 <Link
                     key={route.href}
                     href={route.href}
                     className={cn(
-                        "flex flex-col items-center justify-center gap-1 text-xs font-medium text-muted-foreground transition-colors hover:text-primary",
-                        route.active && "text-primary"
+                        "flex flex-col items-center justify-center gap-1 font-medium text-muted-foreground transition-all duration-200 active:scale-95 py-1 relative",
+                        route.active ? "text-primary scale-105" : "hover:text-primary"
                     )}
                 >
-                    <route.icon className={cn("h-6 w-6", route.active && "fill-current")} />
-                    <span className="text-[10px]">{route.label}</span>
+                    <div className={cn(
+                        "absolute -top-1 left-1/2 -translate-x-1/2 w-8 h-1 bg-primary rounded-b-md transition-all duration-300 opacity-0",
+                        route.active && "opacity-100 top-0"
+                    )} />
+                    <route.icon className={cn(
+                        "h-5 w-5 transition-all duration-200",
+                        route.active && "fill-primary/20 text-primary"
+                    )} />
+                    <span className="text-[10px] font-semibold">{route.label}</span>
                 </Link>
             ))}
         </nav>

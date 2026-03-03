@@ -47,7 +47,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         if (userData.role === "ADMIN") {
             router.push("/admin/courses");
         } else {
-            router.push("/dashboard");
+            router.push("/dashboard/academic");
         }
     };
 
